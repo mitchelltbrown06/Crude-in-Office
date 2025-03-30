@@ -8,11 +8,12 @@ TagManager:
   - Building
   - Grid
   - Button
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Building
   - Water
   - UI
   - 

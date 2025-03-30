@@ -14,6 +14,7 @@ public class LogicScript : MonoBehaviour
     public string Equiped;
     public int OilRigPrice;
     public int MintPrice;
+    public int WallPrice;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,10 @@ public class LogicScript : MonoBehaviour
     {
         Equiped = "OilRig";
     }
+    public void EquipWall()
+    {
+        Equiped = "Wall";
+    }
     public void PurchaseOilRig()
     {
         Coins -= OilRigPrice;
@@ -54,5 +59,9 @@ public class LogicScript : MonoBehaviour
     public void PurchaseMint()
     {
         Coins -= MintPrice;
+    }
+    public void PurchaseWall()
+    {
+        Coins -= WallPrice;
     }
 }
