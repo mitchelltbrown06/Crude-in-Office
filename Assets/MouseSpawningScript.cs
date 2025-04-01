@@ -5,18 +5,22 @@ using UnityEngine.EventSystems;
 
 public class MouseSpawningScript : MonoBehaviour
 {
-    public GameObject[] Tiles;
+    //public GameObject[] Tiles;
     public GameObject oilrig;
     public GameObject mint;
     public GameObject wall;
     public LogicScript Logic;
-    public GridScript grid;
+    //public GridScript grid;
     //Vector3 spawnLocation;
-    private float nearestDistance;
-    float distance;
-    public GameObject closestTile;
+    //private float nearestDistance;
+    //float distance;
+    //public GameObject closestTile;
     private Vector3 mousePosition;
     public LayerMask buildingLayer;
+
+    public Tilemap
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +31,7 @@ public class MouseSpawningScript : MonoBehaviour
     void Update()
     {
         mousePosition = Input.mousePosition;
-        FindCursorTile();
+        //FindCursorTile();
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
             if(Logic.Coins >= Logic.OilRigPrice && Logic.Equiped == "OilRig")
@@ -47,7 +51,7 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
-   void FindCursorTile()
+    void FindCursorTile()
     {
         nearestDistance = float.MaxValue;
         Tiles = GameObject.FindGameObjectsWithTag("Grid");
@@ -68,4 +72,5 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
+
 }
