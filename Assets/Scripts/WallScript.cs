@@ -7,24 +7,61 @@ public class WallScript : MonoBehaviour
     public Sprite verticalWall;
     public Sprite horizontalWall;
     public GridScript grid;
+    private Collider2D leftCheck;
+    private Collider2D rightCheck;
     public LayerMask buildingLayer;
+
+    public GameObject leftWall;
+    public WallScript leftWallScript;
+    public GameObject rightWall;
+    public WallScript rightWallScript;
+
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+        //GetComponent<SpriteRenderer>().sprite = verticalWall;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = verticalWall;
+
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
         buildingLayer = LayerMask.GetMask("Building");
+        UpdateNeighbors();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(leftCheck.GetComponent<Collider>().gameObject.CompareTag("Wall") || rightCheck.GetComponent<Collider>().gameObject.CompareTag("Wall"))
-      //  {
-            //GetComponent<SpriteRenderer>().sprite = horizontalWall;
-       // }
-       // else
-       // {
-       //     GetComponent<SpriteRenderer>().sprite = verticalWall;
-       // }
+        
     }
+
+    public void UpdateNeighbors()
+    {
+        
+        leftWall = Physics2D.Raycast(new Vector2(transform.position.x - grid.tileSize, transform.position.y), Vector2.left, grid.tileSize / 4).collider.gameObject;
+        leftWallScript = leftWall.GetComponent<WallScript>();
+
+        rightWall = Physics2D.Raycast(new Vector2(transform.position.x + grid.tileSize, transform.position.y), Vector2.right, grid.tileSize / 4).collider.gameObject;
+        rightWallScript = rightWall.GetComponent<WallScript>();
+
+        if (leftWall.CompareTag("Wall"))
+        {
+            leftWallScript.WallToYourRight();
+            spriteRenderer.sprite = horizontalWall;
+        }
+        if (rightWall.CompareTag("Wall"))
+        {
+            rightWallScript.WallToYourLeft();
+            spriteRenderer.sprite = horizontalWall;
+        }
+    }
+    public void WallToYourLeft()
+    {
+        GetComponent<SpriteRenderer>().sprite = horizontalWall;
+    }
+    public void WallToYourRight()
+    {
+        GetComponent<SpriteRenderer>().sprite = horizontalWall;
+    }
+    
 }
