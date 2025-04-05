@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridScript : MonoBehaviour
 {
     public GameObject tile;
-    public float tileSize = 1;
+    public float tileSize = 1f;
     private float lineLength = 2;
     public int layers;
     // Start is called before the first frame update

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class JoeBidenScript : MonoBehaviour
 {
+
+    /*
     public GameObject[] Buildings;
-    public GameObject closestBuilding;
-    public GameObject Player;
+    public GameObject closestBuilding;    
     float distance;
-    float nearestDistance = 10000000;
+    float nearestBuildingDistance = 10000000;
     Vector3 direction;
     public OilRigScript OilRigScript;
+    public GameObject Player;
+    */
+
+    public BidenPathfinding pathfinding;
 
     public Rigidbody2D rb;
 
@@ -19,66 +24,40 @@ public class JoeBidenScript : MonoBehaviour
     public float attackDistance;
     public float attackSpeed;
     private float attackTimer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        FindClosestBuilding();
+        pathfinding.FindClosestBuilding();
 
         attackTimer += Time.deltaTime;
-        if(nearestDistance < attackDistance && attackTimer > attackSpeed)
+        if(pathfinding.nearestBuildingDistance < attackDistance && attackTimer > attackSpeed)
         {
             AttackBuilding();
         }
-        if(nearestDistance > attackDistance)
+        if(pathfinding.nearestBuildingDistance > attackDistance)
         {
-        ApproachBuilding();
+            ApproachBuilding();
         }
         else
         {
             rb.velocity = new Vector2(0,0);
         }
     }
-    void FindClosestBuilding()
-    {
-        nearestDistance = 10000000;
-        Buildings = GameObject.FindGameObjectsWithTag("Building");
 
-        if (Buildings.Length > 0)
-        {
-            for(int i = 0; i < Buildings.Length; i++)
-            {
-                //Debug.Log("checking i: " + i.ToString());
-                distance = Vector3.Distance(this.transform.position, Buildings[i].transform.position);
-                //Debug.Log("distance: " + distance.ToString());
-
-                if(distance < nearestDistance)
-                {
-                    closestBuilding = Buildings[i];
-                    nearestDistance = distance;
-                }
-            }
-        }
-        else 
-        {
-        closestBuilding = Player;
-        }
-
-        OilRigScript = closestBuilding.GetComponent<OilRigScript>();
-    }
     void ApproachBuilding()
     {
-        direction = (closestBuilding.transform.position - this.transform.position).normalized;
-        rb.velocity = direction * speed;
+        rb.velocity = (pathfinding.closestBuilding.transform.position - transform.position).normalized * speed;
     }
     void AttackBuilding()
     {
-        OilRigScript.DamageFromJoe();
+        pathfinding.OilRigScript.DamageFromJoe();
         Debug.Log("Attack");
         attackTimer = 0;
     }

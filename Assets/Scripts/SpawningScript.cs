@@ -10,7 +10,7 @@ public class SpawningScript : MonoBehaviour
     public LogicScript Logic;
     public GridScript grid;
     //Vector3 spawnLocation;
-    private float nearestDistance;
+    private float nearestBuildingDistance;
     float distance;
     public GameObject closestTile;
     // Start is called before the first frame update
@@ -45,7 +45,7 @@ public class SpawningScript : MonoBehaviour
    // }
    void FindClosestTile()
     {
-        nearestDistance = float.MaxValue;
+        nearestBuildingDistance = float.MaxValue;
         Tiles = GameObject.FindGameObjectsWithTag("Grid");
 
         if (Tiles.Length > 0)
@@ -56,10 +56,10 @@ public class SpawningScript : MonoBehaviour
                 distance = Vector3.Distance(this.transform.position, Tiles[i].transform.position);
                 //Debug.Log("distance: " + distance.ToString());
 
-                if(distance < nearestDistance)
+                if(distance < nearestBuildingDistance)
                 {
                     closestTile = Tiles[i];
-                    nearestDistance = distance;
+                    nearestBuildingDistance = distance;
                 }
             }
         }
