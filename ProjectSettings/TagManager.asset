@@ -9,6 +9,7 @@ TagManager:
   - Grid
   - Button
   - Wall
+  - GridSpawner
   layers:
   - Default
   - TransparentFX

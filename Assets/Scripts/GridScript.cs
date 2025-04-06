@@ -8,6 +8,8 @@ public class GridScript : MonoBehaviour
     public float tileSize = 1f;
     private float lineLength = 2;
     public int layers;
+
+    public GameObject gridParent;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class GridScript : MonoBehaviour
     }
     void SpawnTile()
     {
-        Instantiate(tile, transform.position, transform.rotation);
+        Instantiate(tile, transform.position, transform.rotation, gridParent.transform);
     }
     void SpawnGrid()
     {
