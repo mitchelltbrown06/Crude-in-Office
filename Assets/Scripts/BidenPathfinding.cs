@@ -19,10 +19,10 @@ public class BidenPathfinding : MonoBehaviour
     public float nearestBuildingDistance;
     public float buildingDistance;
 
-    public GameObject[] Tiles;
-    public GameObject closestTile;
-    public float nearestGridDistance;
-    public float gridDistance;
+    public Node[] nodes;
+    public Node nodeAtBuilding;
+    public float nearestNodeDistance;
+    public float nodeDistance;
 
     public GameObject highlightedTile;
 
@@ -43,11 +43,12 @@ public class BidenPathfinding : MonoBehaviour
     void Update()
     {
         FindClosestBuilding();
+        FindNodeAtBuilding();
     }
 
     public void FindClosestBuilding()
     {
-        nearestBuildingDistance = 10000000;
+        nearestBuildingDistance = float.MaxValue;
         Buildings = GameObject.FindGameObjectsWithTag("Building");
 
         if (Buildings.Length > 0)
@@ -71,5 +72,23 @@ public class BidenPathfinding : MonoBehaviour
         }
 
         OilRigScript = closestBuilding.GetComponent<OilRigScript>();
+    }
+    public void FindNodeAtBuilding()
+    {
+        nearestNodeDistance = float.MaxValue;
+        nodes = FindObjectsOfType<Node>();
+
+        if (nodes.Length > 0)
+        {
+            for(int i = 0; i < nodes.Length; i++)
+            {
+                nodeDistance = Vector2.Distance(closestBuilding.transform.position, nodes[i].transform.position);
+                if(nodeDistance < nearestNodeDistance)
+                {
+                    nodeAtBuilding = nodes[i];
+                    nearestNodeDistance = nodeDistance;
+                }
+            }
+        }
     }
 }

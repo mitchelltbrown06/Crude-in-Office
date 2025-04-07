@@ -25,6 +25,8 @@ public class JoeBidenScript : MonoBehaviour
     public float attackSpeed;
     private float attackTimer;
 
+    public npcController NPC;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,7 @@ public class JoeBidenScript : MonoBehaviour
         }
         if(pathfinding.nearestBuildingDistance > attackDistance)
         {
-            ApproachBuilding();
+            ApproachPathfinder();
         }
         else
         {
@@ -51,9 +53,9 @@ public class JoeBidenScript : MonoBehaviour
         }
     }
 
-    void ApproachBuilding()
+    void ApproachPathfinder()
     {
-        rb.velocity = (pathfinding.closestBuilding.transform.position - transform.position).normalized * speed;
+        rb.velocity = (NPC.transform.position - transform.position).normalized * speed;
     }
     void AttackBuilding()
     {

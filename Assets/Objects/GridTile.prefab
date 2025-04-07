@@ -92,5 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameFrom: {fileID: 0}
   connections: []
+  allGridTiles: []
+  grid: {fileID: 0}
   gScore: 0
   hScore: 0
