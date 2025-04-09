@@ -13,6 +13,8 @@ public class Node : MonoBehaviour
     public float gScore;
     public float hScore;
 
+    public bool onWall = false;
+
     void Start()
     {
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
@@ -36,6 +38,8 @@ public class Node : MonoBehaviour
     }
     void Update()
     {
+        onWall = OnWall();
+
         if(connections.Count > 0)
         {
             for (int i = 0; i < connections.Count; i++)
@@ -46,5 +50,19 @@ public class Node : MonoBehaviour
                 }
             }
         }
+    }
+    public bool OnWall()
+    {
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+
+        foreach(GameObject wall in walls)
+        {
+            if (Vector2.Distance(wall.transform.position, transform.position) < grid.tileSize / 2)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

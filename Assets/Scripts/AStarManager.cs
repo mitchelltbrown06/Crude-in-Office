@@ -56,17 +56,20 @@ public class AStarManager : MonoBehaviour
 
             foreach(Node connectedNode in currentNode.connections)
             {
-                float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
-
-                if(heldGScore < connectedNode.gScore)
+                if(!connectedNode.onWall)
                 {
-                    connectedNode.cameFrom = currentNode;
-                    connectedNode.gScore = heldGScore;
-                    connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
+                    float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
 
-                    if(!openSet.Contains(connectedNode))
+                    if(heldGScore < connectedNode.gScore)
                     {
-                        openSet.Add(connectedNode);
+                        connectedNode.cameFrom = currentNode;
+                        connectedNode.gScore = heldGScore;
+                        connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
+
+                        if(!openSet.Contains(connectedNode))
+                        {
+                            openSet.Add(connectedNode);
+                        }
                     }
                 }
             }
@@ -82,7 +85,7 @@ public class AStarManager : MonoBehaviour
 
         foreach(Node node in NodesInScene())
         {
-            float currentDistance = Vector2.Distance(transform.position, node.transform.position);
+            float currentDistance = Vector2.Distance(position, node.transform.position);
             if (currentDistance < minDistance)
             {
                 minDistance = currentDistance;
@@ -108,8 +111,7 @@ public class AStarManager : MonoBehaviour
         }
         return foundNode;
     }
-
-    public Node[] NodesInScene()
+    private Node[] NodesInScene()
     {
         return FindObjectsOfType<Node>();
     }
