@@ -5,69 +5,40 @@ using UnityEngine;
 public class npcController : MonoBehaviour
 {
     public Node currentNode;
-    public List<Node> path = new List<Node>();
+    public List<Node> path;
 
-    private float nearestDistance;
-    private float distance;
-    public Node closestNode;
-    public Node[] nodes;
-    public bool foundClosestNode = false;
+    public JoeBidenScript player;
+    private float speed = 3;
 
-    public BidenPathfinding joeBiden;
-
-
-    private void Update()
+    void Start()
     {
-        if (!foundClosestNode)
-        {
-            FindClosestNode();
-            currentNode = closestNode;
-            foundClosestNode = true;
-        }
+        //need to find closest node and then teleport to it and set it to the current node
+    }
+    void Update()
+    {
         CreatePath();
     }
-
-    public void CreatePath()
+    void Engage()
     {
-        if (path.Count > 0)
+        if(path.Count == 0)
+        {
+            path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(player.transform.position));
+        }
+    }
+    void CreatePath()
+    {
+        if(path.Count > 0)
         {
             int x = 0;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(path[x].transform.position.x, path[x].transform.position.y, transform.position.z), 3 * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(path[x].transform.position.x, path[x].transform.position.y, transform.position.z),
+                speed * Time.deltaTime);
 
-            if(Vector2.Distance(transform.position, path[x].transform.position) < 0.1f && Vector2.Distance(joeBiden.transform.position, transform.position) < .3f)
+            if(Vector2.Distance(transform.position, path[x].transform.position) < .1f /* && Vector2.Distance(transform.position, player.transform.position) < .5f*/)
             {
                 currentNode = path[x];
                 path.RemoveAt(x);
             }
         }
-        else
-        {
-            nodes = FindObjectsOfType<Node>();
-            while(path == null || path.Count == 0)
-            {
-                path = AStarManager.instance.GeneratePath(currentNode, joeBiden.nodeAtBuilding);
-            }
-        }
     }
-    void FindClosestNode()
-    {
-        nodes = FindObjectsOfType<Node>();
-        nearestDistance = float.MaxValue;
 
-        if (nodes.Length > 0)
-        {
-            for(int i = 0; i < nodes.Length; i++)
-            {
-                //Debug.Log("checking i: " + i.ToString());
-                distance = Vector2.Distance(transform.position, nodes[i].transform.position);
-                //Debug.Log("distance: " + distance.ToString());
-
-                if(distance < nearestDistance)
-                {
-                    closestNode = nodes[i];
-                    nearestDistance = distance;
-                }
-            }
-        }
-    }
 }

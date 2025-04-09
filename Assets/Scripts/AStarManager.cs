@@ -74,4 +74,43 @@ public class AStarManager : MonoBehaviour
 
         return null;
     }
+
+    public Node FindNearestNode(Vector2 position)
+    {
+        Node foundNode = null;
+        float minDistance = float.MaxValue;
+
+        foreach(Node node in NodesInScene())
+        {
+            float currentDistance = Vector2.Distance(transform.position, node.transform.position);
+            if (currentDistance < minDistance)
+            {
+                minDistance = currentDistance;
+                foundNode = node;
+            }
+        }
+        return foundNode;
+    }
+
+    public Node FindFurtherstNode(Vector2 Position)
+    {
+        Node foundNode = null;
+        float maxDistance = 0;
+
+        foreach(Node node in NodesInScene())
+        {
+            float currentDistance = Vector2.Distance(transform.position, node.transform.position);
+            if (currentDistance > maxDistance)
+            {
+                maxDistance = currentDistance;
+                foundNode = node;
+            }
+        }
+        return foundNode;
+    }
+
+    public Node[] NodesInScene()
+    {
+        return FindObjectsOfType<Node>();
+    }
 }
