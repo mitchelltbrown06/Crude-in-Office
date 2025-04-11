@@ -14,7 +14,8 @@ public class Node : MonoBehaviour
     public float hScore;
 
     public bool onWall = false;
-
+    public bool onEnemy = false;
+    
     void Start()
     {
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
@@ -39,6 +40,7 @@ public class Node : MonoBehaviour
     void Update()
     {
         onWall = OnWall();
+        onEnemy = OnEnemy();
 
         if(connections.Count > 0)
         {
@@ -46,7 +48,7 @@ public class Node : MonoBehaviour
             {
                 if (connections[i] != null)
                 {
-                    Debug.DrawLine(this.transform.position, connections[i].transform.position, Color.red);
+                    //Debug.DrawLine(this.transform.position, connections[i].transform.position, Color.red);
                 }
             }
         }
@@ -58,6 +60,20 @@ public class Node : MonoBehaviour
         foreach(GameObject wall in walls)
         {
             if (Vector2.Distance(wall.transform.position, transform.position) < grid.tileSize / 2)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public bool OnEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach(GameObject enemy in enemies)
+        {
+            if (Vector2.Distance(enemy.transform.position, transform.position) < grid.tileSize / 2)
             {
                 return true;
             }

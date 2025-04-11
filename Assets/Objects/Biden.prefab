@@ -208,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 3427509127096123257}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.1400001, z: 0.20981419}
+  m_LocalPosition: {x: 0.035, y: -0.031, z: 0.20981419}
   m_LocalScale: {x: 0.0713, y: 0.0713, z: 0.0713}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentNode: {fileID: 0}
+  nodesInScene: []
   path: []
   joeBiden: {fileID: 5129047554183928262}
   UpdateCooldown: 0.01

@@ -5,6 +5,7 @@ using UnityEngine;
 public class npcController : MonoBehaviour
 {
     public Node currentNode;
+    public Node[] nodesInScene;
     public List<Node> path;
 
     public BidenPathfinding joeBiden;
@@ -17,6 +18,7 @@ public class npcController : MonoBehaviour
 
     void Start()
     {
+        /*
         //need to find closest node and then teleport to it and set it to the current node
         if (!onStartTile)
         {
@@ -24,9 +26,23 @@ public class npcController : MonoBehaviour
             currentNode = FindNearestNode(transform.position);
             onStartTile = true;
         }
+        */
     }
     void Update()
     {
+        if(nodesInScene.Length == 0)
+        {
+            nodesInScene = FindObjectsOfType<Node>();
+        }
+        else
+        {
+            if (!onStartTile)
+            {
+                transform.position = new Vector3(FindNearestNode(transform.position).transform.position.x, FindNearestNode(transform.position).transform.position.y, transform.position.z);
+                currentNode = FindNearestNode(transform.position);
+                onStartTile = true;
+            }
+        }
         UpdateTimer += Time.deltaTime;
         if(onStartTile)
         {
@@ -69,7 +85,7 @@ public class npcController : MonoBehaviour
         Node foundNode = null;
         float minDistance = float.MaxValue;
 
-        foreach(Node node in NodesInScene())
+        foreach(Node node in nodesInScene)
         {
             float currentDistance = Vector2.Distance(transform.position, node.transform.position);
             if (currentDistance < minDistance)

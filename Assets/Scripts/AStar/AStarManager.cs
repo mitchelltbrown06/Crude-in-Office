@@ -56,7 +56,7 @@ public class AStarManager : MonoBehaviour
 
             foreach(Node connectedNode in currentNode.connections)
             {
-                if(!connectedNode.onWall)
+                if(!connectedNode.onWall && !connectedNode.onEnemy)
                 {
                     float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
 

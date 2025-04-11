@@ -35,7 +35,7 @@ public class BidenPathfinding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = GameObject.FindGameObjectWithTag("GridSpawner").GetComponent<GridScript>();
+        grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
         Player = GameObject.FindGameObjectWithTag("Player");
         buildingLayer = LayerMask.GetMask("Building");
         gridLayer = LayerMask.GetMask("Building");
@@ -84,11 +84,14 @@ public class BidenPathfinding : MonoBehaviour
         {
             for(int i = 0; i < nodes.Length; i++)
             {
-                nodeDistance = Vector2.Distance(closestBuilding.transform.position, nodes[i].transform.position);
-                if(nodeDistance < nearestNodeDistance)
+                if(!nodes[i].onWall && !nodes[i].onEnemy)
                 {
-                    nodeAtBuilding = nodes[i];
-                    nearestNodeDistance = nodeDistance;
+                    nodeDistance = Vector2.Distance(closestBuilding.transform.position, nodes[i].transform.position);
+                    if(nodeDistance < nearestNodeDistance)
+                    {
+                        nodeAtBuilding = nodes[i];
+                        nearestNodeDistance = nodeDistance;
+                    }
                 }
             }
         }
