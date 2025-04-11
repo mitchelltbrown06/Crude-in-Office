@@ -16,10 +16,15 @@ public class WallScript : MonoBehaviour
     public GameObject rightWall;
     public WallScript rightWallScript;
 
+    public Collider2D currentCollider;
+
     private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
+        transform.GetChild(1).gameObject.GetComponent<Collider2D>().enabled = true;
+        transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = false;
+
         //GetComponent<SpriteRenderer>().sprite = verticalWall;
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = verticalWall;
@@ -38,30 +43,40 @@ public class WallScript : MonoBehaviour
     public void UpdateNeighbors()
     {
         
-        leftWall = Physics2D.Raycast(new Vector2(transform.position.x - grid.tileSize, transform.position.y), Vector2.left, grid.tileSize / 4).collider.gameObject;
+        leftWall = Physics2D.Raycast(new Vector2(transform.position.x - grid.tileSize, transform.position.y), Vector2.left, grid.tileSize).collider.gameObject.transform.parent.gameObject;
         leftWallScript = leftWall.GetComponent<WallScript>();
 
-        rightWall = Physics2D.Raycast(new Vector2(transform.position.x + grid.tileSize, transform.position.y), Vector2.right, grid.tileSize / 4).collider.gameObject;
+        rightWall = Physics2D.Raycast(new Vector2(transform.position.x + grid.tileSize, transform.position.y), Vector2.right, grid.tileSize).collider.gameObject.transform.parent.gameObject;
         rightWallScript = rightWall.GetComponent<WallScript>();
 
         if (leftWall.CompareTag("Wall"))
         {
             leftWallScript.WallToYourRight();
             spriteRenderer.sprite = horizontalWall;
+
+            transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = true;
+            transform.GetChild(1).gameObject.GetComponent<Collider2D>().enabled = false;
         }
         if (rightWall.CompareTag("Wall"))
         {
             rightWallScript.WallToYourLeft();
             spriteRenderer.sprite = horizontalWall;
+
+            transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = true;
+            transform.GetChild(1).gameObject.GetComponent<Collider2D>().enabled = false;
         }
     }
     public void WallToYourLeft()
     {
         GetComponent<SpriteRenderer>().sprite = horizontalWall;
+        transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = true;
+        transform.GetChild(1).gameObject.GetComponent<Collider2D>().enabled = false;
     }
     public void WallToYourRight()
     {
         GetComponent<SpriteRenderer>().sprite = horizontalWall;
+        transform.GetChild(0).gameObject.GetComponent<Collider2D>().enabled = true;
+        transform.GetChild(1).gameObject.GetComponent<Collider2D>().enabled = false;
     }
     
 }

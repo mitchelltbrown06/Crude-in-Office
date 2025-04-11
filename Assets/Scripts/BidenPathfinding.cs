@@ -35,6 +35,8 @@ public class BidenPathfinding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        grid = GameObject.FindGameObjectWithTag("GridSpawner").GetComponent<GridScript>();
+        Player = GameObject.FindGameObjectWithTag("Player");
         buildingLayer = LayerMask.GetMask("Building");
         gridLayer = LayerMask.GetMask("Building");
     }

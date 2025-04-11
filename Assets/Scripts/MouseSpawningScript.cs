@@ -9,6 +9,7 @@ public class MouseSpawningScript : MonoBehaviour
     public GameObject oilrig;
     public GameObject mint;
     public GameObject wall;
+    public GameObject vance;
     public LogicScript Logic;
     public GridScript grid;
     //Vector3 spawnLocation;
@@ -44,6 +45,11 @@ public class MouseSpawningScript : MonoBehaviour
             {
                 Instantiate(wall, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
                 Logic.PurchaseWall();
+            }
+            if(Logic.Coins >= Logic.VancePrice && Logic.Equiped == "Vance")
+            {
+                Instantiate(vance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                Logic.PurchaseVance();
             }
         }
     }
