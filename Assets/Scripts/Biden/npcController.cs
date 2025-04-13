@@ -9,7 +9,7 @@ public class npcController : MonoBehaviour
     public List<Node> path;
 
     public BidenPathfinding joeBiden;
-    private float speed = 3;
+    public float speed = .5f;
 
     private bool onStartTile = false;
 
@@ -58,6 +58,10 @@ public class npcController : MonoBehaviour
         if(path.Count == 0)
         {
             path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(joeBiden.nodeAtBuilding.transform.position));
+            if(path.Count == 0)
+            {
+                path = AStarManager.instance.GenerateWallPath(currentNode, AStarManager.instance.FindNearestNode(joeBiden.nodeAtBuilding.transform.position));
+            }
         }
     }
     void CreatePath()
