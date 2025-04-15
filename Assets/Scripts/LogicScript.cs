@@ -58,6 +58,10 @@ public class LogicScript : MonoBehaviour
     {
         Equiped = "Vance";
     }
+    public void EquipEntrance()
+    {
+        Equiped = "Entrance";
+    }
     public void PurchaseOilRig()
     {
         Coins -= OilRigPrice;

@@ -10,6 +10,9 @@ public class MouseSpawningScript : MonoBehaviour
     public GameObject mint;
     public GameObject wall;
     public GameObject vance;
+    public GameObject entrance;
+    public GameObject exit;
+    public ButtonManager buttonManager;
     public LogicScript Logic;
     public GridScript grid;
     //Vector3 spawnLocation;
@@ -50,6 +53,16 @@ public class MouseSpawningScript : MonoBehaviour
             {
                 Instantiate(vance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
                 Logic.PurchaseVance();
+            }
+            if(buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance")
+            {
+                Instantiate(entrance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                buttonManager.PurchaseEntrance();
+            }
+            if(buttonManager.exitPlaced == false && buttonManager.equiped == "Exit")
+            {
+                Instantiate(exit, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                buttonManager.PurchaseExit();
             }
         }
     }

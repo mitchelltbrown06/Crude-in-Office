@@ -11,6 +11,8 @@ TagManager:
   - Wall
   - GridSpawner
   - Enemy
+  - tileMap
+  - ButtonManager
   layers:
   - Default
   - TransparentFX

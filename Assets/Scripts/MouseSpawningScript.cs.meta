@@ -3,7 +3,15 @@ guid: 370561d33f26a485ba37a0d6fc752f3e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - oilrig: {instanceID: 0}
+  - mint: {instanceID: 0}
+  - wall: {instanceID: 0}
+  - vance: {instanceID: 0}
+  - entrance: {fileID: 7258289274802347544, guid: 4ae0b4b00484f4b0c9097d99864ef684, type: 3}
+  - Logic: {instanceID: 0}
+  - grid: {instanceID: 0}
+  - closestTile: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
