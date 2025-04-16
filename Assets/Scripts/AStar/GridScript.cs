@@ -14,7 +14,7 @@ public class GridScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(-0.5f, 0.5f, 0.0f);
+        transform.position = new Vector3(-0.5f, 0.5f, 10f);
         SpawnGrid(); 
     }
 
@@ -25,7 +25,7 @@ public class GridScript : MonoBehaviour
     }
     void SpawnTile()
     {
-        Instantiate(tile, transform.position, transform.rotation, gridParent.transform);
+        Instantiate(tile, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation, gridParent.transform);
     }
     void SpawnGrid()
     {

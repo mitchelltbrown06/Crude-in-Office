@@ -16,6 +16,8 @@ public class npcController : MonoBehaviour
     public float UpdateCooldown = 1;
     public float UpdateTimer = 0;
 
+    public GameObject exit;
+
     void Start()
     {
         /*
@@ -27,9 +29,14 @@ public class npcController : MonoBehaviour
             onStartTile = true;
         }
         */
+        exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
     }
     void Update()
     {
+        if(Vector2.Distance(exit.transform.position, this.transform.parent.gameObject.transform.position) < .1)
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }
         if(nodesInScene.Length == 0)
         {
             nodesInScene = FindObjectsOfType<Node>();
@@ -46,7 +53,7 @@ public class npcController : MonoBehaviour
         UpdateTimer += Time.deltaTime;
         if(onStartTile)
         {
-            if(joeBiden.nodeAtBuilding != null)
+            if(exit != null)
             {
                 Engage();
                 CreatePath();
@@ -57,11 +64,13 @@ public class npcController : MonoBehaviour
     {
         if(path.Count == 0)
         {
-            path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(joeBiden.nodeAtBuilding.transform.position));
+            path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(exit.transform.position));
+            /*
             if(path.Count == 0)
             {
-                path = AStarManager.instance.GenerateWallPath(currentNode, AStarManager.instance.FindNearestNode(joeBiden.nodeAtBuilding.transform.position));
+                path = AStarManager.instance.GenerateWallPath(currentNode, AStarManager.instance.FindNearestNode(exit.transform.position));
             }
+            */
         }
     }
     void CreatePath()

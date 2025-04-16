@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -9,45 +10,115 @@ public class ButtonManager : MonoBehaviour
     public Canvas canvas;
 
     //entrance and exit info
-    public GameObject entrance;
-    public GameObject exit;
+    public Button entrancePrefab;
+    public Button entranceInstance;
+    public Button exitPrefab;
+    public Button exitInstance;
     public bool entrancePlaced = false;
     public bool exitPlaced = false;
 
     //button slot info
     public bool slot1Filled = false;
-    public Vector3 slot1Position = new Vector3(0, 0, 0);
+    public Vector3 slot1Position;
+
+    public bool slot2Filled = false;
+    public Vector3 slot2Position;
+
     public Vector3 spawnPosition;
+
+    //buttons
+    public Button pathPrefab;
+    public Button pathInstance;
 
     void Start()
     {
+        slot1Position = new Vector3(55, 55, 0);
+        slot2Position = new Vector3(160, 55, 0);
+
         spawnPosition = slot1Position;
-        Instantiate(entrance, spawnPosition, Quaternion.identity, canvas.transform);
+        SpawnEntrance();
     }
     void Update()
     {
-        if (!slot1Filled)
-        {
-            spawnPosition = slot1Position;
-        }
+        CheckSpawnPosition();
     }
+
+    //Purchases
+    /*
     public void PurchaseEntrance()
     {
         entrancePlaced = true;
-        entrance.GetComponent<ButtonDisable>().Disable();
-        Instantiate(exit, spawnPosition, Quaternion.identity, canvas.transform);
+        entranceInstance.GetComponent<ButtonDisable>().Disable();
+        SpawnExit();
     }
     public void PurchaseExit()
     {
         exitPlaced = true;
-        exit.GetComponent<ButtonDisable>().Disable();
+        exitInstance.GetComponent<ButtonDisable>().Disable();
     }
-    public void EquipEntrance()
+    */
+
+    public void Purchase(Button instance)
     {
-        equiped = "Entrance";
+        Disable(instance);
     }
-    public void EquipExit()
+
+    //Equips
+    public void Equip(string equippable)
     {
-        equiped = "Exit";
+        equiped = equippable;
+    }
+
+    //Button spawns
+    public void SpawnEntrance()
+    {
+        entranceInstance = Instantiate(entrancePrefab, slot1Position, Quaternion.identity, canvas.transform);
+        Enable(entranceInstance);
+        entranceInstance.onClick.AddListener(EntranceOnClick);
+    }
+    public void SpawnExit()
+    {
+        exitInstance = Instantiate(exitPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(exitInstance);
+        exitInstance.onClick.AddListener(ExitOnClick);
+    }
+    public void SpawnPath()
+    {
+        pathInstance = Instantiate(pathPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(pathInstance);
+        pathInstance.onClick.AddListener(PathOnClick);
+    }
+
+    //OnClicks
+    void EntranceOnClick()
+    {
+        Equip("Entrance");
+    }
+    void ExitOnClick()
+    {
+        Equip("Exit");
+    }
+    void PathOnClick()
+    {
+        Equip("Path");
+    }
+    public void CheckSpawnPosition()
+    {
+        if (!slot1Filled)
+            {
+                spawnPosition = slot1Position;
+            }
+            else if(!slot2Filled)
+            {
+                spawnPosition = slot2Position;
+            }
+    }
+    void Disable(Button instance)
+    {
+        instance.GetComponent<ButtonDisable>().Disable();
+    }
+    void Enable(Button instance)
+    {
+        instance.GetComponent<ButtonEnable>().Enable();
     }
 }

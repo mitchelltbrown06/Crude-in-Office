@@ -22,5 +22,9 @@ public class ButtonDisable : MonoBehaviour
         {
             buttonManager.slot1Filled = false;
         }
+        if (gameObject.GetComponent<ButtonEnable>().currentSlot == 2)
+        {
+            buttonManager.slot2Filled = false;
+        }
     }
 }

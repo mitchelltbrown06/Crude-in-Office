@@ -12,6 +12,7 @@ public class MouseSpawningScript : MonoBehaviour
     public GameObject vance;
     public GameObject entrance;
     public GameObject exit;
+    public GameObject path;
     public ButtonManager buttonManager;
     public LogicScript Logic;
     public GridScript grid;
@@ -57,12 +58,22 @@ public class MouseSpawningScript : MonoBehaviour
             if(buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance")
             {
                 Instantiate(entrance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-                buttonManager.PurchaseEntrance();
+                buttonManager.Purchase(buttonManager.entranceInstance);
+                buttonManager.entrancePlaced = true;
+                buttonManager.SpawnExit();
+                buttonManager.CheckSpawnPosition();
+                buttonManager.SpawnPath();
             }
             if(buttonManager.exitPlaced == false && buttonManager.equiped == "Exit")
             {
                 Instantiate(exit, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-                buttonManager.PurchaseExit();
+                buttonManager.Purchase(buttonManager.exitInstance);
+                buttonManager.exitPlaced = true;
+            }
+            if(buttonManager.equiped == "Path")
+            {
+                Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                buttonManager.Purchase(buttonManager.pathInstance);
             }
         }
     }

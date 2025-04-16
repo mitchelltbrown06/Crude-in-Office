@@ -56,33 +56,27 @@ public class AStarManager : MonoBehaviour
 
             foreach(Node connectedNode in currentNode.connections)
             {
-                    if(connectedNode == null)
-                    {
-                        List<Node> path = new List<Node>();
-                        return path;
-                    }
-                    if(!connectedNode.onWall && !connectedNode.onEnemy)
-                    {
-                        float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
+                float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
 
-                        if(heldGScore < connectedNode.gScore)
-                        {
-                            connectedNode.cameFrom = currentNode;
-                            connectedNode.gScore = heldGScore;
-                            connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
+                if(heldGScore < connectedNode.gScore)
+                {
+                    connectedNode.cameFrom = currentNode;
+                    connectedNode.gScore = heldGScore;
+                    connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
 
-                            if(!openSet.Contains(connectedNode))
-                            {
-                                openSet.Add(connectedNode);
-                            }
-                        }
+                    if(!openSet.Contains(connectedNode))
+                    {
+                        openSet.Add(connectedNode);
                     }
+                }
             }
+            
         }
 
         return null;
     }
-
+ 
+    /*
     public List<Node> GenerateWallPath(Node start, Node end)
     {
         List<Node> openSet = new List<Node>();
@@ -147,6 +141,7 @@ public class AStarManager : MonoBehaviour
 
         return null;
     }
+    */
 
     public Node FindNearestNode(Vector2 position)
     {
