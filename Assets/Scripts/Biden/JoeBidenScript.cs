@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class JoeBidenScript : MonoBehaviour
 {
-
-    /*
-    public GameObject[] Buildings;
-    public GameObject closestBuilding;    
-    float distance;
-    float nearestBuildingDistance = 10000000;
-    Vector3 direction;
-    public OilRigScript OilRigScript;
-    public GameObject Player;
-    */
-
     public BidenPathfinding pathfinding;
 
     public Rigidbody2D rb;
@@ -47,28 +36,11 @@ public class JoeBidenScript : MonoBehaviour
         pathfinding.FindClosestBuilding();
 
         attackTimer += Time.deltaTime;
-        if(pathfinding.nearestBuildingDistance < attackDistance && attackTimer > attackSpeed)
-        {
-            AttackBuilding();
-        }
-        if(pathfinding.nearestBuildingDistance > attackDistance)
-        {
-            ApproachPathfinder();
-        }
-        else
-        {
-            rb.velocity = new Vector2(0,0);
-        }
+        ApproachPathfinder();
     }
 
     void ApproachPathfinder()
     {
         rb.velocity = (targetPosition - transform.position).normalized * speed;
-    }
-    void AttackBuilding()
-    {
-        pathfinding.OilRigScript.DamageFromJoe();
-        Debug.Log("Attack");
-        attackTimer = 0;
     }
 }

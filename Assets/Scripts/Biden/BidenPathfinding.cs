@@ -10,8 +10,6 @@ public class BidenPathfinding : MonoBehaviour
 
     public JoeBidenScript movement;
 
-    public OilRigScript OilRigScript;
-
     public GridScript grid;
 
     public GameObject[] Buildings;
@@ -23,12 +21,6 @@ public class BidenPathfinding : MonoBehaviour
     public Node nodeAtBuilding;
     public float nearestNodeDistance;
     public float nodeDistance;
-
-    public GameObject highlightedTile;
-
-    public GameObject nextTile;
-
-    public Vector3 nextDirection;
 
     public GameObject Player;
 
@@ -72,8 +64,6 @@ public class BidenPathfinding : MonoBehaviour
         {
         closestBuilding = Player;
         }
-
-        OilRigScript = closestBuilding.GetComponent<OilRigScript>();
     }
     public void FindNodeAtBuilding()
     {

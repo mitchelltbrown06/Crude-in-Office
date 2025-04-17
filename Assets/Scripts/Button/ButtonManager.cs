@@ -9,14 +9,6 @@ public class ButtonManager : MonoBehaviour
 
     public Canvas canvas;
 
-    //entrance and exit info
-    public Button entrancePrefab;
-    public Button entranceInstance;
-    public Button exitPrefab;
-    public Button exitInstance;
-    public bool entrancePlaced = false;
-    public bool exitPlaced = false;
-
     //button slot info
     public bool slot1Filled = false;
     public Vector3 slot1Position;
@@ -24,17 +16,34 @@ public class ButtonManager : MonoBehaviour
     public bool slot2Filled = false;
     public Vector3 slot2Position;
 
+    public bool slot3Filled = false;
+    public Vector3 slot3Position;
+
     public Vector3 spawnPosition;
 
     //buttons
+    public Button entrancePrefab;
+    public Button entranceInstance;
+
+    public Button exitPrefab;
+    public Button exitInstance;
+    
     public Button pathPrefab;
     public Button pathInstance;
+
+    public Button arcadeMachinePrefab;
+    public Button arcadeMachineInstance;
+
+    //button specifics
+    public bool entrancePlaced = false;
+    public bool exitPlaced = false;
     public int paths = 25;
 
     void Start()
     {
         slot1Position = new Vector3(55, 55, 0);
         slot2Position = new Vector3(160, 55, 0);
+        slot3Position = new Vector3(265, 55, 0);
 
         spawnPosition = slot1Position;
         SpawnEntrance();
@@ -74,6 +83,12 @@ public class ButtonManager : MonoBehaviour
         Enable(pathInstance);
         pathInstance.onClick.AddListener(PathOnClick);
     }
+    public void SpawnArcadeMachine()
+    {
+        arcadeMachineInstance = Instantiate(arcadeMachinePrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(arcadeMachineInstance);
+        arcadeMachineInstance.onClick.AddListener(ArcadeMachineOnClick);
+    }
 
     //OnClicks
     void EntranceOnClick()
@@ -88,6 +103,10 @@ public class ButtonManager : MonoBehaviour
     {
         Equip("Path");
     }
+    void ArcadeMachineOnClick()
+    {
+        Equip("ArcadeMachine");
+    }
     public void CheckSpawnPosition()
     {
         if (!slot1Filled)
@@ -97,6 +116,10 @@ public class ButtonManager : MonoBehaviour
             else if(!slot2Filled)
             {
                 spawnPosition = slot2Position;
+            }
+            else if(!slot3Filled)
+            {
+                spawnPosition = slot3Position;
             }
     }
     void Disable(Button instance)

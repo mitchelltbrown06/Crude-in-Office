@@ -8,7 +8,6 @@ public class npcController : MonoBehaviour
     public Node[] nodesInScene;
     public List<Node> path;
 
-    public BidenPathfinding joeBiden;
     public float speed = .5f;
 
     private bool onStartTile = false;
@@ -81,7 +80,7 @@ public class npcController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(path[x].transform.position.x, path[x].transform.position.y, transform.position.z),
                 speed * Time.deltaTime);
 
-            if(Vector2.Distance(transform.position, path[x].transform.position) < .1f && Vector2.Distance(transform.position, joeBiden.transform.position) < .5f)
+            if(Vector2.Distance(transform.position, path[x].transform.position) < .1f && Vector2.Distance(transform.position, transform.parent.gameObject.transform.position) < .5f)
             {
                 currentNode = path[x];
                 path.RemoveAt(x);

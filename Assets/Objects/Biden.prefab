@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7712503002155772942}
   - component: {fileID: 8726816556462461886}
-  - component: {fileID: 5392044598073701942}
   - component: {fileID: 5118784917983745087}
   - component: {fileID: 5129047554183928262}
   - component: {fileID: 6099015639908025710}
@@ -89,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5392044598073701942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259764672723223979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e845693c0d494767bf577116a9e64c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
-  logic: {fileID: 0}
 --- !u!114 &5118784917983745087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +126,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   movement: {fileID: 5118784917983745087}
-  OilRigScript: {fileID: 0}
   grid: {fileID: 0}
   Buildings: []
   closestBuilding: {fileID: 0}
@@ -151,9 +135,6 @@ MonoBehaviour:
   nodeAtBuilding: {fileID: 0}
   nearestNodeDistance: 0
   nodeDistance: 0
-  highlightedTile: {fileID: 0}
-  nextTile: {fileID: 0}
-  nextDirection: {x: 0, y: 0, z: 0}
   Player: {fileID: 0}
 --- !u!50 &6099015639908025710
 Rigidbody2D:
@@ -230,7 +211,6 @@ MonoBehaviour:
   currentNode: {fileID: 0}
   nodesInScene: []
   path: []
-  joeBiden: {fileID: 5129047554183928262}
   speed: 0.5
   UpdateCooldown: 0.01
   UpdateTimer: 0

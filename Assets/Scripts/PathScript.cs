@@ -13,12 +13,10 @@ public class PathScript : MonoBehaviour
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         if(logic.lastPath == null)
         {
-            Debug.Log("setting last path");
             logic.lastPath = FindNearestNode(transform.position);
         }
         else
         {
-            Debug.Log("lastpath isn't null!");
             FindNearestNode(transform.position).connections.Add(logic.lastPath);
             logic.lastPath.connections.Add(FindNearestNode(transform.position));
         }
