@@ -14,6 +14,7 @@ TagManager:
   - tileMap
   - ButtonManager
   - npc
+  - Path
   layers:
   - Default
   - TransparentFX

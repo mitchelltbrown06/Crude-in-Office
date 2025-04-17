@@ -22,10 +22,9 @@ public class EntranceScript : MonoBehaviour
         {
             exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
             exitFound = true;
-
         }
         Timer += Time.deltaTime;
-        if(Timer > spawnCooldown && exit != null)
+        if(Timer > spawnCooldown && exit != null && AStarManager.instance.GeneratePath(AStarManager.instance.FindNearestNode(transform.position), AStarManager.instance.FindNearestNode(exit.transform.position)) != null)
         {
             Timer = 0;
             Instantiate(npc, transform.position, Quaternion.identity);

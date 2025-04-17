@@ -121,6 +121,7 @@ MonoBehaviour:
   attackDistance: 1
   attackSpeed: 0.2
   NPC: {fileID: 6635873630728005092}
+  logic: {fileID: 0}
 --- !u!114 &5129047554183928262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +235,8 @@ MonoBehaviour:
   UpdateCooldown: 0.01
   UpdateTimer: 0
   exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
+  grid: {fileID: 0}
+  logic: {fileID: 0}
 --- !u!212 &3775505159471163094
 SpriteRenderer:
   m_ObjectHideFlags: 0

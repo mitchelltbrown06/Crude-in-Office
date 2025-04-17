@@ -9,37 +9,40 @@ public class Node : MonoBehaviour
 
     public GameObject[] allGridTiles;
     public GridScript grid;
+    public LogicScript logic;
 
     public float gScore;
     public float hScore;
 
-    public bool onWall = false;
+    public bool onPath = false;
     public bool onEnemy = false;
     
     void Start()
     {
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
-        FindNeighbors();
     }
+    /*
     public void FindNeighbors()
     {
         allGridTiles = GameObject.FindGameObjectsWithTag("Grid");
 
         for (int i = 0; i < allGridTiles.Length; i++)
         {
-            if (Vector3.Distance(this.transform.position, allGridTiles[i].transform.position) < grid.tileSize * 1.5 && Vector3.Distance(this.transform.position, allGridTiles[i].transform.position) > grid.tileSize / 2f)
+            if (Vector3.Distance(this.transform.position, allGridTiles[i].transform.position) < grid.tileSize * 1.3 && Vector3.Distance(this.transform.position, allGridTiles[i].transform.position) > grid.tileSize / 2f)
             {
                 connections.Add(allGridTiles[i].GetComponent<Node>());
             }
         }
     }
+    */
     public float FScore()
     {
         return gScore + hScore;
     }
     void Update()
     {
-        onWall = OnWall();
+        onPath = OnPath();
         onEnemy = OnEnemy();
 
         if(connections.Count > 0)
@@ -53,13 +56,13 @@ public class Node : MonoBehaviour
             }
         }
     }
-    public bool OnWall()
+    public bool OnPath()
     {
-        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+        GameObject[] paths = GameObject.FindGameObjectsWithTag("Path");
 
-        foreach(GameObject wall in walls)
+        foreach(GameObject path in paths)
         {
-            if (Vector2.Distance(wall.transform.position, transform.position) < grid.tileSize / 2)
+            if (Vector2.Distance(path.transform.position, transform.position) < grid.tileSize / 2)
             {
                 return true;
             }

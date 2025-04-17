@@ -18,8 +18,14 @@ public class npcController : MonoBehaviour
 
     public GameObject exit;
 
+    public GridScript grid;
+
+    public LogicScript logic;
+
     void Start()
     {
+        logic = GameObject.FindObjectOfType<LogicScript>();
+        grid = GameObject.FindObjectOfType<GridScript>();
         /*
         //need to find closest node and then teleport to it and set it to the current node
         if (!onStartTile)
@@ -33,7 +39,7 @@ public class npcController : MonoBehaviour
     }
     void Update()
     {
-        if(Vector2.Distance(exit.transform.position, this.transform.parent.gameObject.transform.position) < .1)
+        if(Vector2.Distance(exit.transform.position, this.transform.parent.gameObject.transform.position) < logic.npcOffsetRange * 1.5)
         {
             Destroy(gameObject.transform.parent.gameObject);
         }
@@ -65,12 +71,6 @@ public class npcController : MonoBehaviour
         if(path.Count == 0)
         {
             path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(exit.transform.position));
-            /*
-            if(path.Count == 0)
-            {
-                path = AStarManager.instance.GenerateWallPath(currentNode, AStarManager.instance.FindNearestNode(exit.transform.position));
-            }
-            */
         }
     }
     void CreatePath()

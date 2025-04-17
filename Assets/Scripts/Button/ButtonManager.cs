@@ -29,6 +29,7 @@ public class ButtonManager : MonoBehaviour
     //buttons
     public Button pathPrefab;
     public Button pathInstance;
+    public int paths = 25;
 
     void Start()
     {
@@ -42,21 +43,6 @@ public class ButtonManager : MonoBehaviour
     {
         CheckSpawnPosition();
     }
-
-    //Purchases
-    /*
-    public void PurchaseEntrance()
-    {
-        entrancePlaced = true;
-        entranceInstance.GetComponent<ButtonDisable>().Disable();
-        SpawnExit();
-    }
-    public void PurchaseExit()
-    {
-        exitPlaced = true;
-        exitInstance.GetComponent<ButtonDisable>().Disable();
-    }
-    */
 
     public void Purchase(Button instance)
     {

@@ -25,6 +25,7 @@ public class MouseSpawningScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Logic = GameObject.FindObjectOfType<LogicScript>();
         buildingLayer = LayerMask.GetMask("Building");
     }
 
@@ -58,22 +59,30 @@ public class MouseSpawningScript : MonoBehaviour
             if(buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance")
             {
                 Instantiate(entrance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
                 buttonManager.Purchase(buttonManager.entranceInstance);
                 buttonManager.entrancePlaced = true;
-                buttonManager.SpawnExit();
-                buttonManager.CheckSpawnPosition();
                 buttonManager.SpawnPath();
             }
-            if(buttonManager.exitPlaced == false && buttonManager.equiped == "Exit")
+            if(buttonManager.exitPlaced == false && buttonManager.equiped == "Exit" && Vector2.Distance(closestTile.transform.position, Logic.lastPath.transform.position) < grid.tileSize * 1.1)
             {
                 Instantiate(exit, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
                 buttonManager.Purchase(buttonManager.exitInstance);
                 buttonManager.exitPlaced = true;
             }
-            if(buttonManager.equiped == "Path")
+            if(buttonManager.equiped == "Path" && Vector2.Distance(closestTile.transform.position, Logic.lastPath.transform.position) < grid.tileSize * 1.1)
             {
-                Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-                buttonManager.Purchase(buttonManager.pathInstance);
+                buttonManager.paths -= 1;
+                if(buttonManager.paths >= 0)
+                {   
+                    Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                }
+                if(buttonManager.paths <= 0 && buttonManager.pathInstance != null)
+                {
+                    buttonManager.Purchase(buttonManager.pathInstance);
+                    buttonManager.SpawnExit();
+                }
             }
         }
     }

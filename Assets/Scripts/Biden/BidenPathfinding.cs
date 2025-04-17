@@ -84,14 +84,11 @@ public class BidenPathfinding : MonoBehaviour
         {
             for(int i = 0; i < nodes.Length; i++)
             {
-                if(!nodes[i].onWall && !nodes[i].onEnemy)
+                nodeDistance = Vector2.Distance(closestBuilding.transform.position, nodes[i].transform.position);
+                if(nodeDistance < nearestNodeDistance)
                 {
-                    nodeDistance = Vector2.Distance(closestBuilding.transform.position, nodes[i].transform.position);
-                    if(nodeDistance < nearestNodeDistance)
-                    {
-                        nodeAtBuilding = nodes[i];
-                        nearestNodeDistance = nodeDistance;
-                    }
+                    nodeAtBuilding = nodes[i];
+                    nearestNodeDistance = nodeDistance;
                 }
             }
         }

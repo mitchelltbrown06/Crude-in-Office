@@ -18,6 +18,10 @@ public class LogicScript : MonoBehaviour
     public int VancePrice;
     public float vanceShotDamage;
 
+    public Node lastPath;
+
+    public float npcOffsetRange;
+
     // Start is called before the first frame update
     void Start()
     {
