@@ -16,26 +16,16 @@ public class Node : MonoBehaviour
 
     public bool onPath = false;
     public bool onEnemy = false;
+    public bool onBuilding = false;
+    public bool onEntranceOrExit = false;
     
     void Start()
     {
+
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
-    }
-    /*
-    public void FindNeighbors()
-    {
-        allGridTiles = GameObject.FindGameObjectsWithTag("Grid");
 
-        for (int i = 0; i < allGridTiles.Length; i++)
-        {
-            if (Vector3.Distance(this.transform.position, allGridTiles[i].transform.position) < grid.tileSize * 1.3 && Vector3.Distance(this.transform.position, allGridTiles[i].transform.position) > grid.tileSize / 2f)
-            {
-                connections.Add(allGridTiles[i].GetComponent<Node>());
-            }
-        }
     }
-    */
     public float FScore()
     {
         return gScore + hScore;
@@ -44,6 +34,8 @@ public class Node : MonoBehaviour
     {
         onPath = OnPath();
         onEnemy = OnEnemy();
+        onBuilding = OnBuilding();
+        //onEntranceOrExit = OnEntranceOrExit();
 
         if(connections.Count > 0)
         {
@@ -82,6 +74,40 @@ public class Node : MonoBehaviour
             }
         }
 
+        return false;
+    }
+    public bool OnBuilding()
+    {
+        GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
+
+        foreach(GameObject building in buildings)
+        {
+            if (Vector2.Distance(building.transform.position, transform.position) < grid.tileSize / 2)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public bool OnEntranceOrExit()
+    {
+        if(GameObject.FindObjectOfType<EntranceScript>() != null)
+        {
+            GameObject entrance = GameObject.FindObjectOfType<EntranceScript>().gameObject;
+            if(Vector2.Distance(entrance.transform.position, transform.position) < grid.tileSize / 2)
+            {
+                return true;
+            }
+        }
+        if(GameObject.FindObjectOfType<ExitScript>() != null)
+        {
+            GameObject exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
+            if(Vector2.Distance(exit.transform.position, transform.position) < grid.tileSize / 2)
+            {
+                return true;
+            }
+        }
         return false;
     }
 }

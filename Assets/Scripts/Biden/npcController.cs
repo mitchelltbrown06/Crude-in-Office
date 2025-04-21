@@ -27,6 +27,8 @@ public class npcController : MonoBehaviour
 
     public BidenPathfinding npc;
 
+    public GameObject target;
+
     void Start()
     {
         exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
@@ -72,25 +74,27 @@ public class npcController : MonoBehaviour
             }
             if(exit != null && jobToDo == false)
             {
-                Engage();
-                CreatePath();
+                CreatePath(exit.transform.position);
+                target = exit;
+                FollowPath();
             }
-            else if(exit != null && path != null && path.Count > 0)
+            else if(exit != null && jobToDo == true)
             {
-                path.Clear();
-                path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(npc.closestBuilding.transform.position));
+                CreatePath(npc.closestBuilding.transform.position);
+                target = npc.closestBuilding;
+                FollowPath();
                 // the problem here is that there is no connection between the node at the building and the path, so you need to create connecitons between the building and it's closest path when it is placed.
             }
         }
     }
-    void Engage()
+    void CreatePath(Vector3 destination)
     {
         if(path.Count == 0)
         {
-            path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(exit.transform.position));
+            path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(destination));
         }
     }
-    void CreatePath()
+    void FollowPath()
     {
         if(path.Count > 0)
         {
@@ -135,7 +139,6 @@ public class npcController : MonoBehaviour
 
         if(Vector2.Distance(building.transform.position, npc.transform.position) < buildingCaptureDistance)
         {
-            Debug.Log("Found Job");
             jobToDo = true;
         }
     }

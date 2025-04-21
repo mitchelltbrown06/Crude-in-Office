@@ -55,6 +55,9 @@ TagManager:
   - name: Grid
     uniqueID: 3816992489
     locked: 0
+  - name: Path
+    uniqueID: 4093279905
+    locked: 0
   - name: Building
     uniqueID: 3557086887
     locked: 0
