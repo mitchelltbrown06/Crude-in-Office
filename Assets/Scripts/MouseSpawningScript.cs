@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class MouseSpawningScript : MonoBehaviour
 {
-    public GameObject[] Tiles;
-    public PathScript[] paths;
 
     //Prefabs
     public GameObject entrance;
@@ -21,7 +19,7 @@ public class MouseSpawningScript : MonoBehaviour
 
     //Vector3 spawnLocation;
     public GameObject closestTile;
-    public PathScript closestPath;
+    public GameObject closestPath;
 
     private Vector3 mousePosition;
     public LayerMask buildingLayer;
@@ -37,7 +35,8 @@ public class MouseSpawningScript : MonoBehaviour
     {
         mousePosition = Input.mousePosition;
         closestTile = FindClosestTile(Camera.main.ScreenToWorldPoint(mousePosition));
-        FindClosestPath();
+        closestPath = FindClosestPath(Camera.main.ScreenToWorldPoint(mousePosition));
+
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
             if(buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance" && closestTile.GetComponent<Node>().onPath == false)
@@ -72,7 +71,8 @@ public class MouseSpawningScript : MonoBehaviour
             }
             if(buttonManager.entrancePlaced == true && buttonManager.equiped == "ArcadeMachine" && closestTile.GetComponent<Node>().onPath == false
                 && FindClosestTile(closestPath.transform.position).GetComponent<Node>().connections.Count > 1
-                && Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1)
+                && Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1
+                )
             {
                 Instantiate(arcadeMachine, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
                 buttonManager.Purchase(buttonManager.arcadeMachineInstance);
@@ -104,23 +104,26 @@ public class MouseSpawningScript : MonoBehaviour
         }
         return null;
     }
-    void FindClosestPath()
+    public GameObject FindClosestPath(Vector3 position)
     {
         float nearestDistance = float.MaxValue;
-        paths = GameObject.FindObjectsOfType<PathScript>();
+        GameObject[] paths = GameObject.FindGameObjectsWithTag("Path");
+        GameObject path = null;
 
         if (paths.Length > 0)
         {
             for(int i = 0; i < paths.Length; i++)
             {
-                float distance = Vector3.Distance(Camera.main.ScreenToWorldPoint(mousePosition), paths[i].transform.position);
+                float distance = Vector3.Distance(position, paths[i].transform.position);
 
                 if(distance < nearestDistance && FindClosestTile(paths[i].transform.position).GetComponent<Node>().connections.Count > 1)
                 {
-                    closestPath = paths[i];
+                    path = paths[i];
                     nearestDistance = distance;
                 }
             }
+            return path;
         }
+        return null;
     }
 }

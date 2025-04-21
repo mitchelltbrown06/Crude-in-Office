@@ -22,13 +22,10 @@ public class BidenPathfinding : MonoBehaviour
     public float nearestNodeDistance;
     public float nodeDistance;
 
-    public GameObject Player;
-
     // Start is called before the first frame update
     void Start()
     {
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
-        Player = GameObject.FindGameObjectWithTag("Player");
         buildingLayer = LayerMask.GetMask("Building");
         gridLayer = LayerMask.GetMask("Building");
     }
@@ -37,7 +34,10 @@ public class BidenPathfinding : MonoBehaviour
     void Update()
     {
         FindClosestBuilding();
-        FindNodeAtBuilding();
+        if(closestBuilding != null)
+        {
+            FindNodeAtBuilding();
+        }
     }
 
     public void FindClosestBuilding()
@@ -59,10 +59,6 @@ public class BidenPathfinding : MonoBehaviour
                     nearestBuildingDistance = buildingDistance;
                 }
             }
-        }
-        else 
-        {
-        closestBuilding = Player;
         }
     }
     public void FindNodeAtBuilding()

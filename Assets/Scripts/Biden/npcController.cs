@@ -21,10 +21,19 @@ public class npcController : MonoBehaviour
 
     public LogicScript logic;
 
+    public float buildingCaptureDistance;
+
+    public bool jobToDo = false;
+
+    public BidenPathfinding npc;
+
     void Start()
     {
+        exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
         logic = GameObject.FindObjectOfType<LogicScript>();
         grid = GameObject.FindObjectOfType<GridScript>();
+        npc = GameObject.FindObjectOfType<BidenPathfinding>();
+        buildingCaptureDistance = grid.tileSize;
         /*
         //need to find closest node and then teleport to it and set it to the current node
         if (!onStartTile)
@@ -34,7 +43,6 @@ public class npcController : MonoBehaviour
             onStartTile = true;
         }
         */
-        exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
     }
     void Update()
     {
@@ -58,10 +66,20 @@ public class npcController : MonoBehaviour
         UpdateTimer += Time.deltaTime;
         if(onStartTile)
         {
-            if(exit != null)
+            if(npc.closestBuilding != null)
+            {
+                FindJob(npc.closestBuilding.gameObject);
+            }
+            if(exit != null && jobToDo == false)
             {
                 Engage();
                 CreatePath();
+            }
+            else if(exit != null && path != null && path.Count > 0)
+            {
+                path.Clear();
+                path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(npc.closestBuilding.transform.position));
+                // the problem here is that there is no connection between the node at the building and the path, so you need to create connecitons between the building and it's closest path when it is placed.
             }
         }
     }
@@ -111,5 +129,14 @@ public class npcController : MonoBehaviour
     private Node[] NodesInScene()
     {
         return FindObjectsOfType<Node>();
+    }
+    void FindJob(GameObject building)
+    {
+
+        if(Vector2.Distance(building.transform.position, npc.transform.position) < buildingCaptureDistance)
+        {
+            Debug.Log("Found Job");
+            jobToDo = true;
+        }
     }
 }
