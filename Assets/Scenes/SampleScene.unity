@@ -985,7 +985,7 @@ MonoBehaviour:
   arcadeMachineInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
-  paths: 2
+  paths: 4
 --- !u!4 &1760549752
 Transform:
   m_ObjectHideFlags: 0
@@ -1075,18 +1075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8fe9296f3e7471f8ed17d6e1133e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gasPrice: 3.75
-  ScoreBoard: {fileID: 0}
-  CoinBoard: {fileID: 0}
-  OilRigRate: 0.0001
-  GasPriceIncrease: 0.0001
-  Coins: 100
-  Equiped: 
-  OilRigPrice: 1
-  MintPrice: 1
-  WallPrice: 1
-  VancePrice: 1
-  vanceShotDamage: 3
   lastPath: {fileID: 0}
   npcOffsetRange: 0.3
 --- !u!4 &1990053728
@@ -1116,7 +1104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370561d33f26a485ba37a0d6fc752f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tiles: []
   entrance: {fileID: 7258289274802347544, guid: 4ae0b4b00484f4b0c9097d99864ef684, type: 3}
   exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
   path: {fileID: 3270414855831790524, guid: 90af0551c658c4c6b8b2c41a51caf3bd, type: 3}
@@ -1125,6 +1112,7 @@ MonoBehaviour:
   Logic: {fileID: 1990053727}
   grid: {fileID: 133848949}
   closestTile: {fileID: 0}
+  closestPath: {fileID: 0}
   buildingLayer:
     serializedVersion: 2
     m_Bits: 0

@@ -80,10 +80,14 @@ public class npcController : MonoBehaviour
             }
             else if(exit != null && jobToDo == true)
             {
+                if(target != npc.closestBuilding)
+                {
+                    path.Clear();
+                    currentNode = FindNearestNode(transform.position);
+                }
                 CreatePath(npc.closestBuilding.transform.position);
                 target = npc.closestBuilding;
                 FollowPath();
-                // the problem here is that there is no connection between the node at the building and the path, so you need to create connecitons between the building and it's closest path when it is placed.
             }
         }
     }
@@ -137,7 +141,8 @@ public class npcController : MonoBehaviour
     void FindJob(GameObject building)
     {
 
-        if(Vector2.Distance(building.transform.position, npc.transform.position) < buildingCaptureDistance)
+        if(Vector2.Distance(building.transform.position, npc.transform.position) < buildingCaptureDistance
+            && AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(npc.closestBuilding.transform.position)).Count < 2)
         {
             jobToDo = true;
         }

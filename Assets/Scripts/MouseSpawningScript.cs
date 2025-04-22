@@ -36,6 +36,10 @@ public class MouseSpawningScript : MonoBehaviour
         mousePosition = Input.mousePosition;
         closestTile = FindClosestTile(Camera.main.ScreenToWorldPoint(mousePosition));
         closestPath = FindClosestPath(Camera.main.ScreenToWorldPoint(mousePosition));
+        if(closestPath != null)
+        {
+            Debug.Log("Closest Path : " + closestPath.transform.position);
+        }
 
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
@@ -71,7 +75,7 @@ public class MouseSpawningScript : MonoBehaviour
             }
             if(buttonManager.entrancePlaced == true && buttonManager.equiped == "ArcadeMachine" && closestTile.GetComponent<Node>().onPath == false
                 && FindClosestTile(closestPath.transform.position).GetComponent<Node>().onEntranceOrExit == false
-                && Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1
+                //&& Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1
                 )
             {
                 Instantiate(arcadeMachine, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
@@ -81,7 +85,7 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
-   public GameObject FindClosestTile(Vector3 position)
+    public GameObject FindClosestTile(Vector3 position)
     {
         float nearestDistance = float.MaxValue;
         GameObject[] Tiles = GameObject.FindGameObjectsWithTag("Grid");
@@ -118,7 +122,7 @@ public class MouseSpawningScript : MonoBehaviour
             {
                 float distance = Vector3.Distance(position, paths[i].transform.position);
 
-                if(distance < nearestDistance && FindClosestTile(paths[i].transform.position).GetComponent<Node>().connections.Count > 1)
+                if(distance < nearestDistance)
                 {
                     path = paths[i];
                     nearestDistance = distance;
