@@ -36,10 +36,6 @@ public class MouseSpawningScript : MonoBehaviour
         mousePosition = Input.mousePosition;
         closestTile = FindClosestTile(Camera.main.ScreenToWorldPoint(mousePosition));
         closestPath = FindClosestPath(Camera.main.ScreenToWorldPoint(mousePosition));
-        if(closestPath != null)
-        {
-            Debug.Log("Closest Path : " + closestPath.transform.position);
-        }
 
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
@@ -82,6 +78,7 @@ public class MouseSpawningScript : MonoBehaviour
                 FindClosestTile(closestPath.transform.position).GetComponent<Node>().connections.Add(closestTile.GetComponent<Node>());
                 closestTile.GetComponent<Node>().connections.Add(FindClosestTile(closestPath.transform.position).GetComponent<Node>());
                 buttonManager.Purchase(buttonManager.arcadeMachineInstance);
+                buttonManager.equiped = "null";
             }
         }
     }

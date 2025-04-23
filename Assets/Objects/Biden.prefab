@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6099015639908025710}
   m_Layer: 7
   m_Name: Biden
-  m_TagString: npc
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1958472443
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3c7c5c52c7ef345099097135e0ba3e50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,7 +135,6 @@ MonoBehaviour:
   nodeAtBuilding: {fileID: 0}
   nearestNodeDistance: 0
   nodeDistance: 0
-  Player: {fileID: 0}
 --- !u!50 &6099015639908025710
 Rigidbody2D:
   serializedVersion: 4
@@ -176,7 +175,7 @@ GameObject:
   - component: {fileID: 3775505159471163094}
   m_Layer: 7
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,6 +216,10 @@ MonoBehaviour:
   exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
   grid: {fileID: 0}
   logic: {fileID: 0}
+  buildingCaptureDistance: 0
+  jobToDo: 0
+  npc: {fileID: 0}
+  target: {fileID: 0}
 --- !u!212 &3775505159471163094
 SpriteRenderer:
   m_ObjectHideFlags: 0

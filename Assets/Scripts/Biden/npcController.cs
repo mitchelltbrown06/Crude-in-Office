@@ -35,7 +35,7 @@ public class npcController : MonoBehaviour
         logic = GameObject.FindObjectOfType<LogicScript>();
         grid = GameObject.FindObjectOfType<GridScript>();
         npc = GameObject.FindObjectOfType<BidenPathfinding>();
-        buildingCaptureDistance = grid.tileSize;
+        buildingCaptureDistance = grid.tileSize / 2;
         /*
         //need to find closest node and then teleport to it and set it to the current node
         if (!onStartTile)
@@ -70,7 +70,7 @@ public class npcController : MonoBehaviour
         {
             if(npc.closestBuilding != null)
             {
-                FindJob(npc.closestBuilding.gameObject);
+                FindJob(npc.closestBuilding.transform.Find("Door").gameObject);
             }
             if(exit != null && jobToDo == false)
             {
@@ -83,9 +83,8 @@ public class npcController : MonoBehaviour
                 if(target != npc.closestBuilding)
                 {
                     path.Clear();
-                    currentNode = FindNearestNode(transform.position);
                 }
-                CreatePath(npc.closestBuilding.transform.position);
+                CreatePathWithNode(npc.closestBuilding.transform.Find("Door").GetComponent<DoorScript>().openJob);
                 target = npc.closestBuilding;
                 FollowPath();
             }
@@ -94,8 +93,17 @@ public class npcController : MonoBehaviour
     void CreatePath(Vector3 destination)
     {
         if(path.Count == 0)
-        {
+        { 
             path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(destination));
+        }
+    }
+    void CreatePathWithNode(Node node)
+    {
+        Debug.Log(node.transform.position);
+        Debug.Log(currentNode != null);
+        if(path.Count == 0)
+        { 
+            path = AStarManager.instance.GeneratePath(currentNode, node);
         }
     }
     void FollowPath()
@@ -138,11 +146,10 @@ public class npcController : MonoBehaviour
     {
         return FindObjectsOfType<Node>();
     }
-    void FindJob(GameObject building)
+    void FindJob(GameObject door)
     {
 
-        if(Vector2.Distance(building.transform.position, npc.transform.position) < buildingCaptureDistance
-            && AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(npc.closestBuilding.transform.position)).Count < 2)
+        if(Vector2.Distance(door.transform.position, npc.transform.position) < buildingCaptureDistance)
         {
             jobToDo = true;
         }
