@@ -14,6 +14,7 @@ public class DoorScript : MonoBehaviour
         grid = GameObject.FindObjectOfType<GridScript>();
         npcs = GameObject.FindGameObjectsWithTag("npc");
         GetComponent<Node>().connections.Add(FindClosestTile(FindClosestPath(transform.position).transform.position).GetComponent<Node>());
+        FindClosestTile(FindClosestPath(transform.position).transform.position).GetComponent<Node>().connections.Add(GetComponent<Node>());
     }
  /*\\
     // Update is called once per frame

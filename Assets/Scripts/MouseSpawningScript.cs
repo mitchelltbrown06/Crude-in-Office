@@ -71,12 +71,10 @@ public class MouseSpawningScript : MonoBehaviour
             }
             if(buttonManager.entrancePlaced == true && buttonManager.equiped == "ArcadeMachine" && closestTile.GetComponent<Node>().onPath == false
                 && FindClosestTile(closestPath.transform.position).GetComponent<Node>().onEntranceOrExit == false
-                //&& Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1
+                && Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1
                 )
             {
                 Instantiate(arcadeMachine, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-                FindClosestTile(closestPath.transform.position).GetComponent<Node>().connections.Add(closestTile.GetComponent<Node>());
-                closestTile.GetComponent<Node>().connections.Add(FindClosestTile(closestPath.transform.position).GetComponent<Node>());
                 buttonManager.Purchase(buttonManager.arcadeMachineInstance);
                 buttonManager.equiped = "null";
             }

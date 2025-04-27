@@ -985,7 +985,7 @@ MonoBehaviour:
   arcadeMachineInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
-  paths: 4
+  paths: 2
 --- !u!4 &1760549752
 Transform:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastPath: {fileID: 0}
-  npcOffsetRange: 0.3
 --- !u!4 &1990053728
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,4 @@ public class LogicScript : MonoBehaviour
 {
 
     public Node lastPath;
-
-    public float npcOffsetRange;
 }

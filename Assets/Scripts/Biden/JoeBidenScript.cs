@@ -10,37 +10,68 @@ public class JoeBidenScript : MonoBehaviour
 
     public float speed;
 
-    public float attackDistance;
-    public float attackSpeed;
-    private float attackTimer;
-
     public npcController NPC;
 
-    private Vector3 randomOffset;
-    private Vector3 targetPosition;
+    public Vector3 randomOffset;
+
+    public Vector3 targetPosition;
 
     public LogicScript logic;
+
+    public GridScript grid;
 
     // Start is called before the first frame update
     void Start()
     {
+        grid = GameObject.FindObjectOfType<GridScript>();
+        randomOffset = new Vector3(Random.Range(-grid.tileSize / 2, grid.tileSize / 2), Random.Range(-grid.tileSize / 2, grid.tileSize / 2), 0);
         logic = GameObject.FindObjectOfType<LogicScript>();
-        randomOffset = new Vector3(Random.Range(-logic.npcOffsetRange, logic.npcOffsetRange), Random.Range(-logic.npcOffsetRange, logic.npcOffsetRange), Random.Range(-logic.npcOffsetRange, logic.npcOffsetRange));
     }
 
     // Update is called once per frame
     void Update()
     {
-        targetPosition = new Vector3(NPC.transform.position.x + randomOffset.x, NPC.transform.position.y + randomOffset.y, NPC.transform.position.z + randomOffset.z);
-
+        CheckIfAtTargetPosition();
         pathfinding.FindClosestBuilding();
-
-        attackTimer += Time.deltaTime;
         ApproachPathfinder();
     }
 
     void ApproachPathfinder()
     {
         rb.velocity = (targetPosition - transform.position).normalized * speed;
+    }
+    public void UpdateTargetPosition()
+    {
+        targetPosition = new Vector3(NPC.nextNode.transform.position.x + randomOffset.x, NPC.nextNode.transform.position.y + randomOffset.y, NPC.nextNode.transform.position.z);
+    }
+    void CheckIfAtTargetPosition()
+    {
+        /*
+        if(NPC.nextNode != null)
+        {
+            if(Vector2.Distance(NPC.transform.position, NPC.nextNode.transform.position) < .1f
+                && Vector2.Distance(transform.position, targetPosition) < .1f)
+            {
+                NPC.GoToNextTile();
+            }
+            else if(Vector2.Distance(NPC.transform.position, NPC.entrance.transform.position) < .1f)
+            {
+                NPC.GoToNextTile();
+            }
+        }
+        else if(NPC.currentNode != null && Vector2.Distance(targetPosition.transform.position, transform.position) < .1f)
+        {
+            NPC.GoToNextTile();
+        }
+        */
+        if(targetPosition == null)
+        {
+            NPC.GoToNextTile();
+            targetPosition = transform.position;
+        }
+        if(Vector2.Distance(transform.position, targetPosition) < .1f)
+        {
+            NPC.GoToNextTile();
+        }
     }
 }

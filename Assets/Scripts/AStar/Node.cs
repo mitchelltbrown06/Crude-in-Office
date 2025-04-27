@@ -44,7 +44,7 @@ public class Node : MonoBehaviour
             {
                 if (connections[i] != null)
                 {
-                    //Debug.DrawLine(this.transform.position, connections[i].transform.position, Color.red);
+                    Debug.DrawLine(this.transform.position, connections[i].transform.position, Color.red);
                 }
             }
         }
@@ -110,5 +110,9 @@ public class Node : MonoBehaviour
             }
         }
         return false;
+    }
+    public void JobFilled()
+    {
+        occupied = true;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class npcController : MonoBehaviour
 {
+    public Node nextNode;
     public Node currentNode;
     public Node[] nodesInScene;
     public List<Node> path;
@@ -12,10 +13,9 @@ public class npcController : MonoBehaviour
 
     private bool onStartTile = false;
 
-    public float UpdateCooldown = 1;
-    public float UpdateTimer = 0;
-
     public GameObject exit;
+
+    public GameObject entrance;
 
     public GridScript grid;
 
@@ -27,28 +27,26 @@ public class npcController : MonoBehaviour
 
     public BidenPathfinding npc;
 
-    public GameObject target;
+    private Node jobNode;
+
+    public JoeBidenScript npcFollowerMovement;
 
     void Start()
     {
+        entrance = GameObject.FindObjectOfType<EntranceScript>().gameObject;
         exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
         logic = GameObject.FindObjectOfType<LogicScript>();
         grid = GameObject.FindObjectOfType<GridScript>();
         npc = GameObject.FindObjectOfType<BidenPathfinding>();
-        buildingCaptureDistance = grid.tileSize / 2;
-        /*
-        //need to find closest node and then teleport to it and set it to the current node
-        if (!onStartTile)
-        {
-            transform.position = new Vector3(FindNearestNode(transform.position).transform.position.x, FindNearestNode(transform.position).transform.position.y, transform.position.z);
-            currentNode = FindNearestNode(transform.position);
-            onStartTile = true;
-        }
-        */
+        npcFollowerMovement = GameObject.FindObjectOfType<JoeBidenScript>();
+
+        buildingCaptureDistance = grid.tileSize * .9f;
+
     }
     void Update()
     {
-        if(Vector2.Distance(exit.transform.position, this.transform.parent.gameObject.transform.position) < logic.npcOffsetRange * 1.5)
+
+        if(Vector2.Distance(exit.transform.position, this.transform.parent.gameObject.transform.position) < .5)
         {
             Destroy(gameObject.transform.parent.gameObject);
         }
@@ -65,27 +63,20 @@ public class npcController : MonoBehaviour
                 onStartTile = true;
             }
         }
-        UpdateTimer += Time.deltaTime;
         if(onStartTile)
         {
-            if(npc.closestBuilding != null)
+            if(npc.closestBuilding != null && jobToDo == false)
             {
                 FindJob(npc.closestBuilding.transform.Find("Door").gameObject);
             }
             if(exit != null && jobToDo == false)
             {
                 CreatePath(exit.transform.position);
-                target = exit;
                 FollowPath();
             }
-            else if(exit != null && jobToDo == true)
+            else if(exit != null && jobToDo == true && npc.closestBuilding != null)
             {
-                if(target != npc.closestBuilding)
-                {
-                    path.Clear();
-                }
-                CreatePathWithNode(npc.closestBuilding.transform.Find("Door").GetComponent<DoorScript>().openJob);
-                target = npc.closestBuilding;
+                CreatePath(jobNode.transform.position);
                 FollowPath();
             }
         }
@@ -97,36 +88,16 @@ public class npcController : MonoBehaviour
             path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(destination));
         }
     }
-    void CreatePathWithNode(Node node)
-    {
-        Debug.Log(node.transform.position);
-        Debug.Log(currentNode != null);
-        if(path.Count == 0)
-        { 
-            path = AStarManager.instance.GeneratePath(currentNode, node);
-        }
-    }
     void FollowPath()
     {
         if(path.Count > 0)
         {
             int x = 0;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(path[x].transform.position.x, path[x].transform.position.y, transform.position.z),
+            transform.position = Vector3.MoveTowards(transform.position, path[x].transform.position,
                 speed * Time.deltaTime);
-
-            if(Vector2.Distance(transform.position, path[x].transform.position) < .1f && Vector2.Distance(transform.position, transform.parent.gameObject.transform.position) < .5f)
-            {
-                currentNode = path[x];
-                path.RemoveAt(x);
-                if(UpdateTimer > UpdateCooldown)
-                {
-                    path.Clear();
-                    UpdateTimer = 0;
-                }
-            }
         }
     }
-    private Node FindNearestNode(Vector2 position)
+    public Node FindNearestNode(Vector2 position)
     {
         Node foundNode = null;
         float minDistance = float.MaxValue;
@@ -148,10 +119,32 @@ public class npcController : MonoBehaviour
     }
     void FindJob(GameObject door)
     {
-
-        if(Vector2.Distance(door.transform.position, npc.transform.position) < buildingCaptureDistance)
+        if(Vector2.Distance(door.transform.position, transform.position) < buildingCaptureDistance
+        && door.GetComponent<DoorScript>().openJob != null)
         {
+            path.Clear();
+            jobNode = door.GetComponent<DoorScript>().openJob;
             jobToDo = true;
+            door.GetComponent<DoorScript>().openJob.JobFilled();
+            
+
+        }
+    }
+    public void GoToNextTile()
+    {
+        int x = 0;
+
+        currentNode = path[x];
+        path.RemoveAt(x);
+        if(path.Count > 1 && Vector2.Distance(transform.position, exit.transform.position) > grid.tileSize)
+        {
+            nextNode = path[x];
+            npcFollowerMovement.UpdateTargetPosition();
+        }
+        else if(Vector2.Distance(transform.position, exit.transform.position) < grid.tileSize)
+        {
+            nextNode = currentNode;
+            npcFollowerMovement.UpdateTargetPosition();
         }
     }
 }

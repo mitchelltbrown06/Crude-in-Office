@@ -13,6 +13,7 @@ public class ArcadeScript : MonoBehaviour
     void Start()
     {
         ConnectNodes();
+        SetOnBuilding();
     }
 
     // Update is called once per frame
@@ -48,7 +49,19 @@ public class ArcadeScript : MonoBehaviour
         }
         else if(node4.GetComponent<Node>().occupied == false)
         {
+            door.GetComponent<DoorScript>().openJob = node4.GetComponent<Node>();
+        }
+        else
+        {
             door.GetComponent<DoorScript>().openJob = null;
         }
+    }
+    void SetOnBuilding()
+    {
+        door.GetComponent<Node>().onBuilding = true;
+        node1.GetComponent<Node>().onBuilding = true;
+        node2.GetComponent<Node>().onBuilding = true;
+        node3.GetComponent<Node>().onBuilding = true;
+        node4.GetComponent<Node>().onBuilding = true;
     }
 }
