@@ -24,8 +24,8 @@ public class JoeBidenScript : MonoBehaviour
     void Start()
     {
         grid = GameObject.FindObjectOfType<GridScript>();
-        randomOffset = new Vector3(Random.Range(-grid.tileSize / 2, grid.tileSize / 2), Random.Range(-grid.tileSize / 2, grid.tileSize / 2), 0);
         logic = GameObject.FindObjectOfType<LogicScript>();
+        targetPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class JoeBidenScript : MonoBehaviour
         CheckIfAtTargetPosition();
         pathfinding.FindClosestBuilding();
         ApproachPathfinder();
+        CheckIfAtExit();
     }
 
     void ApproachPathfinder()
@@ -42,36 +43,42 @@ public class JoeBidenScript : MonoBehaviour
     }
     public void UpdateTargetPosition()
     {
-        targetPosition = new Vector3(NPC.nextNode.transform.position.x + randomOffset.x, NPC.nextNode.transform.position.y + randomOffset.y, NPC.nextNode.transform.position.z);
+        if(NPC.jobToDo == true)
+        {
+            randomOffset = new Vector3(Random.Range(-grid.tileSize * .05f, grid.tileSize * .05f), Random.Range(-grid.tileSize * .05f, grid.tileSize * .05f), 0);
+        }
+        else
+        {
+            randomOffset = new Vector3(Random.Range(-grid.tileSize * .3f, grid.tileSize * .3f), Random.Range(-grid.tileSize * .3f, grid.tileSize * .3f), 0);
+        }
+        if(NPC.nextNode != null)
+        {
+            targetPosition = new Vector3(NPC.nextNode.transform.position.x + randomOffset.x, NPC.nextNode.transform.position.y + randomOffset.y, NPC.nextNode.transform.position.z);
+        }
     }
     void CheckIfAtTargetPosition()
     {
-        /*
-        if(NPC.nextNode != null)
+        if(NPC.jobToDo == true)
         {
-            if(Vector2.Distance(NPC.transform.position, NPC.nextNode.transform.position) < .1f
-                && Vector2.Distance(transform.position, targetPosition) < .1f)
-            {
-                NPC.GoToNextTile();
-            }
-            else if(Vector2.Distance(NPC.transform.position, NPC.entrance.transform.position) < .1f)
+            if(Vector2.Distance(transform.position, targetPosition) < .05f)
             {
                 NPC.GoToNextTile();
             }
         }
-        else if(NPC.currentNode != null && Vector2.Distance(targetPosition.transform.position, transform.position) < .1f)
+        else
         {
-            NPC.GoToNextTile();
+            if(Vector2.Distance(transform.position, targetPosition) < .3f)
+            {
+                NPC.GoToNextTile();
+            }
         }
-        */
-        if(targetPosition == null)
-        {
-            NPC.GoToNextTile();
-            targetPosition = transform.position;
-        }
-        if(Vector2.Distance(transform.position, targetPosition) < .1f)
-        {
-            NPC.GoToNextTile();
-        }
+    }
+    void CheckIfAtExit()
+    {
+        if(Vector2.Distance(NPC.transform.position, NPC.exit.transform.position) < .1
+            && Vector2.Distance(transform.position, targetPosition) < .3)
+            {
+                Destroy(gameObject);
+            }
     }
 }

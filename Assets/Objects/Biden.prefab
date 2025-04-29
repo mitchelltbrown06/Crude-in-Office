@@ -103,10 +103,11 @@ MonoBehaviour:
   pathfinding: {fileID: 5129047554183928262}
   rb: {fileID: 6099015639908025710}
   speed: 0.2
-  attackDistance: 1
-  attackSpeed: 0.2
   NPC: {fileID: 6635873630728005092}
+  randomOffset: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!114 &5129047554183928262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,19 +208,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb8381f2cba04de1940182751a028d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextNode: {fileID: 0}
   currentNode: {fileID: 0}
   nodesInScene: []
   path: []
   speed: 0.5
-  UpdateCooldown: 0.01
-  UpdateTimer: 0
   exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
+  entrance: {fileID: 0}
   grid: {fileID: 0}
   logic: {fileID: 0}
   buildingCaptureDistance: 0
   jobToDo: 0
   npc: {fileID: 0}
-  target: {fileID: 0}
+  npcFollowerMovement: {fileID: 0}
 --- !u!212 &3775505159471163094
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -258,8 +259,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1958472443
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3c7c5c52c7ef345099097135e0ba3e50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

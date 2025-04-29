@@ -42,43 +42,36 @@ public class npcController : MonoBehaviour
 
         buildingCaptureDistance = grid.tileSize * .9f;
 
+        GoToNextTile();
     }
     void Update()
     {
-
-        if(Vector2.Distance(exit.transform.position, this.transform.parent.gameObject.transform.position) < .5)
-        {
-            Destroy(gameObject.transform.parent.gameObject);
-        }
         if(nodesInScene.Length == 0)
         {
             nodesInScene = FindObjectsOfType<Node>();
         }
-        else
+        if (!onStartTile)
         {
-            if (!onStartTile)
-            {
-                transform.position = new Vector3(FindNearestNode(transform.position).transform.position.x, FindNearestNode(transform.position).transform.position.y, transform.position.z);
-                currentNode = FindNearestNode(transform.position);
-                onStartTile = true;
-            }
+            transform.position = new Vector3(FindNearestNode(transform.position).transform.position.x, FindNearestNode(transform.position).transform.position.y, transform.position.z);
+            currentNode = FindNearestNode(transform.position);
+            onStartTile = true;
         }
-        if(onStartTile)
+        if(npc.closestBuilding != null && jobToDo == false)
         {
-            if(npc.closestBuilding != null && jobToDo == false)
-            {
-                FindJob(npc.closestBuilding.transform.Find("Door").gameObject);
+            FindJob(npc.closestBuilding.transform.Find("Door").gameObject);
+        }
+        if(exit != null && jobToDo == false)
+        {
+            CreatePath(exit.transform.position);
+            FollowPath();
+        }
+        else if(exit != null && jobToDo == true && npc.closestBuilding != null)
+        {
+            if(path.Count == 0)
+            { 
+                path = AStarManager.instance.GeneratePath(nextNode, AStarManager.instance.FindNearestNode(jobNode.transform.position));
             }
-            if(exit != null && jobToDo == false)
-            {
-                CreatePath(exit.transform.position);
-                FollowPath();
-            }
-            else if(exit != null && jobToDo == true && npc.closestBuilding != null)
-            {
-                CreatePath(jobNode.transform.position);
-                FollowPath();
-            }
+            FollowPath();
         }
     }
     void CreatePath(Vector3 destination)
@@ -119,32 +112,36 @@ public class npcController : MonoBehaviour
     }
     void FindJob(GameObject door)
     {
-        if(Vector2.Distance(door.transform.position, transform.position) < buildingCaptureDistance
-        && door.GetComponent<DoorScript>().openJob != null)
+        if(nextNode != null)
         {
-            path.Clear();
-            jobNode = door.GetComponent<DoorScript>().openJob;
-            jobToDo = true;
-            door.GetComponent<DoorScript>().openJob.JobFilled();
-            
+            if(Vector2.Distance(door.transform.position, nextNode.transform.position) < buildingCaptureDistance
+            && door.GetComponent<DoorScript>().openJob != null)
+            {
+                path.Clear();
+                jobNode = door.GetComponent<DoorScript>().openJob;
+                jobToDo = true;
+                door.GetComponent<DoorScript>().openJob.JobFilled();
+                
 
+            }
         }
     }
     public void GoToNextTile()
     {
         int x = 0;
-
-        currentNode = path[x];
-        path.RemoveAt(x);
-        if(path.Count > 1 && Vector2.Distance(transform.position, exit.transform.position) > grid.tileSize)
+        if(path.Count > 0)
         {
-            nextNode = path[x];
-            npcFollowerMovement.UpdateTargetPosition();
+            currentNode = path[x];
+            path.RemoveAt(x);
         }
-        else if(Vector2.Distance(transform.position, exit.transform.position) < grid.tileSize)
+        if(path.Count > 0)
+            {
+                nextNode = path[x];
+            }
+        if(Vector2.Distance(transform.position, exit.transform.position) < grid.tileSize)
         {
             nextNode = currentNode;
-            npcFollowerMovement.UpdateTargetPosition();
         }
+        npcFollowerMovement.UpdateTargetPosition();
     }
 }
