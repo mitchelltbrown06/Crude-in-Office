@@ -11,6 +11,10 @@ public class MouseSpawningScript : MonoBehaviour
     public GameObject path;
     public GameObject arcadeMachine;
 
+    //Previews
+    public GameObject arcadePreview;
+    public GameObject arcadePreviewInstance;
+
     //managers
     public ButtonManager buttonManager;
     public LogicScript Logic;
@@ -35,7 +39,48 @@ public class MouseSpawningScript : MonoBehaviour
         mousePosition = Input.mousePosition;
         closestTile = FindClosestTile(Camera.main.ScreenToWorldPoint(mousePosition));
         closestPath = FindClosestPath(Camera.main.ScreenToWorldPoint(mousePosition));
+        //displaying previews
+        if(buttonManager.equiped == "ArcadeMachine")
+        {
+            //if there's no preview currently spawned, spawn one in
+            if(arcadePreviewInstance == null)
+            {
+                arcadePreviewInstance = Instantiate(arcadePreview, closestTile.transform.position, Quaternion.identity);
+            }
+            //everything you do if there is a preview
+            else
+            {
+                //if you press r, the preview should rotate
+                if(Input.GetKeyDown(KeyCode.R))
+                {
+                    arcadePreviewInstance.transform.Rotate(0, 0, -90);
+                }
+                //update the preview position to be at the cursor tile
+                arcadePreviewInstance.transform.position = closestTile.transform.position;
 
+                //if the preview is on a tile that is spawnable, it's color values should be normal. If not, turn it red
+                if(closestTile.GetComponent<Node>().onPath == false
+                && FindClosestTile(FindClosestPath(arcadePreviewInstance.transform.GetChild(0).transform.position).transform.position).GetComponent<Node>().onEntranceOrExit == false
+                && Vector2.Distance(FindClosestPath(arcadePreviewInstance.transform.GetChild(0).transform.position).transform.position, arcadePreviewInstance.transform.GetChild(0).transform.position) < grid.tileSize * 0.6
+                )
+                {
+                    //this finds all the sprite renderers for each child object
+                    foreach(SpriteRenderer sr in arcadePreviewInstance.GetComponentsInChildren<SpriteRenderer>()) 
+                    {
+                        sr.color = new Color(1f, 1f, 1f, 0.7f);
+                    }
+                }
+                else
+                {
+                    foreach(SpriteRenderer sr in arcadePreviewInstance.GetComponentsInChildren<SpriteRenderer>()) 
+                    {
+                        sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
+                    }
+                }
+            }
+        }
+        
+        //When the mouse is clicked down
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
             if(buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance" && closestTile.GetComponent<Node>().onPath == false)
@@ -61,13 +106,17 @@ public class MouseSpawningScript : MonoBehaviour
                 }
             }
             if(buttonManager.entrancePlaced == true && buttonManager.equiped == "ArcadeMachine" && closestTile.GetComponent<Node>().onPath == false
-                && FindClosestTile(closestPath.transform.position).GetComponent<Node>().onEntranceOrExit == false
-                && Vector2.Distance(closestPath.transform.position, closestTile.transform.position) < grid.tileSize * 1.1
+                && FindClosestTile(FindClosestPath(arcadePreviewInstance.transform.GetChild(0).transform.position).transform.position).GetComponent<Node>().onEntranceOrExit == false
+                && Vector2.Distance(FindClosestPath(arcadePreviewInstance.transform.GetChild(0).transform.position).transform.position, arcadePreviewInstance.transform.GetChild(0).transform.position) < grid.tileSize * 0.6
                 )
             {
-                Instantiate(arcadeMachine, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+                Instantiate(arcadeMachine, arcadePreviewInstance.transform.position, arcadePreviewInstance.transform.rotation);
+                //get ride of the arcade button
                 buttonManager.Purchase(buttonManager.arcadeMachineInstance);
+
                 buttonManager.equiped = "null";
+                //get ride of the arcade preview
+                Destroy(arcadePreviewInstance);
             }
         }
     }

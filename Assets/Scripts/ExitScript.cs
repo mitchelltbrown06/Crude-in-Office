@@ -41,7 +41,6 @@ public class ExitScript : MonoBehaviour
     public void GoToPath(Vector3 position)
     {
         FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = false;
-        Debug.Log("going to " + position.ToString());
         transform.position = position;
         FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
     }

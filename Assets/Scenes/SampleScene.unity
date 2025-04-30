@@ -1104,9 +1104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entrance: {fileID: 7258289274802347544, guid: 4ae0b4b00484f4b0c9097d99864ef684, type: 3}
-  exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
   path: {fileID: 3270414855831790524, guid: 90af0551c658c4c6b8b2c41a51caf3bd, type: 3}
   arcadeMachine: {fileID: 8014823283768476951, guid: 595c3a391b2e643518fa31b382d16625, type: 3}
+  arcadePreview: {fileID: 8014823283768476951, guid: 998510b53c4a2454fbfc417bbec356e8, type: 3}
+  arcadePreviewInstance: {fileID: 0}
   buttonManager: {fileID: 1760549751}
   Logic: {fileID: 1990053727}
   grid: {fileID: 133848949}

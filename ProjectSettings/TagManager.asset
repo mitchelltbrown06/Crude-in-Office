@@ -15,6 +15,7 @@ TagManager:
   - ButtonManager
   - npc
   - Path
+  - Preview
   layers:
   - Default
   - TransparentFX
