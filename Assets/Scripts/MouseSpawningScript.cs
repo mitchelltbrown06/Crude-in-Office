@@ -8,7 +8,6 @@ public class MouseSpawningScript : MonoBehaviour
 
     //Prefabs
     public GameObject entrance;
-    public GameObject exit;
     public GameObject path;
     public GameObject arcadeMachine;
 
@@ -49,13 +48,6 @@ public class MouseSpawningScript : MonoBehaviour
                 buttonManager.CheckSpawnPosition();
                 buttonManager.SpawnArcadeMachine();
             }
-            if(buttonManager.exitPlaced == false && buttonManager.equiped == "Exit" && Vector2.Distance(closestTile.transform.position, Logic.lastPath.transform.position) < grid.tileSize * 1.1 && closestTile.GetComponent<Node>().onPath == false)
-            {
-                Instantiate(exit, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-                Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-                buttonManager.Purchase(buttonManager.exitInstance);
-                buttonManager.exitPlaced = true;
-            }
             if(buttonManager.equiped == "Path" && Vector2.Distance(closestTile.transform.position, Logic.lastPath.transform.position) < grid.tileSize * 1.1 && closestTile.GetComponent<Node>().onPath == false)
             {
                 buttonManager.paths -= 1;
@@ -66,7 +58,6 @@ public class MouseSpawningScript : MonoBehaviour
                 if(buttonManager.paths <= 0 && buttonManager.pathInstance != null)
                 {
                     buttonManager.Purchase(buttonManager.pathInstance);
-                    buttonManager.SpawnExit();
                 }
             }
             if(buttonManager.entrancePlaced == true && buttonManager.equiped == "ArcadeMachine" && closestTile.GetComponent<Node>().onPath == false

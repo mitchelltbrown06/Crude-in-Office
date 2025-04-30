@@ -99,3 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodesInScene: []
   logic: {fileID: 0}
+  entrance: {fileID: 0}
+  exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}

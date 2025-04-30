@@ -985,7 +985,7 @@ MonoBehaviour:
   arcadeMachineInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
-  paths: 2
+  paths: 5
 --- !u!4 &1760549752
 Transform:
   m_ObjectHideFlags: 0

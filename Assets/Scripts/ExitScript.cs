@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class ExitScript : MonoBehaviour
 {
+    public LogicScript logic;
     // Start is called before the first frame update
     void Start()
     {
+        logic = GameObject.FindObjectOfType<LogicScript>();
         FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public GameObject FindClosestTile(Vector3 position)
     {
         float nearestDistance = float.MaxValue;
@@ -39,5 +36,13 @@ public class ExitScript : MonoBehaviour
             }
         }
         return null;
+    }
+    //This will make the exit path go to the last placed path every time thsi function is triggered (which is whenever a path is placed)
+    public void GoToPath(Vector3 position)
+    {
+        FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = false;
+        Debug.Log("going to " + position.ToString());
+        transform.position = position;
+        FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
     }
 }
