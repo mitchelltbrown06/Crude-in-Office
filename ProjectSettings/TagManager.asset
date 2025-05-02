@@ -16,6 +16,9 @@ TagManager:
   - npc
   - Path
   - Preview
+  - Entity
+  - UI
+  - BuildingPreview
   layers:
   - Default
   - TransparentFX
@@ -64,4 +67,7 @@ TagManager:
     locked: 0
   - name: Entity
     uniqueID: 2336494853
+    locked: 0
+  - name: UI
+    uniqueID: 2792550799
     locked: 0

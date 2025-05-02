@@ -10,6 +10,9 @@ public class ButtonManager : MonoBehaviour
     public Canvas canvas;
 
     //button slot info
+    public bool slotZFilled = false;
+    public Vector3 slotZPosition;
+
     public bool slot1Filled = false;
     public Vector3 slot1Position;
 
@@ -22,6 +25,9 @@ public class ButtonManager : MonoBehaviour
     public Vector3 spawnPosition;
 
     //buttons
+    public Button bulldozerPrefab;
+    public Button bulldozerInstance;
+
     public Button entrancePrefab;
     public Button entranceInstance;
 
@@ -45,11 +51,24 @@ public class ButtonManager : MonoBehaviour
         slot2Position = new Vector3(160, 55, 0);
         slot3Position = new Vector3(265, 55, 0);
 
+        slotZPosition = new Vector3(784, 55, 0);
+
         spawnPosition = slot1Position;
+        
         SpawnEntrance();
+        SpawnBulldozer();
+        equiped = "null";
     }
     void Update()
     {
+        if(equiped == "Bulldozer")
+        {
+            canvas.GetComponent<Image>().enabled = true;
+        }
+        else
+        {
+            canvas.GetComponent<Image>().enabled = false;
+        }
         CheckSpawnPosition();
     }
 
@@ -65,9 +84,14 @@ public class ButtonManager : MonoBehaviour
     }
 
     //Button spawns
+    public void SpawnBulldozer()
+    {
+        bulldozerInstance = Instantiate(bulldozerPrefab, slotZPosition, Quaternion.identity, canvas.transform);
+        bulldozerInstance.onClick.AddListener(BulldozerOnClick);
+    }
     public void SpawnEntrance()
     {
-        entranceInstance = Instantiate(entrancePrefab, slot1Position, Quaternion.identity, canvas.transform);
+        entranceInstance = Instantiate(entrancePrefab, spawnPosition, Quaternion.identity, canvas.transform);
         Enable(entranceInstance);
         entranceInstance.onClick.AddListener(EntranceOnClick);
     }
@@ -91,6 +115,10 @@ public class ButtonManager : MonoBehaviour
     }
 
     //OnClicks
+    void BulldozerOnClick()
+    {
+        Equip("Bulldozer");
+    }
     void EntranceOnClick()
     {
         Equip("Entrance");

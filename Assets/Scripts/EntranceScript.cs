@@ -14,6 +14,7 @@ public class EntranceScript : MonoBehaviour
 
     void Start()
     {
+        Timer = spawnCooldown;
         FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
     }
     void Update()

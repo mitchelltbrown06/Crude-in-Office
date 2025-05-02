@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5118784917983745087}
   - component: {fileID: 5129047554183928262}
   - component: {fileID: 6099015639908025710}
+  - component: {fileID: 6700659429436387659}
   m_Layer: 7
   m_Name: Biden
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,6 +164,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6700659429436387659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259764672723223979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b67e74e6453a43a18fdde11cb87ab4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3427509127096123257
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +187,7 @@ GameObject:
   - component: {fileID: 4925434175915604953}
   - component: {fileID: 6635873630728005092}
   - component: {fileID: 3775505159471163094}
+  - component: {fileID: 3073056043246412703}
   m_Layer: 7
   m_Name: NPC
   m_TagString: npc
@@ -273,3 +287,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3073056043246412703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427509127096123257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b67e74e6453a43a18fdde11cb87ab4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

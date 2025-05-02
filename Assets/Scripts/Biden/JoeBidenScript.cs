@@ -45,7 +45,7 @@ public class JoeBidenScript : MonoBehaviour
     {
         if(NPC.jobToDo == true)
         {
-            randomOffset = new Vector3(Random.Range(-grid.tileSize * .05f, grid.tileSize * .05f), Random.Range(-grid.tileSize * .05f, grid.tileSize * .05f), 0);
+            randomOffset = new Vector3(0, 0, 0);
         }
         else
         {

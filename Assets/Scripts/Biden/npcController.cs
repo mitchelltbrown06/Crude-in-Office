@@ -11,8 +11,6 @@ public class npcController : MonoBehaviour
 
     public float speed = .5f;
 
-    private bool onStartTile = false;
-
     public GameObject exit;
 
     public GameObject entrance;
@@ -50,11 +48,13 @@ public class npcController : MonoBehaviour
         {
             nodesInScene = FindObjectsOfType<Node>();
         }
-        if (!onStartTile)
+        if(currentNode == null)
         {
-            transform.position = new Vector3(FindNearestNode(transform.position).transform.position.x, FindNearestNode(transform.position).transform.position.y, transform.position.z);
-            currentNode = FindNearestNode(transform.position);
-            onStartTile = true;
+            transform.position = FindClosestConnectedNode().transform.position;
+            currentNode = FindClosestConnectedNode();
+            jobToDo = false;
+            
+            Debug.Log(FindClosestConnectedNode());
         }
         if(npc.closestBuilding != null && jobToDo == false)
         {
@@ -76,7 +76,7 @@ public class npcController : MonoBehaviour
     }
     void CreatePath(Vector3 destination)
     {
-        if(path.Count == 0)
+        if(path.Count == 0 && currentNode.connections.Count > 0)
         { 
             path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(destination));
         }
@@ -86,8 +86,11 @@ public class npcController : MonoBehaviour
         if(path.Count > 0)
         {
             int x = 0;
-            transform.position = Vector3.MoveTowards(transform.position, path[x].transform.position,
-                speed * Time.deltaTime);
+            if(path[x] != null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, path[x].transform.position,
+                    speed * Time.deltaTime);
+            }
         }
     }
     public Node FindNearestNode(Vector2 position)
@@ -95,7 +98,7 @@ public class npcController : MonoBehaviour
         Node foundNode = null;
         float minDistance = float.MaxValue;
 
-        foreach(Node node in nodesInScene)
+        foreach(Node node in NodesInScene())
         {
             float currentDistance = Vector2.Distance(transform.position, node.transform.position);
             if (currentDistance < minDistance)
@@ -143,5 +146,25 @@ public class npcController : MonoBehaviour
             nextNode = currentNode;
         }
         npcFollowerMovement.UpdateTargetPosition();
+    }
+    private Node FindClosestConnectedNode()
+    {
+        Node closestNode = null;
+        float minDistance = float.MaxValue;
+
+        foreach(Node node in NodesInScene())
+        {
+            if(node.connections.Count > 0)
+            {
+                float currentDistance = Vector2.Distance(transform.position, node.transform.position);
+                if (currentDistance < minDistance)
+                {
+                    minDistance = currentDistance;
+                    closestNode = node;
+                }
+            }
+            
+        }
+        return closestNode;
     }
 }
