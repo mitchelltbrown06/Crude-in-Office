@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class npcController : MonoBehaviour
 {
-    public Node nextNode;
-    public Node currentNode;
-    public Node[] nodesInScene;
-    public List<Node> path;
-
-    public float speed = .5f;
-
-    public GameObject exit;
-
-    public GameObject entrance;
-
     public GridScript grid;
-
     public LogicScript logic;
 
-    public float buildingCaptureDistance;
-
-    public bool jobToDo = false;
-
-    public BidenPathfinding npc;
-
+    public List<Node> path;
+    public Node[] nodesInScene;
+    public Node currentNode;
+    public Node nextNode;
     private Node jobNode;
 
-    public JoeBidenScript npcFollowerMovement;
+    public GameObject closestBuilding;
+
+    public GameObject exit;
+    public GameObject entrance;
+
+    public float speed;
+
+    public float buildingCaptureDistance;
+    
+    public bool jobToDo = false;
+
+    public float updateCooldown;
+    public float updateTimer;
 
     void Start()
     {
@@ -35,15 +33,18 @@ public class npcController : MonoBehaviour
         exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
         logic = GameObject.FindObjectOfType<LogicScript>();
         grid = GameObject.FindObjectOfType<GridScript>();
-        npc = GameObject.FindObjectOfType<BidenPathfinding>();
-        npcFollowerMovement = GameObject.FindObjectOfType<JoeBidenScript>();
 
         buildingCaptureDistance = grid.tileSize * .9f;
-
-        GoToNextTile();
     }
     void Update()
     {
+        updateTimer += Time.deltaTime;
+        if(Vector2.Distance(transform.position, exit.transform.position) < .1f)
+        {
+            Destroy(gameObject);
+        }
+        closestBuilding = FindClosestBuilding(transform.position);
+
         if(nodesInScene.Length == 0)
         {
             nodesInScene = FindObjectsOfType<Node>();
@@ -55,16 +56,16 @@ public class npcController : MonoBehaviour
             jobToDo = false;
             
         }
-        if(npc.closestBuilding != null && jobToDo == false)
+        if(closestBuilding != null && jobToDo == false)
         {
-            FindJob(npc.closestBuilding.transform.Find("Door").gameObject);
+            FindJob(closestBuilding.transform.Find("Door").gameObject);
         }
         if(exit != null && jobToDo == false)
         {
             CreatePath(exit.transform.position);
             FollowPath();
         }
-        else if(exit != null && jobToDo == true && npc.closestBuilding != null)
+        else if(exit != null && jobToDo == true && closestBuilding != null)
         {
             if(path.Count == 0)
             { 
@@ -89,6 +90,10 @@ public class npcController : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, path[x].transform.position,
                     speed * Time.deltaTime);
+            }
+            if(Vector2.Distance(transform.position, path[x].transform.position) < .1f)
+            {
+                GoToNextTile();
             }
         }
     }
@@ -149,7 +154,11 @@ public class npcController : MonoBehaviour
         {
             nextNode = currentNode;
         }
-        npcFollowerMovement.UpdateTargetPosition();
+        if (updateTimer > updateCooldown && path.Count > 0)
+            {
+                path.Clear();
+                updateTimer = 0;
+            }
     }
     private Node FindClosestConnectedNode()
     {
@@ -170,5 +179,28 @@ public class npcController : MonoBehaviour
             
         }
         return closestNode;
+    }
+    public GameObject FindClosestBuilding(Vector3 position)
+    {
+        float closestBuildingDistance = float.MaxValue;
+        GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
+
+        if (buildings.Length > 0)
+        {
+            for(int i = 0; i < buildings.Length; i++)
+            {
+                //Debug.Log("checking i: " + i.ToString());
+                float currentDistance = Vector3.Distance(this.transform.position, buildings[i].transform.position);
+                //Debug.Log("distance: " + distance.ToString());
+
+                if(currentDistance < closestBuildingDistance)
+                {
+                    closestBuilding = buildings[i];
+                    closestBuildingDistance = currentDistance;
+                }
+            }
+            return closestBuilding;
+        }
+        return null;
     }
 }

@@ -56,26 +56,22 @@ public class AStarManager : MonoBehaviour
 
             foreach(Node connectedNode in currentNode.connections)
             {
-                if(connectedNode != null)
+                float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
+
+                if(heldGScore < connectedNode.gScore)
                 {
-                    float heldGScore = currentNode.gScore + Vector2.Distance(currentNode.transform.position, connectedNode.transform.position);
+                    connectedNode.cameFrom = currentNode;
+                    connectedNode.gScore = heldGScore;
+                    connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
 
-                    if(heldGScore < connectedNode.gScore)
+                    if(!openSet.Contains(connectedNode))
                     {
-                        connectedNode.cameFrom = currentNode;
-                        connectedNode.gScore = heldGScore;
-                        connectedNode.hScore = Vector2.Distance(connectedNode.transform.position, end.transform.position);
-
-                        if(!openSet.Contains(connectedNode))
-                        {
-                            openSet.Add(connectedNode);
-                        }
+                        openSet.Add(connectedNode);
                     }
                 }
             }
             
         }
-
         return null;
     }
  

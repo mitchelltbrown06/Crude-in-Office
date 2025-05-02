@@ -25,7 +25,7 @@ public class JobScript : MonoBehaviour
             SelectClosestEmployee();
         }
         //if you have an employee and it's at the job position, start its job
-        else if(Vector2.Distance(transform.position, employee.transform.parent.transform.position) < .1f)
+        else if(Vector2.Distance(transform.position, employee.transform.position) < .1f)
         {
             jobTimer += Time.deltaTime;
             //if its job is done, send it away.
