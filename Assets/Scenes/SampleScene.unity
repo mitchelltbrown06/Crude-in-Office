@@ -1017,8 +1017,6 @@ MonoBehaviour:
   slot3Filled: 0
   slot3Position: {x: 0, y: 0, z: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
-  bulldozerPrefab: {fileID: 7855744068180812019, guid: 1a709d914ed7b435fb47701dbfa0988f, type: 3}
-  bulldozerInstance: {fileID: 0}
   entrancePrefab: {fileID: 7855744068180812019, guid: bef91ee18a62f43e1b92666fb409a661, type: 3}
   entranceInstance: {fileID: 0}
   exitPrefab: {fileID: 7855744068180812019, guid: 6b936e52da08c4690beb4a06daec0264, type: 3}
@@ -1150,10 +1148,14 @@ MonoBehaviour:
   entrance: {fileID: 7258289274802347544, guid: 4ae0b4b00484f4b0c9097d99864ef684, type: 3}
   path: {fileID: 3270414855831790524, guid: 90af0551c658c4c6b8b2c41a51caf3bd, type: 3}
   arcadeMachine: {fileID: 8014823283768476951, guid: 595c3a391b2e643518fa31b382d16625, type: 3}
-  arcadePreview: {fileID: 8014823283768476951, guid: 998510b53c4a2454fbfc417bbec356e8, type: 3}
-  arcadePreviewInstance: {fileID: 0}
   bulldozerPreview: {fileID: 8014823283768476951, guid: 0b233ae4b6a37493fad44a75f4e2c948, type: 3}
   bulldozerPreviewInstance: {fileID: 0}
+  entrancePreview: {fileID: 8014823283768476951, guid: 3ab0b0de5076e422f966c664f260ef7d, type: 3}
+  entrancePreviewInstance: {fileID: 0}
+  pathPreview: {fileID: 8014823283768476951, guid: 276637ac45713440e9402a94654c9131, type: 3}
+  pathPreviewInstance: {fileID: 0}
+  arcadePreview: {fileID: 8014823283768476951, guid: 998510b53c4a2454fbfc417bbec356e8, type: 3}
+  arcadePreviewInstance: {fileID: 0}
   buttonManager: {fileID: 1760549751}
   Logic: {fileID: 1990053727}
   grid: {fileID: 133848949}

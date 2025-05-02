@@ -25,9 +25,6 @@ public class ButtonManager : MonoBehaviour
     public Vector3 spawnPosition;
 
     //buttons
-    public Button bulldozerPrefab;
-    public Button bulldozerInstance;
-
     public Button entrancePrefab;
     public Button entranceInstance;
 
@@ -56,11 +53,21 @@ public class ButtonManager : MonoBehaviour
         spawnPosition = slot1Position;
         
         SpawnEntrance();
-        SpawnBulldozer();
         equiped = "null";
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            if(equiped == "Bulldozer")
+            {
+                equiped = "null";
+            }
+            else
+            {
+                equiped = "Bulldozer";
+            }
+        }
         if(equiped == "Bulldozer")
         {
             canvas.GetComponent<Image>().enabled = true;
@@ -77,18 +84,12 @@ public class ButtonManager : MonoBehaviour
         Disable(instance);
     }
 
-    //Equips
     public void Equip(string equippable)
     {
         equiped = equippable;
     }
 
     //Button spawns
-    public void SpawnBulldozer()
-    {
-        bulldozerInstance = Instantiate(bulldozerPrefab, slotZPosition, Quaternion.identity, canvas.transform);
-        bulldozerInstance.onClick.AddListener(BulldozerOnClick);
-    }
     public void SpawnEntrance()
     {
         entranceInstance = Instantiate(entrancePrefab, spawnPosition, Quaternion.identity, canvas.transform);
@@ -115,10 +116,6 @@ public class ButtonManager : MonoBehaviour
     }
 
     //OnClicks
-    void BulldozerOnClick()
-    {
-        Equip("Bulldozer");
-    }
     void EntranceOnClick()
     {
         Equip("Entrance");

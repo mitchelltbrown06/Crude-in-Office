@@ -12,11 +12,17 @@ public class MouseSpawningScript : MonoBehaviour
     public GameObject arcadeMachine;
 
     //Previews
-    public GameObject arcadePreview;
-    public GameObject arcadePreviewInstance;
-
     public GameObject bulldozerPreview;
     public GameObject bulldozerPreviewInstance;
+    
+    public GameObject entrancePreview;
+    public GameObject entrancePreviewInstance;
+
+    public GameObject pathPreview;
+    public GameObject pathPreviewInstance;
+
+    public GameObject arcadePreview;
+    public GameObject arcadePreviewInstance;
 
     //managers
     public ButtonManager buttonManager;
@@ -41,42 +47,9 @@ public class MouseSpawningScript : MonoBehaviour
         mousePosition = Input.mousePosition;
         closestTile = FindClosestTile(Camera.main.ScreenToWorldPoint(mousePosition));
         closestPath = FindClosestPath(Camera.main.ScreenToWorldPoint(mousePosition));
-        //displaying previews
-        if(buttonManager.equiped == "ArcadeMachine")
-        {
-            //if there's no preview currently spawned, spawn one in
-            if(arcadePreviewInstance == null)
-            {
-                arcadePreviewInstance = Instantiate(arcadePreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                DisplayPreview(arcadePreviewInstance, arcadePreviewInstance.transform.GetChild(0).transform.position);
-            }
-        }
-        else if(arcadePreviewInstance != null)
-        {
-            Destroy(arcadePreviewInstance);
-        }
-        if(buttonManager.equiped == "Bulldozer")
-        {
-            //if there's no preview currently spawned, spawn one in
-            if(bulldozerPreviewInstance == null)
-            {
-                bulldozerPreviewInstance = Instantiate(bulldozerPreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                DisplayPreview(bulldozerPreviewInstance, bulldozerPreviewInstance.transform.position);
-            }
-        }
-        else if(bulldozerPreviewInstance != null)
-        {
-            Destroy(bulldozerPreviewInstance);
-        }
-        
+
+        SpawnPreviews();
+
         //When the mouse is clicked down
         if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
@@ -101,6 +74,7 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
+
     // all the code for displaying previews
     void DisplayPreview(GameObject preview, Vector3 pathConnectionPoint)
     {
@@ -214,6 +188,7 @@ public class MouseSpawningScript : MonoBehaviour
         buttonManager.SpawnPath();
         buttonManager.CheckSpawnPosition();
         buttonManager.SpawnArcadeMachine();
+        buttonManager.equiped = "null";
     }
     void PlacePath()
     {
@@ -225,6 +200,7 @@ public class MouseSpawningScript : MonoBehaviour
         if(buttonManager.paths <= 0 && buttonManager.pathInstance != null)
         {
             buttonManager.Purchase(buttonManager.pathInstance);
+            buttonManager.equiped = "null";
         }
     }
     void PlaceArcade()
@@ -236,5 +212,93 @@ public class MouseSpawningScript : MonoBehaviour
         buttonManager.equiped = "null";
         //get ride of the arcade preview
         Destroy(arcadePreviewInstance);
+    }
+    void SpawnPreviews()
+    {
+        SpawnBulldozerPreview();
+        SpawnEntrancePreview();
+        SpawnPathPreview();
+        SpawnArcadePreview();
+    }
+
+    void SpawnBulldozerPreview()
+    {
+        if(buttonManager.equiped == "Bulldozer")
+        {
+            //if there's no preview currently spawned, spawn one in
+            if(bulldozerPreviewInstance == null)
+            {
+                bulldozerPreviewInstance = Instantiate(bulldozerPreview, closestTile.transform.position, Quaternion.identity);
+            }
+            //everything you do if there is a preview
+            else
+            {
+                DisplayPreview(bulldozerPreviewInstance, bulldozerPreviewInstance.transform.position);
+            }
+        }
+        else if(bulldozerPreviewInstance != null)
+        {
+            Destroy(bulldozerPreviewInstance);
+        }
+    }
+    void SpawnEntrancePreview()
+    {
+        if(buttonManager.equiped == "Entrance")
+        {
+            //if there's no preview currently spawned, spawn one in
+            if(entrancePreviewInstance == null)
+            {
+                entrancePreviewInstance = Instantiate(entrancePreview, closestTile.transform.position, Quaternion.identity);
+            }
+            //everything you do if there is a preview
+            else
+            {
+                DisplayPreview(entrancePreviewInstance, entrancePreviewInstance.transform.position);
+            }
+        }
+        else if(entrancePreviewInstance != null)
+        {
+            Destroy(entrancePreviewInstance);
+        }
+    }
+    void SpawnPathPreview()
+    {
+        if(buttonManager.equiped == "Path")
+        {
+            //if there's no preview currently spawned, spawn one in
+            if(pathPreviewInstance == null)
+            {
+                pathPreviewInstance = Instantiate(pathPreview, closestTile.transform.position, Quaternion.identity);
+            }
+            //everything you do if there is a preview
+            else
+            {
+                DisplayPreview(pathPreviewInstance, pathPreviewInstance.transform.position);
+            }
+        }
+        else if(pathPreviewInstance != null)
+        {
+            Destroy(pathPreviewInstance);
+        }
+    }
+    void SpawnArcadePreview()
+    {
+        if(buttonManager.equiped == "ArcadeMachine")
+        {
+            //if there's no preview currently spawned, spawn one in
+            if(arcadePreviewInstance == null)
+            {
+                arcadePreviewInstance = Instantiate(arcadePreview, closestTile.transform.position, Quaternion.identity);
+            }
+            //everything you do if there is a preview
+            else
+            {
+                DisplayPreview(arcadePreviewInstance, arcadePreviewInstance.transform.GetChild(0).transform.position);
+            }
+        }
+        else if(arcadePreviewInstance != null)
+        {
+            Destroy(arcadePreviewInstance);
+        }
     }
 }

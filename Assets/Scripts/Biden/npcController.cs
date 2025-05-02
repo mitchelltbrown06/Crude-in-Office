@@ -54,7 +54,6 @@ public class npcController : MonoBehaviour
             currentNode = FindClosestConnectedNode();
             jobToDo = false;
             
-            Debug.Log(FindClosestConnectedNode());
         }
         if(npc.closestBuilding != null && jobToDo == false)
         {
@@ -118,14 +117,19 @@ public class npcController : MonoBehaviour
         if(nextNode != null)
         {
             if(Vector2.Distance(door.transform.position, nextNode.transform.position) < buildingCaptureDistance
-            && door.GetComponent<DoorScript>().openJob != null)
+            && door.GetComponent<DoorScript>().openJob != null
+            && !door.GetComponent<DoorScript>().rejectionList.Contains(gameObject))
             {
+                //clear your path so you can make a new one
                 path.Clear();
+                //set jobNode to the open job that you found at the building
                 jobNode = door.GetComponent<DoorScript>().openJob;
+                //JobToDo is now true because you have a job
                 jobToDo = true;
-                door.GetComponent<DoorScript>().openJob.JobFilled();
-                
-
+                //Set jobfilled on your jobNode to true so that other npcs don't take your job.
+                door.GetComponent<DoorScript>().openJob.gameObject.GetComponent<JobScript>().JobFilled();
+                //Set employee on jobNode to this gameObject
+                jobNode.gameObject.GetComponent<JobScript>().employeeCandidates.Add(gameObject);
             }
         }
     }

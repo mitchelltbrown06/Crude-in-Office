@@ -35,19 +35,19 @@ public class ArcadeScript : MonoBehaviour
     }
     void UpdateOpenJob()
     {
-        if(node1.GetComponent<Node>().occupied == false)
+        if(node1.GetComponent<JobScript>().occupied == false)
         {
             door.GetComponent<DoorScript>().openJob = node1.GetComponent<Node>();
         }
-        else if(node2.GetComponent<Node>().occupied == false)
+        else if(node2.GetComponent<JobScript>().occupied == false)
         {
             door.GetComponent<DoorScript>().openJob = node2.GetComponent<Node>();
         }
-        else if(node3.GetComponent<Node>().occupied == false)
+        else if(node3.GetComponent<JobScript>().occupied == false)
         {
             door.GetComponent<DoorScript>().openJob = node3.GetComponent<Node>();
         }
-        else if(node4.GetComponent<Node>().occupied == false)
+        else if(node4.GetComponent<JobScript>().occupied == false)
         {
             door.GetComponent<DoorScript>().openJob = node4.GetComponent<Node>();
         }

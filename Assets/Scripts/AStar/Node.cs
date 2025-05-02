@@ -18,7 +18,6 @@ public class Node : MonoBehaviour
     public bool onEnemy = false;
     public bool onBuilding = false;
     public bool onEntranceOrExit = false;
-    public bool occupied = false;
     
     void Start()
     {
@@ -110,9 +109,5 @@ public class Node : MonoBehaviour
             }
         }
         return false;
-    }
-    public void JobFilled()
-    {
-        occupied = true;
     }
 }

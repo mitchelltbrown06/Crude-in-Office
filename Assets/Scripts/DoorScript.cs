@@ -7,6 +7,7 @@ public class DoorScript : MonoBehaviour
     public GameObject[] npcs;
     public GridScript grid;
     public Node openJob;
+    public List<GameObject> rejectionList;
 
     void Start()
     {
@@ -16,25 +17,7 @@ public class DoorScript : MonoBehaviour
         GetComponent<Node>().connections.Add(FindClosestTile(FindClosestPath(transform.position).transform.position).GetComponent<Node>());
         FindClosestTile(FindClosestPath(transform.position).transform.position).GetComponent<Node>().connections.Add(GetComponent<Node>());
     }
- /*\\
-    // Update is called once per frame
-    void Update()
-    {
-        CheckNPCS();
-    }
-    void CheckNPCS()
-    {
-        foreach(GameObject npc in npcs)
-        {
-            if(Vector2.Distance(npc.transform.position, transform.position) < grid.tileSize / 2)
-            {
-                npc.GetComponent<npcController>().jobToDo = true;
-                npc.GetComponent<npcController>().jobNode = openJobNode;
-                openJobNode.occupied = true;
-            }
-        }
-    }
-    */
+
     public GameObject FindClosestPath(Vector3 position)
     {
         float nearestDistance = float.MaxValue;
