@@ -19,6 +19,7 @@ TagManager:
   - Entity
   - UI
   - BuildingPreview
+  - InBuilding
   layers:
   - Default
   - TransparentFX

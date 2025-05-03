@@ -250,6 +250,13 @@ public class npcController : MonoBehaviour
     {
         Debug.Log("target");
         //target = path[0].transform.position;
-        target = new Vector3(path[0].transform.position.x + Random.Range(-.4f, .4f), path[0].transform.position.y + Random.Range(-.4f, .4f), transform.position.z);
+        if(path[0].transform.CompareTag("InBuilding"))
+        {
+            target = path[0].transform.position;
+        }
+        else
+        {
+            target = new Vector3(path[0].transform.position.x + Random.Range(-.4f, .4f), path[0].transform.position.y + Random.Range(-.4f, .4f), transform.position.z);
+        }
     }
 }
