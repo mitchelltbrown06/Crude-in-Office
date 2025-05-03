@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   employeeCandidates: []
+  price: 5
   employee: {fileID: 0}
   jobLength: 3
   jobTimer: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   employeeCandidates: []
+  price: 5
   employee: {fileID: 0}
   jobLength: 3
   jobTimer: 0
@@ -376,6 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   employeeCandidates: []
+  price: 5
   employee: {fileID: 0}
   jobLength: 3
   jobTimer: 0
@@ -503,6 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   employeeCandidates: []
+  price: 5
   employee: {fileID: 0}
   jobLength: 3
   jobTimer: 0

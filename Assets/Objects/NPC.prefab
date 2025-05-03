@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6171860265177575613}
   - component: {fileID: 4455406034848297871}
   - component: {fileID: 2527700190077171398}
+  - component: {fileID: -779224150779645696}
+  - component: {fileID: 7684499530409351101}
   m_Layer: 7
   m_Name: NPC
   m_TagString: Entity
@@ -52,12 +54,14 @@ MonoBehaviour:
   nodesInScene: []
   currentNode: {fileID: 0}
   nextNode: {fileID: 0}
+  jobNode: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
   closestBuilding: {fileID: 0}
   exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
   entrance: {fileID: 0}
   speed: 0.25
   buildingCaptureDistance: 0
-  jobToDo: 0
+  firstTargetSet: 0
   updateCooldown: 1
   updateTimer: 0
 --- !u!212 &4455406034848297871
@@ -124,3 +128,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b67e74e6453a43a18fdde11cb87ab4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-779224150779645696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747605592038468128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed79fbfa642ab473d8dee45c9244bd8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jobToDo: 0
+--- !u!114 &7684499530409351101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747605592038468128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e026fc93a8854442b97bb068876fc0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 6

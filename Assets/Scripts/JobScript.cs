@@ -5,6 +5,8 @@ using UnityEngine;
 public class JobScript : MonoBehaviour
 {
     public List<GameObject> employeeCandidates;
+
+    public float price;
     public GameObject employee;
     public float jobLength;
     public float jobTimer;
@@ -31,7 +33,7 @@ public class JobScript : MonoBehaviour
             //if its job is done, send it away.
             if(jobTimer > jobLength)
             {
-                employee.GetComponent<npcController>().jobToDo = false;
+                employee.GetComponent<npcJob>().JobComplete(price);
                 transform.parent.Find("Door").GetComponent<DoorScript>().rejectionList.Add(employee);
                 employee = null;
                 occupied = false;
@@ -64,12 +66,12 @@ public class JobScript : MonoBehaviour
             {
                 if(candidate != closestCandidate)
                 {
-                    candidate.GetComponent<npcController>().jobToDo = false;
+                    candidate.GetComponent<npcJob>().jobToDo = false;
                     transform.parent.Find("Door").GetComponent<DoorScript>().rejectionList.Add(candidate);
                 }
                 else
                 {
-                    candidate.GetComponent<npcController>().jobToDo = true;
+                    candidate.GetComponent<npcJob>().jobToDo = true;
                     employee = candidate;
                 }
             }

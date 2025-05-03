@@ -11,8 +11,10 @@ public class npcController : MonoBehaviour
     public Node[] nodesInScene;
     public Node currentNode;
     public Node nextNode;
-    private Node jobNode;
+    public Node jobNode;
     private Node targetNode;
+
+    private npcJob myJob;
 
     public Vector3 target;
 
@@ -25,7 +27,6 @@ public class npcController : MonoBehaviour
 
     public float buildingCaptureDistance;
     
-    public bool jobToDo = false;
     public bool firstTargetSet = false;
 
     public float updateCooldown;
@@ -33,6 +34,7 @@ public class npcController : MonoBehaviour
 
     void Start()
     {
+        myJob = GetComponent<npcJob>();
         entrance = GameObject.FindObjectOfType<EntranceScript>().gameObject;
         exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
         logic = GameObject.FindObjectOfType<LogicScript>();
@@ -42,6 +44,14 @@ public class npcController : MonoBehaviour
     }
     void Update()
     {
+        if(nextNode != null && nextNode.connections.Count == 0)
+        {
+            GetComponent<KillScript>().Kill(); 
+        }
+        if(nextNode == null && firstTargetSet == true)
+        {
+            GetComponent<KillScript>().Kill();
+        }
         //make sure that there aren't any holes in the pathway. if there is, clear the path and set current node to nearest node
         CheckIncompletePath();
 
@@ -49,7 +59,7 @@ public class npcController : MonoBehaviour
         updateTimer += Time.deltaTime;
 
         //If at the exit, die
-        if(Vector2.Distance(transform.position, target) < .1f && Vector2.Distance(nextNode.transform.position, exit.transform.position) < .1f)
+        if(nextNode != null && Vector2.Distance(transform.position, target) < .1f && Vector2.Distance(nextNode.transform.position, exit.transform.position) < .1f)
         {
             Destroy(gameObject);
         }
@@ -68,24 +78,24 @@ public class npcController : MonoBehaviour
         {
             transform.position = FindClosestConnectedNode().transform.position;
             currentNode = FindClosestConnectedNode();
-            jobToDo = false;
+            myJob.jobToDo = false;
         }
 
         //If you don't have a job, look for one
-        if(closestBuilding != null && jobToDo == false)
+        if(closestBuilding != null && myJob.jobToDo == false)
         {
-            FindJob(closestBuilding.transform.Find("Door").gameObject);
+            myJob.FindJob(closestBuilding.transform.Find("Door").gameObject);
         }
 
         //if theres an exit and you don't have a job, make a path to the exit and follow it
-        if(exit != null && jobToDo == false)
+        if(exit != null && myJob.jobToDo == false)
         {
             CreatePath(exit.transform.position);
             FollowPath();
         }
 
         //if you do have a job, create a path to the job and follow it
-        else if(exit != null && jobToDo == true && closestBuilding != null)
+        else if(exit != null && myJob.jobToDo == true && closestBuilding != null)
         {
             if(path.Count == 0)
             { 
@@ -142,27 +152,6 @@ public class npcController : MonoBehaviour
         return FindObjectsOfType<Node>();
     }
 
-    void FindJob(GameObject door)
-    {
-        if(nextNode != null)
-        {
-            if(Vector2.Distance(door.transform.position, nextNode.transform.position) < buildingCaptureDistance
-            && door.GetComponent<DoorScript>().openJob != null
-            && !door.GetComponent<DoorScript>().rejectionList.Contains(gameObject))
-            {
-                //clear your path so you can make a new one
-                path.Clear();
-                //set jobNode to the open job that you found at the building
-                jobNode = door.GetComponent<DoorScript>().openJob;
-                //JobToDo is now true because you have a job
-                jobToDo = true;
-                //Set jobfilled on your jobNode to true so that other npcs don't take your job.
-                door.GetComponent<DoorScript>().openJob.gameObject.GetComponent<JobScript>().JobFilled();
-                //Set employee on jobNode to this gameObject
-                jobNode.gameObject.GetComponent<JobScript>().employeeCandidates.Add(gameObject);
-            }
-        }
-    }
     void GoToNextTile()
     {
         int x = 0;
@@ -216,9 +205,7 @@ public class npcController : MonoBehaviour
         {
             for(int i = 0; i < buildings.Length; i++)
             {
-                //Debug.Log("checking i: " + i.ToString());
                 float currentDistance = Vector3.Distance(this.transform.position, buildings[i].transform.position);
-                //Debug.Log("distance: " + distance.ToString());
 
                 if(currentDistance < closestBuildingDistance)
                 {
@@ -240,7 +227,7 @@ public class npcController : MonoBehaviour
                 {
                     path.Clear();
                     currentNode = FindClosestConnectedNode();
-                    jobToDo = false;
+                    myJob.jobToDo = false;
                     return;
                 }
             }
@@ -248,8 +235,6 @@ public class npcController : MonoBehaviour
     }
     void SetTarget()
     {
-        Debug.Log("target");
-        //target = path[0].transform.position;
         if(path[0].transform.CompareTag("InBuilding"))
         {
             target = path[0].transform.position;

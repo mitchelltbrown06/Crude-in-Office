@@ -7,6 +7,7 @@ public class MouseSpawningScript : MonoBehaviour
 {
 
     //Prefabs
+    public GameObject exit;
     public GameObject entrance;
     public GameObject path;
     public GameObject arcadeMachine;
@@ -35,6 +36,8 @@ public class MouseSpawningScript : MonoBehaviour
 
     private Vector3 mousePosition;
     public LayerMask buildingLayer;
+
+    public List<GameObject> placedPaths;
     // Start is called before the first frame update
     void Start()
     {
@@ -161,16 +164,63 @@ public class MouseSpawningScript : MonoBehaviour
     {
         //make arrays of all the buildings in the scene and all the entities in the scene
         GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
-        GameObject[] entities = GameObject.FindGameObjectsWithTag("Entity");
+
         //go through each building and, if the closest tile to the building is the same as the cursor tile, destroy the building
         foreach(GameObject building in buildings)
         {
             if(Vector2.Distance(FindClosestTile(building.transform.position).transform.position, closestTile.transform.position) < .1f)
             {
                 building.GetComponent<DemolishScript>().Demolish();
+                BulldozeNPCs();
             }
         }
-        //go through each building and, if the buildign is within one tile length of the mouse, destroy it
+
+        //Go through every path in the list of paths that have been placed and if that path is at cursor tile, delete it and all of the following paths
+        for(int i = 0; i < placedPaths.Count; i++)
+        {
+            if(Vector2.Distance(FindClosestTile(placedPaths[i].transform.position).transform.position, closestTile.transform.position) < .1f && i > 0)
+            {
+                for(int j = placedPaths.Count - 1; j > -1; j--)
+                {
+                    if(j > i)
+                    {
+                        //clear the connections between nodes
+                        FindClosestTile(placedPaths[j].transform.position).GetComponent<Node>().connections.Clear();
+                        placedPaths[j].GetComponent<DemolishScript>().Demolish();
+
+                        //remove this path from the list of paths
+                        placedPaths.RemoveAt(j);
+                    }
+                }
+                FindClosestTile(placedPaths[i].transform.position).GetComponent<Node>().connections.Clear();
+                placedPaths[i].GetComponent<DemolishScript>().Demolish();
+
+                exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
+                exit.transform.position = placedPaths[i-1].transform.position;
+                //clear the connection between the last path that wasn't destroyed and the first path that was destroyed
+                FindClosestTile(exit.transform.position).GetComponent<Node>().connections.RemoveAt(FindClosestTile(exit.transform.position).GetComponent<Node>().connections.Count -1);
+                
+                placedPaths.RemoveAt(i);
+
+                //check if any buildings were cut off
+                foreach(GameObject building in buildings)
+                {
+                    if(building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count -1].connections.Count == 0
+                    || Vector2.Distance(building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count -1].transform.position, exit.transform.position) < .1f)
+                    {
+                        building.GetComponent<DemolishScript>().Demolish();
+                    }
+                }
+                //clear the connection between the last path that wasn't destroyed and the first path that was destroyed
+                FindClosestTile(exit.transform.position).GetComponent<Node>().connections.RemoveAt(FindClosestTile(exit.transform.position).GetComponent<Node>().connections.Count -1);
+            }
+        }
+    }
+    //go through each npc and, if the npc is within one tile length of the mouse, destroy it
+    void BulldozeNPCs()
+    {
+        GameObject[] entities = GameObject.FindGameObjectsWithTag("Entity");
+
         foreach(GameObject entity in entities)
         {
             if(Vector2.Distance(FindClosestTile(entity.transform.position).transform.position, closestTile.transform.position) < .1f)
@@ -179,6 +229,7 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
+
     void PlaceEntrance()
     {
         Instantiate(entrance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
@@ -195,7 +246,7 @@ public class MouseSpawningScript : MonoBehaviour
         buttonManager.paths -= 1;
         if(buttonManager.paths >= 0)
         {   
-            Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
+            placedPaths.Add(Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity));
         }
         if(buttonManager.paths <= 0 && buttonManager.pathInstance != null)
         {

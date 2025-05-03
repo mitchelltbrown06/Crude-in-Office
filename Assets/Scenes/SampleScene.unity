@@ -1098,6 +1098,7 @@ GameObject:
   - component: {fileID: 1990053728}
   - component: {fileID: 1990053727}
   - component: {fileID: 1990053729}
+  - component: {fileID: 1990053730}
   m_Layer: 0
   m_Name: LogicManager
   m_TagString: Logic
@@ -1145,6 +1146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370561d33f26a485ba37a0d6fc752f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exit: {fileID: 0}
   entrance: {fileID: 7258289274802347544, guid: 4ae0b4b00484f4b0c9097d99864ef684, type: 3}
   path: {fileID: 3270414855831790524, guid: 90af0551c658c4c6b8b2c41a51caf3bd, type: 3}
   arcadeMachine: {fileID: 8014823283768476951, guid: 595c3a391b2e643518fa31b382d16625, type: 3}
@@ -1164,6 +1166,20 @@ MonoBehaviour:
   buildingLayer:
     serializedVersion: 2
     m_Bits: 0
+  placedPaths: []
+--- !u!114 &1990053730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990053726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41034660b2334d2481e3e2ef690ccdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
