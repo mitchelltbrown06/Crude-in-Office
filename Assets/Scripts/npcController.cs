@@ -8,7 +8,6 @@ public class npcController : MonoBehaviour
     public LogicScript logic;
 
     public List<Node> path;
-    public Node[] nodesInScene;
     public Node currentNode;
     public Node nextNode;
     public Node jobNode;
@@ -52,8 +51,6 @@ public class npcController : MonoBehaviour
         {
             GetComponent<KillScript>().Kill();
         }
-        //make sure that there aren't any holes in the pathway. if there is, clear the path and set current node to nearest node
-        CheckIncompletePath();
 
         //increase the update timer that determines if the path should be cleared and regenerated
         updateTimer += Time.deltaTime;
@@ -67,18 +64,10 @@ public class npcController : MonoBehaviour
         //find the closest building
         closestBuilding = FindClosestBuilding(transform.position);
 
-        //if there aren't any nodes recognized, update the list of nodes
-        if(nodesInScene.Length == 0)
-        {
-            nodesInScene = FindObjectsOfType<Node>();
-        }
-
         //if you don't have a current node, teleport to the closest node and set that to current node
         if(currentNode == null)
         {
-            transform.position = FindClosestConnectedNode().transform.position;
             currentNode = FindClosestConnectedNode();
-            myJob.jobToDo = false;
         }
 
         //If you don't have a job, look for one
@@ -87,19 +76,16 @@ public class npcController : MonoBehaviour
             myJob.FindJob(closestBuilding.transform.Find("Door").gameObject);
         }
 
-        //if theres an exit and you don't have a job, make a path to the exit and follow it
-        if(exit != null && myJob.jobToDo == false)
+        //Create a path to either the exit or your job if you have one
+        if(exit != null)
         {
-            CreatePath(exit.transform.position);
-            FollowPath();
-        }
-
-        //if you do have a job, create a path to the job and follow it
-        else if(exit != null && myJob.jobToDo == true && closestBuilding != null)
-        {
-            if(path.Count == 0)
-            { 
-                path = AStarManager.instance.GeneratePath(nextNode, AStarManager.instance.FindNearestNode(jobNode.transform.position));
+            if(myJob.jobToDo == false)
+            {
+                CreatePath(exit.transform.position);
+            }
+            else if(jobNode != null)
+            {
+                CreatePath(jobNode.transform.position);
             }
             FollowPath();
         }
@@ -119,6 +105,8 @@ public class npcController : MonoBehaviour
     }
     void FollowPath()
     {
+        //make sure that there aren't any holes in the pathway. if there is, clear the path and set current node to nearest node
+        CheckIncompletePath();
         if(path.Count > 0)
         {
             if(path[0] != null)
@@ -163,6 +151,8 @@ public class npcController : MonoBehaviour
         if(path.Count > 0)
             {
                 nextNode = path[x];
+
+                //Don't delete. targetNode only exists to make sure that nextNode has actually changed since the last time we called GoToNextTile().
                 if(targetNode == null || targetNode != nextNode)
                 {
                     SetTarget();
@@ -241,7 +231,8 @@ public class npcController : MonoBehaviour
         }
         else
         {
-            target = new Vector3(path[0].transform.position.x + Random.Range(-.4f, .4f), path[0].transform.position.y + Random.Range(-.4f, .4f), transform.position.z);
+            target = new Vector3(path[0].transform.position.x + Random.Range(-.4f, .4f), 
+            path[0].transform.position.y + Random.Range(-.4f, .4f), transform.position.z);
         }
     }
 }

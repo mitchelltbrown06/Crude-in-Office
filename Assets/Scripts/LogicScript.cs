@@ -5,9 +5,24 @@ using TMPro;
 
 public class LogicScript : MonoBehaviour
 {
-
-    public Node lastPath;
+    public List<GameObject> placedPaths;
     
+    public Node FindNearestNode(Vector2 position)
+    {
+        Node foundNode = null;
+        float minDistance = float.MaxValue;
+
+        foreach(Node node in NodesInScene())
+        {
+            float currentDistance = Vector2.Distance(position, node.transform.position);
+            if (currentDistance < minDistance)
+            {
+                minDistance = currentDistance;
+                foundNode = node;
+            }
+        }
+        return foundNode;
+    }
     public GameObject FindClosestTile(Vector3 position)
     {
         float nearestDistance = float.MaxValue;
@@ -100,5 +115,22 @@ public class LogicScript : MonoBehaviour
     public Node[] NodesInScene()
     {
         return FindObjectsOfType<Node>();
+    }
+    public List<GameObject> FindPathsInRange(Vector3 position, float minDistance)
+    {
+        List<GameObject> pathsInRange = new List<GameObject>();
+
+        if (GameObject.FindGameObjectsWithTag("Path").Length > 0)
+        {
+            foreach(GameObject path in GameObject.FindGameObjectsWithTag("Path"))
+            {
+                if(Vector2.Distance(path.transform.position, position) < minDistance)
+                {
+                    pathsInRange.Add(path);
+                }
+            }
+            return pathsInRange;
+        }
+        return null;
     }
 }

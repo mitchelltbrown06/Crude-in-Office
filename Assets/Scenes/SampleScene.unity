@@ -234,7 +234,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166638}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1008,6 +1008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equiped: 
   canvas: {fileID: 1166641}
+  buttonsSpawned: []
   slotZFilled: 0
   slotZPosition: {x: 0, y: 0, z: 0}
   slot1Filled: 0
@@ -1025,6 +1026,8 @@ MonoBehaviour:
   pathInstance: {fileID: 0}
   arcadeMachinePrefab: {fileID: 7855744068180812019, guid: 867b544eef970498f85803b5fc5ea992, type: 3}
   arcadeMachineInstance: {fileID: 0}
+  rollerRinkPrefab: {fileID: 7855744068180812019, guid: 1b52736c0859245a5981827521c695f3, type: 3}
+  rollerRinkInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
   paths: 5
@@ -1118,7 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8fe9296f3e7471f8ed17d6e1133e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastPath: {fileID: 0}
+  placedPaths: []
 --- !u!4 &1990053728
 Transform:
   m_ObjectHideFlags: 0
@@ -1150,6 +1153,7 @@ MonoBehaviour:
   entrance: {fileID: 7258289274802347544, guid: 4ae0b4b00484f4b0c9097d99864ef684, type: 3}
   path: {fileID: 3270414855831790524, guid: 90af0551c658c4c6b8b2c41a51caf3bd, type: 3}
   arcadeMachine: {fileID: 8014823283768476951, guid: 595c3a391b2e643518fa31b382d16625, type: 3}
+  rollerRink: {fileID: 5594388340798964167, guid: f167367c7fdb8498f816ec6e4cc38bb7, type: 3}
   bulldozerPreview: {fileID: 8014823283768476951, guid: 0b233ae4b6a37493fad44a75f4e2c948, type: 3}
   bulldozerPreviewInstance: {fileID: 0}
   entrancePreview: {fileID: 8014823283768476951, guid: 3ab0b0de5076e422f966c664f260ef7d, type: 3}
@@ -1158,15 +1162,17 @@ MonoBehaviour:
   pathPreviewInstance: {fileID: 0}
   arcadePreview: {fileID: 8014823283768476951, guid: 998510b53c4a2454fbfc417bbec356e8, type: 3}
   arcadePreviewInstance: {fileID: 0}
+  rollerRinkPreview: {fileID: 5594388340798964167, guid: bdd6cd0169518406e9e5324a0df0ed41, type: 3}
+  rollerRinkPreviewInstance: {fileID: 0}
   buttonManager: {fileID: 1760549751}
-  Logic: {fileID: 1990053727}
+  logic: {fileID: 0}
   grid: {fileID: 133848949}
   closestTile: {fileID: 0}
   closestPath: {fileID: 0}
+  closestTileCrossection: {x: 0, y: 0, z: 0}
   buildingLayer:
     serializedVersion: 2
     m_Bits: 0
-  placedPaths: []
 --- !u!114 &1990053730
 MonoBehaviour:
   m_ObjectHideFlags: 0

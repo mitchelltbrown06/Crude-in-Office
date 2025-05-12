@@ -16,7 +16,11 @@ public class DoorScript : MonoBehaviour
         openJob = null;
         grid = GameObject.FindObjectOfType<GridScript>();
         npcs = GameObject.FindGameObjectsWithTag("npc");
-        GetComponent<Node>().connections.Add(logic.FindClosestTile(logic.FindClosestPath(transform.position).transform.position).GetComponent<Node>());
-        logic.FindClosestTile(logic.FindClosestPath(transform.position).transform.position).GetComponent<Node>().connections.Add(GetComponent<Node>());
+        foreach(GameObject path in logic.FindPathsInRange(transform.position, grid.tileSize))
+        {
+            GetComponent<Node>().connections.Add(logic.FindClosestTile(path.transform.position).GetComponent<Node>());
+            logic.FindClosestTile(path.transform.position).GetComponent<Node>().connections.Add(GetComponent<Node>());
+        }
+        
     }
 }

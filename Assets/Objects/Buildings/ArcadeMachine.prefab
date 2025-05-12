@@ -107,7 +107,7 @@ MonoBehaviour:
   hScore: 0
   onPath: 0
   onEnemy: 0
-  onBuilding: 0
+  onBuilding: 1
   onEntranceOrExit: 0
 --- !u!114 &8267262036008719675
 MonoBehaviour:
@@ -235,7 +235,7 @@ MonoBehaviour:
   hScore: 0
   onPath: 0
   onEnemy: 0
-  onBuilding: 0
+  onBuilding: 1
   onEntranceOrExit: 0
 --- !u!114 &7773297709877116034
 MonoBehaviour:
@@ -363,7 +363,7 @@ MonoBehaviour:
   hScore: 0
   onPath: 0
   onEnemy: 0
-  onBuilding: 0
+  onBuilding: 1
   onEntranceOrExit: 0
 --- !u!114 &2143750820381206382
 MonoBehaviour:
@@ -491,7 +491,7 @@ MonoBehaviour:
   hScore: 0
   onPath: 0
   onEnemy: 0
-  onBuilding: 0
+  onBuilding: 1
   onEntranceOrExit: 0
 --- !u!114 &1995826835855319769
 MonoBehaviour:
@@ -635,7 +635,7 @@ MonoBehaviour:
   hScore: 0
   onPath: 0
   onEnemy: 0
-  onBuilding: 0
+  onBuilding: 1
   onEntranceOrExit: 0
 --- !u!1 &8014823283768476951
 GameObject:
@@ -745,6 +745,7 @@ MonoBehaviour:
   node2: {fileID: 1767091686347828150}
   node3: {fileID: 2599571360413805212}
   node4: {fileID: 4696148503923634026}
+  jobNodes: []
 --- !u!114 &3154677809793881162
 MonoBehaviour:
   m_ObjectHideFlags: 0

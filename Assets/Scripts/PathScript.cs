@@ -16,43 +16,20 @@ public class PathScript : MonoBehaviour
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         entrance = GameObject.FindObjectOfType<EntranceScript>();
         
-        if(logic.lastPath != null)
+        if(logic.placedPaths.Count > 1)
         {
-            FindNearestNode(transform.position).connections.Add(logic.lastPath);
-            logic.lastPath.connections.Add(FindNearestNode(transform.position));
+            logic.FindNearestNode(logic.placedPaths[^1].transform.position).connections.Add(logic.FindNearestNode(logic.placedPaths[^2].transform.position));
+            logic.FindNearestNode(logic.placedPaths[^2].transform.position).connections.Add(logic.FindNearestNode(logic.placedPaths[^1].transform.position));
             //if last path is at the entrance, spawn in an exit on this path
-            if(Vector2.Distance(entrance.transform.position, logic.lastPath.transform.position) < .1f)
+            if(Vector2.Distance(entrance.transform.position, logic.placedPaths[^2].transform.position) < .1f)
             {
                 Instantiate(exit, transform.position, Quaternion.identity);
-                logic.lastPath = FindNearestNode(transform.position);
             }
             //if last path is not at the entrance, move the exit to this path
             else
             {
                 FindObjectOfType<ExitScript>().GoToPath(transform.position);
-                logic.lastPath = FindNearestNode(transform.position);
             }
         }
-        else
-        {
-            logic.lastPath = FindNearestNode(transform.position);
-        }
-    }
-
-    private Node FindNearestNode(Vector2 position)
-    {
-        Node foundNode = null;
-        float minDistance = float.MaxValue;
-
-        foreach(Node node in nodesInScene)
-        {
-            float currentDistance = Vector2.Distance(transform.position, node.transform.position);
-            if (currentDistance < minDistance)
-            {
-                minDistance = currentDistance;
-                foundNode = node;
-            }
-        }
-        return foundNode;
     }
 }

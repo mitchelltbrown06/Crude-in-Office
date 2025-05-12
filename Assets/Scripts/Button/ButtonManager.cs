@@ -9,6 +9,8 @@ public class ButtonManager : MonoBehaviour
 
     public Canvas canvas;
 
+    //button list
+    public List<Button> buttonsSpawned;
     //button slot info
     public bool slotZFilled = false;
     public Vector3 slotZPosition;
@@ -36,6 +38,9 @@ public class ButtonManager : MonoBehaviour
 
     public Button arcadeMachinePrefab;
     public Button arcadeMachineInstance;
+
+    public Button rollerRinkPrefab;
+    public Button rollerRinkInstance;
 
     //button specifics
     public bool entrancePlaced = false;
@@ -76,7 +81,6 @@ public class ButtonManager : MonoBehaviour
         {
             canvas.GetComponent<Image>().enabled = false;
         }
-        CheckSpawnPosition();
     }
 
     public void Purchase(Button instance)
@@ -114,6 +118,12 @@ public class ButtonManager : MonoBehaviour
         Enable(arcadeMachineInstance);
         arcadeMachineInstance.onClick.AddListener(ArcadeMachineOnClick);
     }
+    public void SpawnRollerRink()
+    {
+        rollerRinkInstance = Instantiate(rollerRinkPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(rollerRinkInstance);
+        rollerRinkInstance.onClick.AddListener(RollerRinkOnClick);
+    }
 
     //OnClicks
     void EntranceOnClick()
@@ -131,6 +141,10 @@ public class ButtonManager : MonoBehaviour
     void ArcadeMachineOnClick()
     {
         Equip("ArcadeMachine");
+    }
+    void RollerRinkOnClick()
+    {
+        Equip("RollerRink");
     }
     public void CheckSpawnPosition()
     {
@@ -155,4 +169,5 @@ public class ButtonManager : MonoBehaviour
     {
         instance.GetComponent<ButtonEnable>().Enable();
     }
+
 }
