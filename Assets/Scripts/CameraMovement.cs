@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrumpMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     public float walkSpeed;
     public Rigidbody2D rb;

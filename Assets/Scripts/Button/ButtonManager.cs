@@ -24,6 +24,9 @@ public class ButtonManager : MonoBehaviour
     public bool slot3Filled = false;
     public Vector3 slot3Position;
 
+    public bool slot4Filled = false;
+    public Vector3 slot4Position;
+
     public Vector3 spawnPosition;
 
     //buttons
@@ -42,6 +45,9 @@ public class ButtonManager : MonoBehaviour
     public Button rollerRinkPrefab;
     public Button rollerRinkInstance;
 
+    public Button laserTagPrefab;
+    public Button laserTagInstance;
+
     //button specifics
     public bool entrancePlaced = false;
     public bool exitPlaced = false;
@@ -52,6 +58,7 @@ public class ButtonManager : MonoBehaviour
         slot1Position = new Vector3(55, 55, 0);
         slot2Position = new Vector3(160, 55, 0);
         slot3Position = new Vector3(265, 55, 0);
+        slot4Position = new Vector3(370, 55, 0);
 
         slotZPosition = new Vector3(784, 55, 0);
 
@@ -124,6 +131,12 @@ public class ButtonManager : MonoBehaviour
         Enable(rollerRinkInstance);
         rollerRinkInstance.onClick.AddListener(RollerRinkOnClick);
     }
+    public void SpawnLaserTag()
+    {
+        laserTagInstance = Instantiate(laserTagPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(laserTagInstance);
+        laserTagInstance.onClick.AddListener(LaserTagOnClick);
+    }
 
     //OnClicks
     void EntranceOnClick()
@@ -146,6 +159,10 @@ public class ButtonManager : MonoBehaviour
     {
         Equip("RollerRink");
     }
+    void LaserTagOnClick()
+    {
+        Equip("LaserTag");
+    }
     public void CheckSpawnPosition()
     {
         if (!slot1Filled)
@@ -159,6 +176,10 @@ public class ButtonManager : MonoBehaviour
             else if(!slot3Filled)
             {
                 spawnPosition = slot3Position;
+            }
+            else if(!slot4Filled)
+            {
+                spawnPosition = slot4Position;
             }
     }
     void Disable(Button instance)

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingsScript : MonoBehaviour
+public class BuildingScript : MonoBehaviour
 {
     public GameObject door;
+    public GameObject secondDoor;
+
     public List<GameObject> jobNodes; 
+    public List<GameObject> waitingRooms;
 
     void Start()
     {
@@ -25,6 +28,15 @@ public class BuildingsScript : MonoBehaviour
             if(child.GetComponent<JobScript>())
             {
                 jobNodes.Add(child.gameObject);
+                child.GetComponent<JobScript>().door = door.GetComponent<DoorScript>();
+            }
+            foreach(Transform childOfChild in child.transform)
+            {
+                if(childOfChild.GetComponent<JobScript>())
+                {
+                    jobNodes.Add(childOfChild.gameObject);
+                    childOfChild.GetComponent<JobScript>().door = door.GetComponent<DoorScript>();
+                }
             }
         }
         foreach(GameObject jobNode in jobNodes)

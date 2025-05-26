@@ -34,8 +34,6 @@ public class Node : MonoBehaviour
     {
         onPath = OnPath();
         onEnemy = OnEnemy();
-        onBuilding = OnBuilding();
-        //onEntranceOrExit = OnEntranceOrExit();
 
         if(connections.Count > 0)
         {
@@ -74,40 +72,6 @@ public class Node : MonoBehaviour
             }
         }
 
-        return false;
-    }
-    public bool OnBuilding()
-    {
-        GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
-
-        foreach(GameObject building in buildings)
-        {
-            if (Vector2.Distance(building.transform.position, transform.position) < grid.tileSize / 2)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    public bool OnEntranceOrExit()
-    {
-        if(GameObject.FindObjectOfType<EntranceScript>() != null)
-        {
-            GameObject entrance = GameObject.FindObjectOfType<EntranceScript>().gameObject;
-            if(Vector2.Distance(entrance.transform.position, transform.position) < grid.tileSize / 2)
-            {
-                return true;
-            }
-        }
-        if(GameObject.FindObjectOfType<ExitScript>() != null)
-        {
-            GameObject exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
-            if(Vector2.Distance(exit.transform.position, transform.position) < grid.tileSize / 2)
-            {
-                return true;
-            }
-        }
         return false;
     }
 }

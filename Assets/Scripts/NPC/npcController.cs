@@ -11,28 +11,23 @@ public class npcController : MonoBehaviour
     public Node currentNode;
     public Node nextNode;
     public Node jobNode;
-    private Node targetNode;
 
     private npcJob myJob;
-
-    public Vector3 target;
-
-    public GameObject closestBuilding;
+    private npcStats myStats;
 
     public GameObject exit;
     public GameObject entrance;
 
-    public float speed;
-
     public float buildingCaptureDistance;
-    
-    public bool firstTargetSet = false;
 
     public float updateCooldown;
     public float updateTimer;
 
+    public float positionOffset;
+
     void Start()
     {
+        myStats = GetComponent<npcStats>();
         myJob = GetComponent<npcJob>();
         entrance = GameObject.FindObjectOfType<EntranceScript>().gameObject;
         exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
@@ -43,11 +38,20 @@ public class npcController : MonoBehaviour
     }
     void Update()
     {
+        if(nextNode != null && nextNode.CompareTag("InBuilding") && positionOffset != 0)
+        {
+            positionOffset = 0;
+        }
+        else if(nextNode != null && !nextNode.CompareTag("InBuilding") && positionOffset == 0)
+        {
+            positionOffset = Random.Range(-.2f, .2f);
+        }
+        
         if(nextNode != null && nextNode.connections.Count == 0)
         {
             GetComponent<KillScript>().Kill(); 
         }
-        if(nextNode == null && firstTargetSet == true)
+        if(nextNode == null && Vector2.Distance(transform.position, entrance.transform.position) > .1f)
         {
             GetComponent<KillScript>().Kill();
         }
@@ -56,27 +60,17 @@ public class npcController : MonoBehaviour
         updateTimer += Time.deltaTime;
 
         //If at the exit, die
-        if(nextNode != null && Vector2.Distance(transform.position, target) < .1f && Vector2.Distance(nextNode.transform.position, exit.transform.position) < .1f)
+        if(Vector2.Distance(logic.FindNearestNode(transform.position).transform.position, exit.transform.position) < .1f)
         {
             Destroy(gameObject);
         }
         
-        //find the closest building
-        closestBuilding = FindClosestBuilding(transform.position);
-
-        //if you don't have a current node, teleport to the closest node and set that to current node
+        //if you don't have a current node, set the closest node to the current node
         if(currentNode == null)
         {
             currentNode = FindClosestConnectedNode();
         }
 
-        //If you don't have a job, look for one
-        if(closestBuilding != null && myJob.jobToDo == false)
-        {
-            myJob.FindJob(closestBuilding.transform.Find("Door").gameObject);
-        }
-
-        //Create a path to either the exit or your job if you have one
         if(exit != null)
         {
             if(myJob.jobToDo == false)
@@ -85,38 +79,84 @@ public class npcController : MonoBehaviour
             }
             else if(jobNode != null)
             {
+                if(path.Count > 0 && path[^1] != jobNode)
+                {
+                    GoToNextTile();
+                }
                 CreatePath(jobNode.transform.position);
             }
             FollowPath();
         }
     }
 
-    void CreatePath(Vector3 destination)
+    public void CreatePath(Vector3 destination)
     {
         if(path.Count == 0 && currentNode.connections.Count > 0)
         { 
             path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(destination));
-        }
-        if(firstTargetSet == false)
-        {
-            target = path[0].transform.position;
-            firstTargetSet = true;
+            nextNode = path[0];
         }
     }
     void FollowPath()
     {
         //make sure that there aren't any holes in the pathway. if there is, clear the path and set current node to nearest node
         CheckIncompletePath();
-        if(path.Count > 0)
+        if(nextNode != null)
         {
-            if(path[0] != null)
+            /*
+            if(targetNode != null && Vector2.Distance(target, targetNode.transform.position) > grid.tileSize * .5f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                SetTarget();
+            }
+            if(nextNode.CompareTag("InBuilding") || nextNode.onEntranceOrExit == true || target == null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, nextNode.transform.position, myStats.speed * Time.deltaTime);
+                if(Vector2.Distance(transform.position, nextNode.transform.position) < .1f)
+                {
+                    GoToNextTile();
+                } 
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target, myStats.speed * Time.deltaTime);
                 if(Vector2.Distance(transform.position, target) < .1f)
                 {
                     GoToNextTile();
                 }
             }
+            */
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(nextNode.transform.position.x + positionOffset, nextNode.transform.position.y + positionOffset, 0), myStats.speed * Time.deltaTime);
+            if(nextNode.CompareTag("InBuilding") && Vector2.Distance(transform.position, nextNode.transform.position) < .1f)
+            {
+                GoToNextTile();
+            }
+            else if(!nextNode.CompareTag("InBuilding") && Vector2.Distance(transform.position, nextNode.transform.position) < .3)
+            {
+                GoToNextTile();
+            } 
+        }
+        else if(path.Count > 0)
+        {
+            nextNode = path[0];
+        }
+    }
+    void GoToNextTile()
+    {
+        int x = 0;
+        if(path.Count > 0)
+        {
+            currentNode = path[x];
+            path.RemoveAt(x);
+        }
+        if(path.Count > 0)
+        {
+            nextNode = path[x];
+        }
+        //As long as it's been .1 seconds since you last wiped the path, wipe it now
+        if (updateTimer > updateCooldown && path.Count > 0)
+        {
+            path.Clear();
+            updateTimer = 0;
         }
     }
     public Node FindNearestNode(Vector2 position)
@@ -139,33 +179,6 @@ public class npcController : MonoBehaviour
     {
         return FindObjectsOfType<Node>();
     }
-
-    void GoToNextTile()
-    {
-        int x = 0;
-        if(path.Count > 0)
-        {
-            currentNode = path[x];
-            path.RemoveAt(x);
-        }
-        if(path.Count > 0)
-            {
-                nextNode = path[x];
-
-                //Don't delete. targetNode only exists to make sure that nextNode has actually changed since the last time we called GoToNextTile().
-                if(targetNode == null || targetNode != nextNode)
-                {
-                    SetTarget();
-                    targetNode = nextNode;
-                }
-            }
-        //As long as it's been .1 seconds since you last wiped the path, wipe it now
-        if (updateTimer > updateCooldown && path.Count > 0)
-            {
-                path.Clear();
-                updateTimer = 0;
-            }
-    }
     private Node FindClosestConnectedNode()
     {
         Node closestNode = null;
@@ -186,27 +199,7 @@ public class npcController : MonoBehaviour
         }
         return closestNode;
     }
-    public GameObject FindClosestBuilding(Vector3 position)
-    {
-        float closestBuildingDistance = float.MaxValue;
-        GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
-
-        if (buildings.Length > 0)
-        {
-            for(int i = 0; i < buildings.Length; i++)
-            {
-                float currentDistance = Vector3.Distance(this.transform.position, buildings[i].transform.position);
-
-                if(currentDistance < closestBuildingDistance)
-                {
-                    closestBuilding = buildings[i];
-                    closestBuildingDistance = currentDistance;
-                }
-            }
-            return closestBuilding;
-        }
-        return null;
-    }
+    
     void CheckIncompletePath()
     {
         if(path.Count > 0)
@@ -221,18 +214,6 @@ public class npcController : MonoBehaviour
                     return;
                 }
             }
-        }
-    }
-    void SetTarget()
-    {
-        if(path[0].transform.CompareTag("InBuilding"))
-        {
-            target = path[0].transform.position;
-        }
-        else
-        {
-            target = new Vector3(path[0].transform.position.x + Random.Range(-.4f, .4f), 
-            path[0].transform.position.y + Random.Range(-.4f, .4f), transform.position.z);
         }
     }
 }

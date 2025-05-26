@@ -133,4 +133,37 @@ public class LogicScript : MonoBehaviour
         }
         return null;
     }
+    public List<Node> FindTilesInRange(Vector3 position, float minDistance)
+    {
+        List<Node> tilesInRange = new List<Node>();
+
+        if (NodesInScene().Length > 0)
+        {
+            foreach(Node node in NodesInScene())
+            {
+                if(Vector2.Distance(node.transform.position, position) < minDistance)
+                {
+                    tilesInRange.Add(node);
+                }
+            }
+            return tilesInRange;
+        }
+        return null;
+    }
+    public GameObject FindClosestCustomer(Vector2 position)
+    {
+        GameObject foundCustomer = null;
+        float minDistance = float.MaxValue;
+
+        foreach(GameObject customer in GameObject.FindGameObjectsWithTag("Entity"))
+        {
+            float currentDistance = Vector2.Distance(position, customer.transform.position);
+            if (currentDistance < minDistance)
+            {
+                minDistance = currentDistance;
+                foundCustomer = customer;
+            }
+        }
+        return foundCustomer;
+    }
 }

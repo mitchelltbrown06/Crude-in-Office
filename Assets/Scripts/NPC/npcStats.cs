@@ -5,10 +5,13 @@ using UnityEngine;
 public class npcStats : MonoBehaviour
 {
     public GlobalStats globalStats;
+
     public float money;
+    public float speed;
 
     void Start()
     {
+        speed = .3f;
         globalStats = GameObject.FindObjectOfType<GlobalStats>();
     }
 

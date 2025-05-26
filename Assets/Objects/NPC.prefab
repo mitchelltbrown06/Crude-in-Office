@@ -51,18 +51,16 @@ MonoBehaviour:
   grid: {fileID: 0}
   logic: {fileID: 0}
   path: []
-  nodesInScene: []
   currentNode: {fileID: 0}
   nextNode: {fileID: 0}
   jobNode: {fileID: 0}
+  targetNode: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  closestBuilding: {fileID: 0}
   exit: {fileID: 698207834695300643, guid: 567b6202f157743c486d791e145ca33b, type: 3}
   entrance: {fileID: 0}
-  speed: 0.25
   buildingCaptureDistance: 0
   firstTargetSet: 0
-  updateCooldown: 1
+  updateCooldown: 0.01
   updateTimer: 0
 --- !u!212 &4455406034848297871
 SpriteRenderer:
@@ -153,4 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e026fc93a8854442b97bb068876fc0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 0}
   money: 6
+  speed: 0
