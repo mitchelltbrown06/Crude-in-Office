@@ -14,6 +14,7 @@ public class MouseSpawningScript : MonoBehaviour
     public GameObject arcadeMachine;
     public GameObject rollerRink;
     public GameObject laserTag;
+    public GameObject casino;
 
     //Previews
     public GameObject bulldozerPreview;
@@ -33,6 +34,9 @@ public class MouseSpawningScript : MonoBehaviour
 
     public GameObject laserTagPreview;
     public GameObject laserTagPreviewInstance;
+
+    public GameObject casinoPreview;
+    public GameObject casinoPreviewInstance;
 
     //managers
     public ButtonManager buttonManager;
@@ -97,6 +101,10 @@ public class MouseSpawningScript : MonoBehaviour
             if(buttonManager.equiped == "LaserTag")
             {
                 Place3TileBuilding(laserTag, laserTagPreviewInstance, buttonManager.laserTagInstance);
+            }
+            if(buttonManager.equiped == "Casino")
+            {
+                Place4TileBuilding(casino, casinoPreviewInstance, buttonManager.casinoInstance);
             }
         }
     }
@@ -247,6 +255,8 @@ public class MouseSpawningScript : MonoBehaviour
         buttonManager.SpawnRollerRink();
         buttonManager.CheckSpawnPosition();
         buttonManager.SpawnLaserTag();
+        buttonManager.CheckSpawnPosition();
+        buttonManager.SpawnCasino();
         buttonManager.equiped = "null";
     }
     void PlacePath()
@@ -390,7 +400,7 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
-    void Display4TilePreview(GameObject preview, Vector3 pathConnectionPoint)
+    void Display2TilePreview(GameObject preview, Vector3 pathConnectionPoint)
     {
         //update the preview position to be at the cursor tile
         preview.transform.position = closestTileCrossection;
@@ -483,6 +493,59 @@ public class MouseSpawningScript : MonoBehaviour
             }
         }
     }
+    void Display4TilePreview(GameObject preview, Vector3 pathConnectionPoint)
+    {
+        //update the preview position to be at the cursor tile
+        preview.transform.position = closestTileCrossection;
+
+        if(preview.CompareTag("BuildingPreview"))
+        {
+            //if you press r, the preview should rotate
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                preview.transform.Rotate(0, 0, -90);
+            }
+
+            foreach(GameObject path in logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f))
+            {
+
+                if(logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true 
+                || Vector2.Distance(path.transform.position, closestTileCrossection) < grid.tileSize * .9f)
+                {
+                    foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                    {
+                        sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
+                    }
+                    return;
+                }
+            }
+            if(logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f).Count == 2)
+            {
+                //if the surrounding tiles are on buildings, don't spawn
+                foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+                {
+                    if(node.onBuilding == true)
+                    {
+                        foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                        {
+                            sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
+                        }
+                        return;
+                    }
+                }
+                //this finds all the sprite renderers for each child object
+                foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                {
+                    sr.color = new Color(1f, 1f, 1f, .7f);
+                }
+                return;
+            }
+            foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+            {
+                sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
+            }
+        }
+    }
     void SpawnPreviews()
     {
         SpawnBulldozerPreview();
@@ -491,6 +554,7 @@ public class MouseSpawningScript : MonoBehaviour
         SpawnArcadePreview();
         SpawnRollerRinkPreview();
         SpawnLaserTagPreview();
+        SpawnCasinoPreview();
     }
     void SpawnBulldozerPreview()
     {
@@ -610,6 +674,26 @@ public class MouseSpawningScript : MonoBehaviour
         else if(laserTagPreviewInstance != null)
         {
             Destroy(laserTagPreviewInstance);
+        }
+    }
+    void SpawnCasinoPreview()
+    {
+        if(buttonManager.equiped == "Casino")
+        {
+            //if there's no preview currently spawned, spawn one in
+            if(casinoPreviewInstance == null)
+            {
+                casinoPreviewInstance = Instantiate(casinoPreview, closestTileCrossection, Quaternion.identity);
+            }
+            //everything you do if there is a preview
+            else
+            {
+                Display4TilePreview(casinoPreviewInstance, casinoPreviewInstance.transform.GetChild(0).transform.position);
+            }
+        }
+        else if(casinoPreviewInstance != null)
+        {
+            Destroy(casinoPreviewInstance);
         }
     }
 }

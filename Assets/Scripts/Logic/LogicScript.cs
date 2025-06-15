@@ -6,6 +6,7 @@ using TMPro;
 public class LogicScript : MonoBehaviour
 {
     public List<GameObject> placedPaths;
+    public List<GameObject> laserTagPlayers;
     
     public Node FindNearestNode(Vector2 position)
     {

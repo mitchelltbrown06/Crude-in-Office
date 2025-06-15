@@ -27,6 +27,9 @@ public class ButtonManager : MonoBehaviour
     public bool slot4Filled = false;
     public Vector3 slot4Position;
 
+    public bool slot5Filled = false;
+    public Vector3 slot5Position;
+
     public Vector3 spawnPosition;
 
     //buttons
@@ -48,6 +51,9 @@ public class ButtonManager : MonoBehaviour
     public Button laserTagPrefab;
     public Button laserTagInstance;
 
+    public Button casinoPrefab;
+    public Button casinoInstance;
+
     //button specifics
     public bool entrancePlaced = false;
     public bool exitPlaced = false;
@@ -59,6 +65,7 @@ public class ButtonManager : MonoBehaviour
         slot2Position = new Vector3(160, 55, 0);
         slot3Position = new Vector3(265, 55, 0);
         slot4Position = new Vector3(370, 55, 0);
+        slot5Position = new Vector3(475, 55, 0);
 
         slotZPosition = new Vector3(784, 55, 0);
 
@@ -137,6 +144,12 @@ public class ButtonManager : MonoBehaviour
         Enable(laserTagInstance);
         laserTagInstance.onClick.AddListener(LaserTagOnClick);
     }
+    public void SpawnCasino()
+    {
+        casinoInstance = Instantiate(casinoPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(casinoInstance);
+        casinoInstance.onClick.AddListener(CasinoOnClick);
+    }
 
     //OnClicks
     void EntranceOnClick()
@@ -163,6 +176,10 @@ public class ButtonManager : MonoBehaviour
     {
         Equip("LaserTag");
     }
+    void CasinoOnClick()
+    {
+        Equip("Casino");
+    }
     public void CheckSpawnPosition()
     {
         if (!slot1Filled)
@@ -180,6 +197,10 @@ public class ButtonManager : MonoBehaviour
             else if(!slot4Filled)
             {
                 spawnPosition = slot4Position;
+            }
+            else if(!slot5Filled)
+            {
+                spawnPosition = slot5Position;
             }
     }
     void Disable(Button instance)

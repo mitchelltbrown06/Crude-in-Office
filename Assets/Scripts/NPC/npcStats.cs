@@ -9,9 +9,11 @@ public class npcStats : MonoBehaviour
     public float money;
     public float speed;
 
+    public bool rollerSkates;
+    public bool laserTag;
+
     void Start()
     {
-        speed = .3f;
         globalStats = GameObject.FindObjectOfType<GlobalStats>();
     }
 

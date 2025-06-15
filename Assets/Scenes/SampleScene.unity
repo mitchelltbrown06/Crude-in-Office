@@ -1019,6 +1019,8 @@ MonoBehaviour:
   slot3Position: {x: 0, y: 0, z: 0}
   slot4Filled: 0
   slot4Position: {x: 0, y: 0, z: 0}
+  slot5Filled: 0
+  slot5Position: {x: 0, y: 0, z: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
   entrancePrefab: {fileID: 7855744068180812019, guid: bef91ee18a62f43e1b92666fb409a661, type: 3}
   entranceInstance: {fileID: 0}
@@ -1032,9 +1034,11 @@ MonoBehaviour:
   rollerRinkInstance: {fileID: 0}
   laserTagPrefab: {fileID: 7855744068180812019, guid: adec19e78466d4af5b56d95493e2ec23, type: 3}
   laserTagInstance: {fileID: 0}
+  casinoPrefab: {fileID: 7855744068180812019, guid: 12eeaf850576b41efb90b3189be7c528, type: 3}
+  casinoInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
-  paths: 5
+  paths: 7
 --- !u!4 &1760549752
 Transform:
   m_ObjectHideFlags: 0
@@ -1126,6 +1130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placedPaths: []
+  laserTagPlayers: []
 --- !u!4 &1990053728
 Transform:
   m_ObjectHideFlags: 0
@@ -1159,6 +1164,7 @@ MonoBehaviour:
   arcadeMachine: {fileID: 8014823283768476951, guid: 595c3a391b2e643518fa31b382d16625, type: 3}
   rollerRink: {fileID: 5594388340798964167, guid: f167367c7fdb8498f816ec6e4cc38bb7, type: 3}
   laserTag: {fileID: 433695772068429284, guid: f7c559363052349108d72797e2dc6799, type: 3}
+  casino: {fileID: 5594388340798964167, guid: a44a4d263d91f4de2b4684634bdf7fe6, type: 3}
   bulldozerPreview: {fileID: 8014823283768476951, guid: 0b233ae4b6a37493fad44a75f4e2c948, type: 3}
   bulldozerPreviewInstance: {fileID: 0}
   entrancePreview: {fileID: 8014823283768476951, guid: 3ab0b0de5076e422f966c664f260ef7d, type: 3}
@@ -1171,6 +1177,8 @@ MonoBehaviour:
   rollerRinkPreviewInstance: {fileID: 0}
   laserTagPreview: {fileID: 5594388340798964167, guid: a85c7fc9ca5ac447ebf53d07f38416bf, type: 3}
   laserTagPreviewInstance: {fileID: 0}
+  casinoPreview: {fileID: 5594388340798964167, guid: c163be3d7e0f9439489aa958df34f532, type: 3}
+  casinoPreviewInstance: {fileID: 0}
   buttonManager: {fileID: 1760549751}
   logic: {fileID: 0}
   grid: {fileID: 133848949}

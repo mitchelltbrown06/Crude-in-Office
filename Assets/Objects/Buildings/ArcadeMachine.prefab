@@ -127,7 +127,9 @@ MonoBehaviour:
   jobLength: 3
   jobTimer: 0
   occupied: 0
+  door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &1767091686347828150
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +257,9 @@ MonoBehaviour:
   jobLength: 3
   jobTimer: 0
   occupied: 0
+  door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &2599571360413805212
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +387,9 @@ MonoBehaviour:
   jobLength: 3
   jobTimer: 0
   occupied: 0
+  door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &4696148503923634026
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +517,9 @@ MonoBehaviour:
   jobLength: 3
   jobTimer: 0
   occupied: 0
+  door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &6311153811962573866
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +657,7 @@ GameObject:
   - component: {fileID: 6669467349577525196}
   - component: {fileID: 2627242795972476087}
   - component: {fileID: 3154677809793881162}
+  - component: {fileID: 8640762186885516853}
   m_Layer: 0
   m_Name: ArcadeMachine
   m_TagString: Building
@@ -741,11 +750,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 6311153811962573866}
-  node1: {fileID: 734513999135834554}
-  node2: {fileID: 1767091686347828150}
-  node3: {fileID: 2599571360413805212}
-  node4: {fileID: 4696148503923634026}
+  secondDoor: {fileID: 0}
   jobNodes: []
+  waitingRooms: []
+  jobDuration: 5
 --- !u!114 &3154677809793881162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,5 +764,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85a4643a70d0a47f5821a83d1d145f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8640762186885516853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014823283768476951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1336003167f904fec9c5e0d57f3d2c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -183,6 +183,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &677156968063799279
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,6 +313,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &679502592672311512
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +443,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &698873203671317508
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +573,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &724082932667160493
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +703,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &1400369301578495788
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +995,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &2384706853997489110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1125,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &3370518600247634815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1434,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &4548301609353880973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,6 +1618,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &4884701107899200794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +1856,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &5594388340798964167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1870,7 @@ GameObject:
   - component: {fileID: 4535489901868570906}
   - component: {fileID: 8895981683586721311}
   - component: {fileID: 2557896782611034342}
+  - component: {fileID: 7967239472474715779}
   m_Layer: 0
   m_Name: RollerSkatingRink
   m_TagString: Building
@@ -1963,7 +1974,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 3934416108961180423}
+  secondDoor: {fileID: 0}
   jobNodes: []
+  waitingRooms: []
+  jobDuration: 10
 --- !u!114 &8895981683586721311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,6 +2003,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostedCustomers: []
+--- !u!114 &7967239472474715779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594388340798964167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1336003167f904fec9c5e0d57f3d2c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5731934484643551322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,6 +2144,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &5965740903299741198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,6 +2598,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &7363610808926657704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,6 +2782,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &7874410192771980507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,6 +2912,7 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}
 --- !u!1 &8009652613578570385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3012,3 +3042,4 @@ MonoBehaviour:
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
+  grid: {fileID: 0}

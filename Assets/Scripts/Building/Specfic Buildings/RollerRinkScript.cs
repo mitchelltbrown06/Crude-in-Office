@@ -16,6 +16,7 @@ public class RollerRinkScript : MonoBehaviour
             {
                 jobNode.transform.parent.GetComponent<Animator>().SetTrigger("StartAnimation");
                 jobNode.GetComponent<JobScript>().employee.GetComponent<npcStats>().speed = jobNode.GetComponent<JobScript>().employee.GetComponent<npcStats>().speed * 1.6f;
+                jobNode.GetComponent<JobScript>().employee.GetComponent<npcStats>().rollerSkates = true;
                 boostedCustomers.Add(jobNode.GetComponent<JobScript>().employee);
             }
             if(jobNode.GetComponent<JobScript>().occupied == false)

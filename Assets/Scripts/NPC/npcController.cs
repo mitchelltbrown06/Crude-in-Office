@@ -75,25 +75,21 @@ public class npcController : MonoBehaviour
         {
             if(myJob.jobToDo == false)
             {
-                CreatePath(exit.transform.position);
+                CreatePath(logic.FindNearestNode(exit.transform.position));
             }
             else if(jobNode != null)
             {
-                if(path.Count > 0 && path[^1] != jobNode)
-                {
-                    GoToNextTile();
-                }
-                CreatePath(jobNode.transform.position);
+                CreatePath(jobNode.GetComponent<Node>());
             }
             FollowPath();
         }
     }
 
-    public void CreatePath(Vector3 destination)
+    public void CreatePath(Node destination)
     {
         if(path.Count == 0 && currentNode.connections.Count > 0)
         { 
-            path = AStarManager.instance.GeneratePath(currentNode, AStarManager.instance.FindNearestNode(destination));
+            path = AStarManager.instance.GeneratePath(currentNode, destination);
             nextNode = path[0];
         }
     }
@@ -103,28 +99,6 @@ public class npcController : MonoBehaviour
         CheckIncompletePath();
         if(nextNode != null)
         {
-            /*
-            if(targetNode != null && Vector2.Distance(target, targetNode.transform.position) > grid.tileSize * .5f)
-            {
-                SetTarget();
-            }
-            if(nextNode.CompareTag("InBuilding") || nextNode.onEntranceOrExit == true || target == null)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, nextNode.transform.position, myStats.speed * Time.deltaTime);
-                if(Vector2.Distance(transform.position, nextNode.transform.position) < .1f)
-                {
-                    GoToNextTile();
-                } 
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(transform.position, target, myStats.speed * Time.deltaTime);
-                if(Vector2.Distance(transform.position, target) < .1f)
-                {
-                    GoToNextTile();
-                }
-            }
-            */
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(nextNode.transform.position.x + positionOffset, nextNode.transform.position.y + positionOffset, 0), myStats.speed * Time.deltaTime);
             if(nextNode.CompareTag("InBuilding") && Vector2.Distance(transform.position, nextNode.transform.position) < .1f)
             {

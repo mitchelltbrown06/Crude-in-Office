@@ -22,6 +22,7 @@ public class JobScript : MonoBehaviour
         jobTimer = 0;
         logic = GameObject.FindObjectOfType<LogicScript>();
         grid = GameObject.FindObjectOfType<GridScript>();
+        door = transform.root.transform.Find("Door").GetComponent<DoorScript>();
     }
     void Update()
     {
@@ -41,7 +42,7 @@ public class JobScript : MonoBehaviour
                 door.rejectionList.Add(employee);
 
                 //just for debugging
-                employee.transform.localScale = new Vector3(.1f, .1f, .1f);
+                //employee.transform.localScale = new Vector3(.1f, .1f, .1f);
 
                 employee = null;
                 occupied = false;
@@ -78,13 +79,13 @@ public class JobScript : MonoBehaviour
             {
                 employee.GetComponent<npcController>().path.Clear();
                 employee.GetComponent<npcController>().currentNode = logic.FindNearestNode(employee.transform.position);
-                employee.GetComponent<npcController>().CreatePath(transform.position);
+                employee.GetComponent<npcController>().CreatePath(logic.FindNearestNode(transform.position));
             }
 
             JobFilled();
 
             //just for debugging
-            employee.transform.localScale = new Vector3(.2f, .2f, .1f);
+            //employee.transform.localScale = new Vector3(.2f, .2f, .1f);
         }
     }
     public void JobFilled()
