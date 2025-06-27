@@ -180,10 +180,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &677156968063799279
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,10 +314,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &679502592672311512
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,10 +448,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &698873203671317508
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,10 +582,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &724082932667160493
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,10 +716,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &1400369301578495788
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,10 +1012,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &2384706853997489110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,10 +1146,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &3370518600247634815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,8 +1296,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 0.5686275, g: 0.5686275, b: 0.6117647, a: 1}
@@ -1431,10 +1459,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &4548301609353880973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,10 +1647,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &4884701107899200794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,10 +1889,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &5594388340798964167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1911,7 @@ GameObject:
   - component: {fileID: 8895981683586721311}
   - component: {fileID: 2557896782611034342}
   - component: {fileID: 7967239472474715779}
+  - component: {fileID: 828424503899142625}
   m_Layer: 0
   m_Name: RollerSkatingRink
   m_TagString: Building
@@ -1974,10 +2015,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 3934416108961180423}
-  secondDoor: {fileID: 0}
   jobNodes: []
   waitingRooms: []
-  jobDuration: 10
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!114 &8895981683586721311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,6 +2057,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1336003167f904fec9c5e0d57f3d2c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &828424503899142625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594388340798964167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1a3c7300a5f4ecebc320d1b746e1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jobDuration: 15
 --- !u!1 &5731934484643551322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,10 +2196,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &5965740903299741198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,10 +2654,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &7363610808926657704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,10 +2842,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &7874410192771980507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2909,10 +2976,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!1 &8009652613578570385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,7 +3110,11 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 15
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0

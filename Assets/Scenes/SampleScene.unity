@@ -1021,6 +1021,10 @@ MonoBehaviour:
   slot4Position: {x: 0, y: 0, z: 0}
   slot5Filled: 0
   slot5Position: {x: 0, y: 0, z: 0}
+  slot6Filled: 0
+  slot6Position: {x: 0, y: 0, z: 0}
+  slot7Filled: 0
+  slot7Position: {x: 0, y: 0, z: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
   entrancePrefab: {fileID: 7855744068180812019, guid: bef91ee18a62f43e1b92666fb409a661, type: 3}
   entranceInstance: {fileID: 0}
@@ -1036,6 +1040,10 @@ MonoBehaviour:
   laserTagInstance: {fileID: 0}
   casinoPrefab: {fileID: 7855744068180812019, guid: 12eeaf850576b41efb90b3189be7c528, type: 3}
   casinoInstance: {fileID: 0}
+  restaurantPrefab: {fileID: 7855744068180812019, guid: e5b82069c8d8744658bdbc021b08c4e2, type: 3}
+  restaurantInstance: {fileID: 0}
+  bathroomPrefab: {fileID: 7855744068180812019, guid: 04b84c558c5e04ad1bb2003f3ea986ed, type: 3}
+  bathroomInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
   paths: 7
@@ -1131,6 +1139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placedPaths: []
   laserTagPlayers: []
+  hungryCutoff: 7
+  starvation: 14
+  bathroomCutoff: 0
+  gottaGoCuttoff: 24
 --- !u!4 &1990053728
 Transform:
   m_ObjectHideFlags: 0
@@ -1165,6 +1177,8 @@ MonoBehaviour:
   rollerRink: {fileID: 5594388340798964167, guid: f167367c7fdb8498f816ec6e4cc38bb7, type: 3}
   laserTag: {fileID: 433695772068429284, guid: f7c559363052349108d72797e2dc6799, type: 3}
   casino: {fileID: 5594388340798964167, guid: a44a4d263d91f4de2b4684634bdf7fe6, type: 3}
+  restaurant: {fileID: 5594388340798964167, guid: 1bcf1f941a4d24f3cba321649a91539c, type: 3}
+  bathroom: {fileID: 8014823283768476951, guid: 7f151f1fa695e4c428bcac65eedee2de, type: 3}
   bulldozerPreview: {fileID: 8014823283768476951, guid: 0b233ae4b6a37493fad44a75f4e2c948, type: 3}
   bulldozerPreviewInstance: {fileID: 0}
   entrancePreview: {fileID: 8014823283768476951, guid: 3ab0b0de5076e422f966c664f260ef7d, type: 3}
@@ -1179,6 +1193,10 @@ MonoBehaviour:
   laserTagPreviewInstance: {fileID: 0}
   casinoPreview: {fileID: 5594388340798964167, guid: c163be3d7e0f9439489aa958df34f532, type: 3}
   casinoPreviewInstance: {fileID: 0}
+  restaurantPreview: {fileID: 5594388340798964167, guid: 421b14e201d0340849af21a516765b73, type: 3}
+  restaurantPreviewInstance: {fileID: 0}
+  bathroomPreview: {fileID: 8014823283768476951, guid: 849eb0576566e47089f9533b33ca0038, type: 3}
+  bathroomPreviewInstance: {fileID: 0}
   buttonManager: {fileID: 1760549751}
   logic: {fileID: 0}
   grid: {fileID: 133848949}

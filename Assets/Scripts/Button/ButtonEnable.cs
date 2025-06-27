@@ -48,6 +48,20 @@ public class ButtonEnable : MonoBehaviour
             buttonManager.slot5Filled = true;
             currentSlot = 5;
         }
+        else if(!buttonManager.slot6Filled)
+        {
+            this.enabled = true;
+            transform.position = buttonManager.slot6Position;
+            buttonManager.slot6Filled = true;
+            currentSlot = 6;
+        }
+        else if(!buttonManager.slot7Filled)
+        {
+            this.enabled = true;
+            transform.position = buttonManager.slot7Position;
+            buttonManager.slot7Filled = true;
+            currentSlot = 7;
+        }
     }
     public void UpdatePosition()
     {
@@ -80,6 +94,20 @@ public class ButtonEnable : MonoBehaviour
                 buttonManager.slot5Filled = false;
                 buttonManager.slot4Filled = true;
                 currentSlot = 4;
+            }
+            if(!buttonManager.slot5Filled && currentSlot == 6)
+            {
+                transform.position = buttonManager.slot5Position;
+                buttonManager.slot6Filled = false;
+                buttonManager.slot5Filled = true;
+                currentSlot = 5;
+            }
+            if(!buttonManager.slot6Filled && currentSlot == 7)
+            {
+                transform.position = buttonManager.slot6Position;
+                buttonManager.slot7Filled = false;
+                buttonManager.slot6Filled = true;
+                currentSlot = 6;
             }
         }
         buttonManager.CheckSpawnPosition();

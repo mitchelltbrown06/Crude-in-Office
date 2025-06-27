@@ -49,7 +49,6 @@ public class npcLaserTag : MonoBehaviour
     }
     public void Shoot(GameObject opponent)
     {
-        Debug.Log("Shooting");
         lineRenderer.enabled = true;
         opponent.GetComponent<npcLaserTag>().GetHit();
         lineRenderer.SetPosition(0, transform.position);
@@ -62,6 +61,5 @@ public class npcLaserTag : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         lineRenderer.enabled = false;
-        Debug.Log("Stopping!");
     }
 }

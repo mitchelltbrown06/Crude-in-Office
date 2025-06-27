@@ -96,10 +96,10 @@ GameObject:
   - component: {fileID: 2979366622141842920}
   - component: {fileID: 1600693589193527024}
   - component: {fileID: 3741885115144785304}
-  - component: {fileID: 2972470297412743757}
   - component: {fileID: 7224164919486143669}
   - component: {fileID: 1100788906616336092}
   - component: {fileID: 7573279483951021839}
+  - component: {fileID: -5959714318521579113}
   m_Layer: 0
   m_Name: LaserTag
   m_TagString: Building
@@ -204,7 +204,9 @@ MonoBehaviour:
   door: {fileID: 3759947586523446520}
   jobNodes: []
   waitingRooms: []
-  jobDuration: 25
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!114 &3741885115144785304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,19 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a4643a70d0a47f5821a83d1d145f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2972470297412743757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433695772068429284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e36da715608d740acb70772b317d59c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waitingRoomsOpen: 0
 --- !u!114 &7224164919486143669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,9 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d809adc4ff743a99e889271ece410c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerStarted: 0
-  timer: 0
-  timerDuration: 30
   logic: {fileID: 0}
 --- !u!114 &7573279483951021839
 MonoBehaviour:
@@ -271,6 +257,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitingRoomsOpen: 0
+  waitingRooms: []
+  jobNodes: []
+  timerStarted: 0
+  timer: 0
+  timerDuration: 30
+--- !u!114 &-5959714318521579113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433695772068429284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1a3c7300a5f4ecebc320d1b746e1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jobDuration: 100
 --- !u!1 &896196960061961736
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +306,8 @@ Transform:
   m_LocalPosition: {x: -3.4199996, y: -1.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 7462329601870667101}
   m_Father: {fileID: 8366530635388433321}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8658560061782289659
@@ -343,9 +348,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -393,7 +398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &1041665096160275149
 GameObject:
@@ -467,9 +474,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -580,9 +587,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -635,10 +642,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &5885047383155187595
 Animator:
   serializedVersion: 5
@@ -733,9 +744,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -783,7 +794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &1334188738376927183
 GameObject:
@@ -858,9 +871,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -908,7 +921,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &1364987368818786488
 GameObject:
@@ -982,9 +997,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1095,9 +1110,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1145,7 +1160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &2154325685100617478
 GameObject:
@@ -1219,9 +1236,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1332,9 +1349,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1387,10 +1404,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &5931148003661621198
 Animator:
   serializedVersion: 5
@@ -1444,7 +1465,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6549573052819478893}
-  - {fileID: 7462329601870667101}
   m_Father: {fileID: 601097727311382570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4875873452498170549
@@ -1598,9 +1618,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1653,10 +1673,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &7335188372422646344
 Animator:
   serializedVersion: 5
@@ -1751,9 +1775,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1806,10 +1830,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &3483306930344359845
 Animator:
   serializedVersion: 5
@@ -1919,8 +1947,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 0.5686275, g: 0.5686275, b: 0.6117647, a: 1}
@@ -2113,9 +2141,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2226,9 +2254,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2276,7 +2304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &6185934114925106957
 GameObject:
@@ -2351,9 +2381,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2401,7 +2431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &6264402411319190823
 GameObject:
@@ -2559,9 +2591,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2672,9 +2704,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2722,7 +2754,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0
 --- !u!1 &7054374612191506080
 GameObject:
@@ -2852,10 +2886,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &9091203873119106261
 Animator:
   serializedVersion: 5
@@ -3118,9 +3156,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3173,10 +3211,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &3675052382565171714
 Animator:
   serializedVersion: 5
@@ -3311,11 +3353,11 @@ Transform:
   m_GameObject: {fileID: 8704384299055445113}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 1.31, z: 0}
+  m_LocalPosition: {x: 3.4899998, y: 2.4799998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 8366530635388433321}
+  m_Father: {fileID: 6549573052819478893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5029604516107552340
 SpriteRenderer:
@@ -3355,9 +3397,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3410,10 +3452,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &4643773746275538413
 Animator:
   serializedVersion: 5
@@ -3507,9 +3553,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3619,9 +3665,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3732,9 +3778,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3787,10 +3833,14 @@ MonoBehaviour:
   employee: {fileID: 0}
   jobLength: 5
   jobTimer: 0
+  timerStarted: 0
   occupied: 0
   door: {fileID: 0}
   logic: {fileID: 0}
   grid: {fileID: 0}
+  adultsOnly: 0
+  hungryOnly: 0
+  bathroomOnly: 0
 --- !u!95 &5849909028538957534
 Animator:
   serializedVersion: 5
@@ -3885,9 +3935,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1958472443
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayerID: -737880409
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 843fa4334fb0341ae817f70abb7ef7dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3935,5 +3985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919e6f9fc1e954ad4814380c1a00edb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobNode: {fileID: 0}
   employee: {fileID: 0}
+  controller: {fileID: 0}
   customerWaiting: 0

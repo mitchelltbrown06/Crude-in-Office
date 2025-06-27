@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LaserTagScript : MonoBehaviour
 {
-    public bool timerStarted;
-    public float timer;
-    public float timerDuration;
 
     public LogicScript logic;
 
@@ -27,32 +24,16 @@ public class LaserTagScript : MonoBehaviour
             }
             if(jobNode.GetComponent<JobScript>().occupied == false)
             {
-                jobNode.transform.position = new Vector3(transform.position.x + .5f, transform.position.y + .1f, 0);
+                jobNode.transform.position = transform.position + transform.right * .5f + transform.up * .1f;
                 jobNode.GetComponent<Animator>().SetTrigger("StopAnimation");
             }
         }
         if(GetComponent<ControlWaitingRooms>().waitingRoomsOpen == true)
         {
-            timerStarted = true;
             foreach(GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
             {
                 jobNode.GetComponent<JobScript>().employee.GetComponent<npcStats>().laserTag = true;
                 logic.laserTagPlayers.Add(jobNode.GetComponent<JobScript>().employee);
-            }
-        }
-        if(timerStarted)
-        {
-            timer += Time.deltaTime;
-            if(timer > timerDuration)
-            {
-                /*
-                foreach(GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
-                {
-                    jobNode.GetComponent<JobScript>().jobTimer = 100;
-                }
-                */
-                timerStarted = false;
-                timer = 0;
             }
         }
     }

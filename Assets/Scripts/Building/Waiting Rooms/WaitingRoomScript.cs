@@ -8,7 +8,7 @@ public class WaitingRoomScript : MonoBehaviour
     public JobScript jobNode;
     public GameObject employee;
 
-    private ControlWaitingRooms controller;
+    public ControlWaitingRooms controller;
     public bool customerWaiting;
 
     private float previousSpeed;
@@ -16,7 +16,6 @@ public class WaitingRoomScript : MonoBehaviour
     void Start()
     {
         logic = GameObject.FindObjectOfType<LogicScript>();
-        controller = transform.root.GetComponent<ControlWaitingRooms>();
         jobNode = transform.GetChild(0).GetComponent<JobScript>();
     }
     // Update is called once per frame

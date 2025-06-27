@@ -46,12 +46,8 @@ public class npcController : MonoBehaviour
         {
             positionOffset = Random.Range(-.2f, .2f);
         }
-        
-        if(nextNode != null && nextNode.connections.Count == 0)
-        {
-            GetComponent<KillScript>().Kill(); 
-        }
-        if(nextNode == null && Vector2.Distance(transform.position, entrance.transform.position) > .1f)
+        if(logic.FindClosestTile(transform.position).GetComponent<Node>().onPath == false
+        && logic.FindClosestTile(transform.position).GetComponent<Node>().onBuilding == false)
         {
             GetComponent<KillScript>().Kill();
         }

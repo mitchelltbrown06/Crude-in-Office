@@ -9,13 +9,15 @@ public class BuildingScript : MonoBehaviour
     public List<GameObject> jobNodes;
     public List<GameObject> waitingRooms;
 
-    public float jobDuration;
+    public bool adultsOnly;
+    public bool hungryOnly;
+    public bool bathroomOnly;
 
     void Start()
     {
         FindJobNodes();
         FindWaitingRooms();
-        SetJobTimers();
+        SetRestrictions();
     }
 
     // Update is called once per frame
@@ -23,14 +25,6 @@ public class BuildingScript : MonoBehaviour
     {
         UpdateOpenJob();
         SetDoor();
-    }
-
-    void SetJobTimers()
-    {
-        foreach(GameObject jobNode in jobNodes)
-        {
-            jobNode.GetComponent<JobScript>().jobLength = jobDuration;
-        }
     }
 
     void UpdateOpenJob()
@@ -64,6 +58,21 @@ public class BuildingScript : MonoBehaviour
         foreach(GameObject jobNode in jobNodes)
         {
             jobNode.GetComponent<JobScript>().door = door.GetComponent<DoorScript>();
+        }
+    }
+    void SetRestrictions()
+    {
+        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        {
+            jobNode.adultsOnly = adultsOnly;
+        }
+        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        {
+            jobNode.hungryOnly = hungryOnly;
+        }
+        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        {
+            jobNode.bathroomOnly = bathroomOnly;
         }
     }
 }

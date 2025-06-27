@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3934416108961180423}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7099133361487133127}
   - component: {fileID: 1092899971149948455}
   m_Layer: 0
-  m_Name: LaserTagPreview
+  m_Name: Restaurant
   m_TagString: BuildingPreview
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: -1958472443
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e4b5355e7d73c485b814c04c3d7dd77e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1123af397793445ceba608983b0ebcf0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.64705884}
   m_FlipX: 0
   m_FlipY: 0

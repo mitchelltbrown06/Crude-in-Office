@@ -7,6 +7,11 @@ public class LogicScript : MonoBehaviour
 {
     public List<GameObject> placedPaths;
     public List<GameObject> laserTagPlayers;
+
+    public float hungryCutoff;
+    public float starvation;
+    public float bathroomCutoff;
+    public float gottaGoCuttoff;
     
     public Node FindNearestNode(Vector2 position)
     {
@@ -166,5 +171,14 @@ public class LogicScript : MonoBehaviour
             }
         }
         return foundCustomer;
+    }
+    public bool WeightedCoinToss(float weight)
+    {
+        float randomValue = Random.Range(0f,10f);
+        if(randomValue < weight)
+        {
+            return true;
+        }
+        return false;
     }
 }

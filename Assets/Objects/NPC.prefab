@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7684499530409351101}
   - component: {fileID: -2170953337034402202}
   - component: {fileID: 4120817503771639027}
+  - component: {fileID: -5805193144590752120}
   m_Layer: 7
   m_Name: NPC
   m_TagString: Entity
@@ -126,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b67e74e6453a43a18fdde11cb87ab4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tombstone: {fileID: 3724562669782600044, guid: 382682820d7184447b524b8cf1545d19, type: 3}
 --- !u!114 &-779224150779645696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,8 +156,14 @@ MonoBehaviour:
   globalStats: {fileID: 0}
   money: 20
   speed: 0.3
+  hunger: 0
+  bathroom: 0
   rollerSkates: 0
   laserTag: 0
+  hungerMultiplier: 0.1
+  bathroomMultiplier: 0.1
+  adult: 0
+  logic: {fileID: 0}
 --- !u!114 &-2170953337034402202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,3 +285,15 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-5805193144590752120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747605592038468128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6abe2381ac878409c9270a06f1b594c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

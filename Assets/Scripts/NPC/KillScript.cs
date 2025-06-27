@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class KillScript : MonoBehaviour
 {
+    public GameObject tombstone;
     public void Kill()
     {
         if(GetComponent<npcStats>().laserTag == true)
         {
             GameObject.FindObjectOfType<LogicScript>().laserTagPlayers.Remove(gameObject);
         }
-        if(transform.parent != null)
-        {
-            Destroy(transform.parent.gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
+        Instantiate(tombstone, transform.position, transform.rotation);
+        Destroy(transform.root.gameObject);
     }
 }

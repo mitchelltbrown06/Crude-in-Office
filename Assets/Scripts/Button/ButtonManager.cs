@@ -30,6 +30,12 @@ public class ButtonManager : MonoBehaviour
     public bool slot5Filled = false;
     public Vector3 slot5Position;
 
+    public bool slot6Filled = false;
+    public Vector3 slot6Position;
+
+    public bool slot7Filled = false;
+    public Vector3 slot7Position;
+
     public Vector3 spawnPosition;
 
     //buttons
@@ -54,6 +60,12 @@ public class ButtonManager : MonoBehaviour
     public Button casinoPrefab;
     public Button casinoInstance;
 
+    public Button restaurantPrefab;
+    public Button restaurantInstance;
+
+    public Button bathroomPrefab;
+    public Button bathroomInstance;
+
     //button specifics
     public bool entrancePlaced = false;
     public bool exitPlaced = false;
@@ -66,6 +78,8 @@ public class ButtonManager : MonoBehaviour
         slot3Position = new Vector3(265, 55, 0);
         slot4Position = new Vector3(370, 55, 0);
         slot5Position = new Vector3(475, 55, 0);
+        slot6Position = new Vector3(580, 55, 0);
+        slot7Position = new Vector3(685, 55, 0);
 
         slotZPosition = new Vector3(784, 55, 0);
 
@@ -150,6 +164,18 @@ public class ButtonManager : MonoBehaviour
         Enable(casinoInstance);
         casinoInstance.onClick.AddListener(CasinoOnClick);
     }
+    public void SpawnRestaurant()
+    {
+        restaurantInstance = Instantiate(restaurantPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(restaurantInstance);
+        restaurantInstance.onClick.AddListener(RestaurantOnClick);
+    }
+    public void SpawnBathroom()
+    {
+        bathroomInstance = Instantiate(bathroomPrefab, spawnPosition, Quaternion.identity, canvas.transform);
+        Enable(bathroomInstance);
+        bathroomInstance.onClick.AddListener(BathroomOnClick);
+    }
 
     //OnClicks
     void EntranceOnClick()
@@ -180,6 +206,14 @@ public class ButtonManager : MonoBehaviour
     {
         Equip("Casino");
     }
+    void RestaurantOnClick()
+    {
+        Equip("Restaurant");
+    }
+    void BathroomOnClick()
+    {
+        Equip("Bathroom");
+    }
     public void CheckSpawnPosition()
     {
         if (!slot1Filled)
@@ -201,6 +235,10 @@ public class ButtonManager : MonoBehaviour
             else if(!slot5Filled)
             {
                 spawnPosition = slot5Position;
+            }
+            else if(!slot6Filled)
+            {
+                spawnPosition = slot6Position;
             }
     }
     void Disable(Button instance)

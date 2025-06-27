@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 765964671067053681}
   - component: {fileID: 6669467349577525196}
   m_Layer: 0
-  m_Name: ArcadePreview
+  m_Name: Arcade
   m_TagString: BuildingPreview
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
