@@ -9,10 +9,9 @@ public class ControlWaitingRooms : MonoBehaviour
 
     public List<GameObject> waitingRooms;
     public List<GameObject> jobNodes;
-
-    public bool timerStarted;
-    public float timer;
     public float timerDuration;
+    Coroutine startTimer;
+    Coroutine closeWaitingRoomsTimer;
 
     void Start()
     {
@@ -21,59 +20,47 @@ public class ControlWaitingRooms : MonoBehaviour
         FindWaitingRooms();
         FindJobNodes();
     }
-    void Update()
-    {
-        CheckOccupancy();
-        IncreaseTimer();
-    }
-    void CheckOccupancy()
+    public void CheckOccupancy()
     {
         //go through all the job nodes. If one of them isn't occupied, end the function
         //if all the job nodes are occupied, open up the waiting rooms.
-        if(waitingRoomsOpen == false)
+        if (waitingRoomsOpen == false)
         {
-            foreach(GameObject jobNode in jobNodes)
+            foreach (GameObject jobNode in jobNodes)
             {
-                if(!jobNode.GetComponent<JobScript>().occupied)
+                if (!jobNode.GetComponent<JobScript>().occupied)
                 {
                     return;
                 }
             }
-            foreach(GameObject waitingRoom in waitingRooms)
+            foreach (GameObject waitingRoom in waitingRooms)
             {
-                if(waitingRoom.GetComponent<WaitingRoomScript>().customerWaiting == false)
+                if (waitingRoom.GetComponent<WaitingRoomScript>().customerWaiting == false)
                 {
                     return;
                 }
             }
             OpenWaitingRooms();
         }
-        //go through all the job nodes. If one of them is occupied, end the function
-        //if all the job nodes are unoccupied, close the waiting rooms.
-        else
-        {
-            foreach(GameObject jobNode in jobNodes)
-            {
-                if(jobNode.GetComponent<JobScript>().jobTimer == 0)
-                {
-                    return;
-                }
-            }
-            CloseWaitingRooms();
-        }
     }
     void OpenWaitingRooms()
     {
         waitingRoomsOpen = true;
-        timerStarted = true;
+        startTimer = StartCoroutine(StartTimer());
+        closeWaitingRoomsTimer = StartCoroutine(CloseWaitingRoomsTimer());
     }
     void CloseWaitingRooms()
     {
         waitingRoomsOpen = false;
+        foreach (GameObject jobNode in jobNodes)
+        {
+            jobNode.GetComponent<JobScript>().EndJob();
+            jobNode.GetComponentInParent<WaitingRoomScript>().employee = null;
+        }
     }
     void FindWaitingRooms()
     {
-        foreach(WaitingRoomScript waitingRoom in GetComponentsInChildren<WaitingRoomScript>())
+        foreach (WaitingRoomScript waitingRoom in GetComponentsInChildren<WaitingRoomScript>())
         {
             waitingRooms.Add(waitingRoom.gameObject);
             waitingRoom.controller = this;
@@ -81,25 +68,18 @@ public class ControlWaitingRooms : MonoBehaviour
     }
     void FindJobNodes()
     {
-        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        foreach (JobScript jobNode in GetComponentsInChildren<JobScript>())
         {
             jobNodes.Add(jobNode.gameObject);
         }
     }
-    void IncreaseTimer()
+    IEnumerator StartTimer()
     {
-        if(timerStarted == true)
-        {
-            timer += Time.deltaTime;
-            if(timer > timerDuration)
-            {
-                foreach(GameObject jobNode in jobNodes)
-                {
-                    jobNode.GetComponent<JobScript>().jobTimer = jobNode.GetComponent<JobScript>().jobLength;
-                }
-                timerStarted = false;
-                timer = 0;
-            }
-        }
+        yield return new WaitForSeconds(timerDuration);
+        CloseWaitingRooms();
+    }
+    IEnumerator CloseWaitingRoomsTimer()
+    {
+        yield return new WaitForSeconds(.01f);
     }
 }

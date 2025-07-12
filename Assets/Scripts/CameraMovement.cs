@@ -36,9 +36,5 @@ public class CameraMovement : MonoBehaviour
         {
             transform.position =  new Vector3(transform.position.x + walkSpeed * Time.deltaTime, transform.position.y, transform.position.z);
         }
-        if(!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
-        {
-            //rb.velocity = new Vector2(0,0);
-        }
     }
 }

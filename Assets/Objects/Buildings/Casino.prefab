@@ -101,7 +101,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5406752440679831810}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -130,11 +129,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &364748111606745240
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +182,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5122474090296974330}
   - {fileID: 4132389055480040866}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -221,7 +218,7 @@ Transform:
   m_GameObject: {fileID: 940719656786071300}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0034901884, y: -0.06336249, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -294,7 +291,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 1476400992025868244}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -323,11 +319,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &1045723347446793992
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +374,6 @@ MonoBehaviour:
   - {fileID: 3115557211682069849}
   - {fileID: 6506173723237510151}
   - {fileID: 5406752440679831810}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -416,7 +410,7 @@ Transform:
   m_GameObject: {fileID: 1411249998881635936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08787614, y: -0.15016109, z: 0.00036821954}
+  m_LocalPosition: {x: 0.094999984, y: -0.15179047, z: 0.00036821954}
   m_LocalScale: {x: 0.062060643, y: 0.06206063, z: 0.06206063}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -430,7 +424,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411249998881635936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -491,7 +485,6 @@ MonoBehaviour:
   connections:
   - {fileID: 7437538160199141678}
   - {fileID: 3962531067805846770}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -544,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 1428501333352072380}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176242, y: 0.062028877, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -617,7 +610,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5122474090296974330}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -646,11 +638,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &1569347003176383574
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +684,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569347003176383574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -754,7 +745,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5122474090296974330}
   - {fileID: 8114981851811974790}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -807,7 +797,7 @@ Transform:
   m_GameObject: {fileID: 1643668259049771669}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.060757034, y: 0.045915928, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -880,7 +870,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5472418388946528809}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -909,11 +898,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &2657582856336855305
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +944,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2657582856336855305}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1017,7 +1005,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1476400992025868244}
   - {fileID: 2437160755902393574}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1093,7 +1080,6 @@ MonoBehaviour:
   - {fileID: 5406752440679831810}
   - {fileID: 8523691552860444825}
   - {fileID: 5122474090296974330}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1144,7 +1130,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3202735760877973383}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1205,7 +1191,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5472418388946528809}
   - {fileID: 1227106019967448666}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1331,7 +1316,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 1239063639404413625}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1360,11 +1344,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &3934416108961180423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,10 +1394,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d175eb29e6d55438cabafe0395f81a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcs: []
   grid: {fileID: 0}
   openJob: {fileID: 0}
   rejectionList: []
+  pathConnections: []
 --- !u!212 &1863121939358673550
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1488,7 +1471,6 @@ MonoBehaviour:
   - {fileID: 5078511628428440161}
   - {fileID: 9060555854615766910}
   - {fileID: 1239063639404413625}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1525,7 +1507,7 @@ Transform:
   m_GameObject: {fileID: 4008362507478017459}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478841, y: -0.026254684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1598,7 +1580,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 3962531067805846770}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1627,11 +1608,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &4080090571806296602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1684,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -737880409
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: c6741b03bd5474cc58fdb692eed943db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1817,7 +1797,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5406752440679831810}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1846,11 +1825,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &5594388340798964167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,6 +1841,7 @@ GameObject:
   - component: {fileID: 4535489901868570906}
   - component: {fileID: 8895981683586721311}
   - component: {fileID: -8380320729698010994}
+  - component: {fileID: 6492819122827242891}
   m_Layer: 0
   m_Name: Casino
   m_TagString: Building
@@ -1885,8 +1864,8 @@ Transform:
   m_Children:
   - {fileID: 4677032491050149336}
   - {fileID: 1516786758714170959}
-  - {fileID: 2197790573068797933}
   - {fileID: 8557953226234155820}
+  - {fileID: 2197790573068797933}
   - {fileID: 7912295408897520518}
   - {fileID: 3512524297572744608}
   m_Father: {fileID: 0}
@@ -1906,6 +1885,7 @@ MonoBehaviour:
   door: {fileID: 3934416108961180423}
   jobNodes: []
   waitingRooms: []
+  logic: {fileID: 0}
   adultsOnly: 1
   hungryOnly: 0
   bathroomOnly: 0
@@ -1941,6 +1921,19 @@ MonoBehaviour:
   winner: {fileID: 0}
   winnerSelected: 0
   jackpot: -20
+--- !u!114 &6492819122827242891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594388340798964167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d02c2af8f5bd4799a6631c23891a9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jobPrice: 10
 --- !u!1 &5609586213630174823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,7 +2035,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 1239063639404413625}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2071,11 +2063,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &5871268358315021113
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,7 +2095,7 @@ Transform:
   m_GameObject: {fileID: 5871268358315021113}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.28983918, y: 0.8610406, z: 0}
+  m_LocalPosition: {x: -0.26164156, y: 0.9051192, z: 0}
   m_LocalScale: {x: 0.2770929, y: 0.4012305, z: 0.4012305}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2118,7 +2109,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5871268358315021113}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2179,7 +2170,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5406752440679831810}
   - {fileID: 586423488868810005}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2339,8 +2329,8 @@ Transform:
   m_GameObject: {fileID: 7323663086515103838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176232, y: 0.10985852, z: 0}
-  m_LocalScale: {x: 1.611327, y: 1.611327, z: 1.611327}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6113269, y: 1.6113269, z: 1.6113269}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6243114137303450125}
@@ -2412,7 +2402,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5406752440679831810}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2441,11 +2430,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &7581647273587428782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,7 +2485,6 @@ MonoBehaviour:
   - {fileID: 1476400992025868244}
   - {fileID: 47739047558941248}
   - {fileID: 5472418388946528809}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2555,7 +2542,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5406752440679831810}
   - {fileID: 7918145206737561642}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2592,8 +2578,8 @@ Transform:
   m_GameObject: {fileID: 8606304711190393086}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.052055914, y: -0.013656032, z: 0}
-  m_LocalScale: {x: 1.611327, y: 1.6113272, z: 1.6113272}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6113269, y: 1.611327, z: 1.611327}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5459434471568709829}
@@ -2665,7 +2651,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5406752440679831810}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2694,11 +2679,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &8948984808183883227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2727,7 +2711,7 @@ Transform:
   m_GameObject: {fileID: 8948984808183883227}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.81631565, y: 0.367527, z: 0}
+  m_LocalPosition: {x: -0.8018913, y: 0.3620478, z: 0}
   m_LocalScale: {x: 0.2770929, y: 0.40123048, z: 0.40123048}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2741,7 +2725,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8948984808183883227}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2802,7 +2786,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5406752440679831810}
   - {fileID: 8063337235375266856}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0

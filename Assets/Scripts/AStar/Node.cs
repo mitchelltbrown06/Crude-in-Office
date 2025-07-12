@@ -6,8 +6,6 @@ public class Node : MonoBehaviour
 {
     public Node cameFrom;
     public List<Node> connections;
-
-    public GameObject[] allGridTiles;
     public GridScript grid;
     public LogicScript logic;
 
@@ -18,13 +16,13 @@ public class Node : MonoBehaviour
     public bool onEnemy = false;
     public bool onBuilding = false;
     public bool onEntranceOrExit = false;
-    
+
     void Start()
     {
-
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridScript>();
 
+        logic.nodesInScene.Add(this);
     }
     public float FScore()
     {
@@ -32,17 +30,20 @@ public class Node : MonoBehaviour
     }
     void Update()
     {
-        onPath = OnPath();
-        onEnemy = OnEnemy();
-
-        if(connections.Count > 0)
+        if (connections.Count > 0)
         {
-            for (int i = 0; i < connections.Count; i++)
+            foreach (Node node in connections)
             {
-                if (connections[i] != null)
+                if (node == null)
                 {
-                    Debug.DrawLine(this.transform.position, connections[i].transform.position, Color.red);
+                    connections.Remove(node);
+                    return;
                 }
+                else
+                {
+                    Debug.DrawLine(this.transform.position, node.transform.position, Color.red);
+                }
+               
             }
         }
     }
@@ -53,20 +54,6 @@ public class Node : MonoBehaviour
         foreach(GameObject path in paths)
         {
             if (Vector2.Distance(path.transform.position, transform.position) < grid.tileSize / 2)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    public bool OnEnemy()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach(GameObject enemy in enemies)
-        {
-            if (Vector2.Distance(enemy.transform.position, transform.position) < grid.tileSize / 2)
             {
                 return true;
             }

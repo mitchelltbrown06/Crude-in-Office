@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 220273185837844556}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0034901884, y: -0.06336249, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -101,7 +101,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 2551878804037113785}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -126,15 +125,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &303778706393603300
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +161,7 @@ Transform:
   m_GameObject: {fileID: 303778706393603300}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176242, y: 0.062028877, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -236,7 +234,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 1009166039172879784}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -261,15 +258,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &359372220572045547
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 359372220572045547}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.019307818, y: 0.86104065, z: 0}
+  m_LocalPosition: {x: -0.019307818, y: 0.91, z: 0}
   m_LocalScale: {x: 0.18214779, y: 0.40123054, z: 0.40123054}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -373,7 +369,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2590208260113878346}
   - {fileID: 6838803242431823546}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -501,7 +496,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1001310053031042957}
   - {fileID: 2590208260113878346}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -629,7 +623,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2590208260113878346}
   - {fileID: 3932601151035274194}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -760,9 +753,7 @@ MonoBehaviour:
   waitingRoomsOpen: 0
   waitingRooms: []
   jobNodes: []
-  timerStarted: 0
-  timer: 0
-  timerDuration: 15
+  timerDuration: 30
 --- !u!1 &770970713847835828
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +782,7 @@ Transform:
   m_GameObject: {fileID: 770970713847835828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.359559, y: -0.9364723, z: 0}
+  m_LocalPosition: {x: 0.326, y: -0.899, z: 0}
   m_LocalScale: {x: 0.18214773, y: 0.40123045, z: 0.40123045}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -866,7 +857,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2244991609124939717}
   - {fileID: 8043167260142643169}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1003,7 +993,7 @@ Transform:
   m_GameObject: {fileID: 990930672438388678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0099999355, y: 0.10999991, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113269, y: 1.6113269, z: 1.6113268}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1076,7 +1066,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 7382416310383269940}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1101,15 +1090,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &1238287783632887531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1126,7 @@ Transform:
   m_GameObject: {fileID: 1238287783632887531}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176242, y: 0.062028877, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1211,7 +1199,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 7289976319458266956}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1236,15 +1223,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &1288409227101371028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1284,6 @@ MonoBehaviour:
   - {fileID: 5792012356641438018}
   - {fileID: 7382416310383269940}
   - {fileID: 6149456522050424956}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1335,7 +1320,7 @@ Transform:
   m_GameObject: {fileID: 1347324882686085911}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0099999355, y: 0.10999991, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113269, y: 1.6113269, z: 1.6113268}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1408,7 +1393,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5620702775291172926}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1433,15 +1417,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &1401979240244084631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1528,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2590208260113878346}
   - {fileID: 1392862325679384398}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1598,7 +1580,7 @@ Transform:
   m_GameObject: {fileID: 1478383512989264228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8250969, y: 0.050002564, z: 0}
+  m_LocalPosition: {x: -0.79, y: 0.050002564, z: 0}
   m_LocalScale: {x: 0.28199437, y: 0.40125063, z: 0.4012305}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1673,7 +1655,6 @@ MonoBehaviour:
   connections:
   - {fileID: 42757610276964624}
   - {fileID: 3879635169440994645}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1726,7 +1707,7 @@ Transform:
   m_GameObject: {fileID: 1486366380687952746}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0034901884, y: -0.06336249, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1799,7 +1780,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 7663430833834107995}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1824,15 +1804,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &1931837605753763028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,8 +1861,6 @@ MonoBehaviour:
   - {fileID: 6603846666904341484}
   - {fileID: 7663430833834107995}
   - {fileID: 7289976319458266956}
-  allGridTiles:
-  - {fileID: 0}
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1920,7 +1897,7 @@ Transform:
   m_GameObject: {fileID: 1970736555725973486}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.009999894, y: 0.10999994, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113269, y: 1.6113269, z: 1.6113269}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1993,7 +1970,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 1333200123539788128}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2018,15 +1994,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &2689933649839547328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2030,7 @@ Transform:
   m_GameObject: {fileID: 2689933649839547328}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7619484, y: -0.020062778, z: 0}
+  m_LocalPosition: {x: 0.7619484, y: 0.05, z: 0}
   m_LocalScale: {x: 0.28199437, y: 0.40125063, z: 0.4012305}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2130,7 +2105,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5322349098379395537}
   - {fileID: 8870706013418972776}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2155,6 +2129,116 @@ MonoBehaviour:
   employee: {fileID: 0}
   controller: {fileID: 0}
   customerWaiting: 0
+--- !u!1 &2710525187401931649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4361919516305658565}
+  - component: {fileID: 4911602925356041345}
+  - component: {fileID: 1326615655699355551}
+  m_Layer: 0
+  m_Name: Queue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4361919516305658565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710525187401931649}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0007, y: 0.8142, z: 0}
+  m_LocalScale: {x: 1.8677375, y: 0.24996713, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7099133361487133127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4911602925356041345
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710525187401931649}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1326615655699355551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710525187401931649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 083b68c2bc4e144f1a5d19cfc7c1b68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  queueOpen: 0
+  maxCustomers: 8
+  nodePrefab: {fileID: 361989636522234013, guid: 22cf133df20e6430cb047f930a0b2adc, type: 3}
+  logic: {fileID: 0}
+  grid: {fileID: 0}
+  employee: {fileID: 0}
+  building: {fileID: 0}
+  nodeConnections:
+  - {fileID: 9188404886206515389}
+  - {fileID: 6352769517699088161}
+  price: 0
+  door: {fileID: 0}
+  moveRate: 5
 --- !u!1 &3347755979484291762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,7 +2342,6 @@ MonoBehaviour:
   connections:
   - {fileID: 8828878664535616824}
   - {fileID: 2590208260113878346}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2311,7 +2394,7 @@ Transform:
   m_GameObject: {fileID: 3658010365858908595}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176232, y: 0.10985852, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.611327, z: 1.611327}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2384,7 +2467,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 3607877048675566861}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2409,15 +2491,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &3934416108961180423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2464,10 +2545,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d175eb29e6d55438cabafe0395f81a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcs: []
   grid: {fileID: 0}
   openJob: {fileID: 0}
   rejectionList: []
+  pathConnections: []
 --- !u!212 &1863121939358673550
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2536,7 +2617,6 @@ MonoBehaviour:
   connections:
   - {fileID: 9188404886206515389}
   - {fileID: 6352769517699088161}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2594,7 +2674,6 @@ MonoBehaviour:
   - {fileID: 6603846666904341484}
   - {fileID: 4146732342993841554}
   - {fileID: 4051718522047060770}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2651,7 +2730,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5406752440679831810}
   - {fileID: 3879635169440994645}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2688,7 +2766,7 @@ Transform:
   m_GameObject: {fileID: 4518562102525739509}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176242, y: 0.062028877, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2761,7 +2839,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 4051718522047060770}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2786,15 +2863,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &4545915485946541168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2849,7 +2925,6 @@ MonoBehaviour:
   - {fileID: 5620702775291172926}
   - {fileID: 4899724948503077888}
   - {fileID: 1502767020287708326}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2886,7 +2961,7 @@ Transform:
   m_GameObject: {fileID: 4632307090680035474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478836, y: -0.026254702, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113269, y: 1.6113274, z: 1.6113273}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2959,7 +3034,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 1502767020287708326}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2984,15 +3058,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &4848012035363881010
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,7 +3094,7 @@ Transform:
   m_GameObject: {fileID: 4848012035363881010}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24420685, y: 0.86108387, z: 0}
+  m_LocalPosition: {x: 0.24420685, y: 0.91, z: 0}
   m_LocalScale: {x: 0.28199437, y: 0.4012507, z: 0.40123057}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3096,7 +3169,6 @@ MonoBehaviour:
   connections:
   - {fileID: 3879635169440994645}
   - {fileID: 7321387222668556389}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -3227,9 +3299,7 @@ MonoBehaviour:
   waitingRoomsOpen: 0
   waitingRooms: []
   jobNodes: []
-  timerStarted: 0
-  timer: 0
-  timerDuration: 15
+  timerDuration: 30
 --- !u!1 &5109450695471644703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,7 +3328,7 @@ Transform:
   m_GameObject: {fileID: 5109450695471644703}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01930782, y: -0.9364725, z: 0}
+  m_LocalPosition: {x: 0, y: -0.89, z: 0}
   m_LocalScale: {x: 0.18214773, y: 0.40123045, z: 0.40123045}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3333,7 +3403,6 @@ MonoBehaviour:
   connections:
   - {fileID: 8870706013418972776}
   - {fileID: 1311215116517157914}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -3408,7 +3477,6 @@ MonoBehaviour:
   - {fileID: 6603846666904341484}
   - {fileID: 2551878804037113785}
   - {fileID: 9156735098972188641}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -3467,6 +3535,7 @@ Transform:
   - {fileID: 462047260268280773}
   - {fileID: 7189396056781442995}
   - {fileID: 4574581179083928730}
+  - {fileID: 4361919516305658565}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1092899971149948455
@@ -3536,6 +3605,7 @@ MonoBehaviour:
   door: {fileID: 3934416108961180423}
   jobNodes: []
   waitingRooms: []
+  logic: {fileID: 0}
   adultsOnly: 0
   hungryOnly: 1
   bathroomOnly: 0
@@ -3563,7 +3633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1a3c7300a5f4ecebc320d1b746e1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobDuration: 100
+  jobDuration: 10000
 --- !u!114 &4229735993397716179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3590,6 +3660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fedCustomers: []
+  tablesToFeed: []
 --- !u!1 &6297591548435896915
 GameObject:
   m_ObjectHideFlags: 0
@@ -3618,7 +3689,7 @@ Transform:
   m_GameObject: {fileID: 6297591548435896915}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478841, y: -0.026254684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3691,7 +3762,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 8369921521505351557}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -3716,15 +3786,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &6304831547446605903
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,7 +3822,7 @@ Transform:
   m_GameObject: {fileID: 6304831547446605903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.71, y: 0.05, z: 0}
+  m_LocalPosition: {x: -0.68, y: 0.03, z: 0}
   m_LocalScale: {x: 0.18214779, y: 0.40123048, z: 0.40123048}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3828,7 +3897,6 @@ MonoBehaviour:
   connections:
   - {fileID: 4014611193632106775}
   - {fileID: 3879635169440994645}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -3881,7 +3949,7 @@ Transform:
   m_GameObject: {fileID: 6311066517568639117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24420685, y: -0.9365195, z: 0}
+  m_LocalPosition: {x: 0.26, y: -0.89, z: 0}
   m_LocalScale: {x: 0.28199428, y: 0.40125057, z: 0.40123045}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3956,7 +4024,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2770047845471433475}
   - {fileID: 80019176280595943}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4084,7 +4151,6 @@ MonoBehaviour:
   connections:
   - {fileID: 8870706013418972776}
   - {fileID: 4212972711557361411}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4137,7 +4203,7 @@ Transform:
   m_GameObject: {fileID: 6378486814741915927}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478841, y: -0.026254684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4210,7 +4276,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 6563113032735629465}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4235,15 +4300,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &6458281235241686299
 GameObject:
   m_ObjectHideFlags: 0
@@ -4294,7 +4358,6 @@ MonoBehaviour:
   - {fileID: 8870706013418972776}
   - {fileID: 2770047845471433475}
   - {fileID: 7090713679031564100}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4575,7 +4638,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2770047845471433475}
   - {fileID: 8589824013982762341}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4628,7 +4690,7 @@ Transform:
   m_GameObject: {fileID: 6766889947857056600}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176232, y: 0.10985852, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.611327, z: 1.611327}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4701,7 +4763,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5792012356641438018}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4726,15 +4787,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &6824155898832139009
 GameObject:
   m_ObjectHideFlags: 0
@@ -4763,7 +4823,7 @@ Transform:
   m_GameObject: {fileID: 6824155898832139009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25462437, y: 0.85004264, z: 0}
+  m_LocalPosition: {x: -0.25462437, y: 0.9, z: 0}
   m_LocalScale: {x: 0.28199437, y: 0.40125066, z: 0.40123054}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4838,7 +4898,6 @@ MonoBehaviour:
   connections:
   - {fileID: 3879635169440994645}
   - {fileID: 415329688434231123}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4891,7 +4950,7 @@ Transform:
   m_GameObject: {fileID: 6839847958013561544}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0034901884, y: -0.06336249, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4964,7 +5023,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 4146732342993841554}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -4989,15 +5047,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &7160320286037850363
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,7 +5083,7 @@ Transform:
   m_GameObject: {fileID: 7160320286037850363}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478841, y: -0.026254684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5099,7 +5156,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 6149456522050424956}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -5124,15 +5180,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &7220926858016565800
 GameObject:
   m_ObjectHideFlags: 0
@@ -5241,9 +5296,7 @@ MonoBehaviour:
   waitingRoomsOpen: 0
   waitingRooms: []
   jobNodes: []
-  timerStarted: 0
-  timer: 0
-  timerDuration: 15
+  timerDuration: 30
 --- !u!1 &7332031030183909790
 GameObject:
   m_ObjectHideFlags: 0
@@ -5272,7 +5325,7 @@ Transform:
   m_GameObject: {fileID: 7332031030183909790}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478836, y: -0.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113269, y: 1.6113274, z: 1.6113273}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5345,7 +5398,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 9156735098972188641}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -5370,15 +5422,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &7482851629035522630
 GameObject:
   m_ObjectHideFlags: 0
@@ -5407,7 +5458,7 @@ Transform:
   m_GameObject: {fileID: 7482851629035522630}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.34151638, y: 0.85, z: 0}
+  m_LocalPosition: {x: -0.35, y: 0.9, z: 0}
   m_LocalScale: {x: 0.18214779, y: 0.4012305, z: 0.4012305}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5482,7 +5533,6 @@ MonoBehaviour:
   connections:
   - {fileID: 3879635169440994645}
   - {fileID: 1012919784970552617}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -5535,7 +5585,7 @@ Transform:
   m_GameObject: {fileID: 7499255300630933459}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8250969, y: 0.050002564, z: 0}
+  m_LocalPosition: {x: -0.77, y: 0.03, z: 0}
   m_LocalScale: {x: 0.28199437, y: 0.40125063, z: 0.4012305}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5610,7 +5660,6 @@ MonoBehaviour:
   connections:
   - {fileID: 4123654628307162058}
   - {fileID: 2244991609124939717}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -5663,7 +5712,7 @@ Transform:
   m_GameObject: {fileID: 7796182737449030705}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.060757034, y: 0.045915928, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.6113274, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5736,7 +5785,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 7877853880763112958}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -5761,15 +5809,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &7814464253517173178
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,7 +5845,7 @@ Transform:
   m_GameObject: {fileID: 7814464253517173178}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478841, y: -0.026254684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -5871,7 +5918,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5859845515031368427}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -5896,15 +5942,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &7900896519459133252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5933,7 +5978,7 @@ Transform:
   m_GameObject: {fileID: 7900896519459133252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11478841, y: -0.026254684, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.6113274, z: 1.6113274}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -6006,7 +6051,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 2629967233100214033}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -6031,15 +6075,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &7975091520926591984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6143,7 +6186,6 @@ MonoBehaviour:
   connections:
   - {fileID: 7090713679031564100}
   - {fileID: 4384497310704718730}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -6271,7 +6313,6 @@ MonoBehaviour:
   connections:
   - {fileID: 3846526007517017099}
   - {fileID: 2590208260113878346}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -6347,7 +6388,6 @@ MonoBehaviour:
   - {fileID: 1009166039172879784}
   - {fileID: 7877853880763112958}
   - {fileID: 6563113032735629465}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -6384,7 +6424,7 @@ Transform:
   m_GameObject: {fileID: 8322965867974472200}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10176232, y: 0.10985852, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.611327, y: 1.611327, z: 1.611327}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -6457,7 +6497,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 4899724948503077888}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -6482,15 +6521,14 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 100
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &8661187064987292336
 GameObject:
   m_ObjectHideFlags: 0
@@ -6519,7 +6557,7 @@ Transform:
   m_GameObject: {fileID: 8661187064987292336}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24420685, y: -0.9365195, z: 0}
+  m_LocalPosition: {x: 0.24420685, y: -0.89, z: 0}
   m_LocalScale: {x: 0.28199428, y: 0.40125057, z: 0.40123045}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -6594,7 +6632,6 @@ MonoBehaviour:
   connections:
   - {fileID: 7090713679031564100}
   - {fileID: 1139851606664105560}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -6667,7 +6704,6 @@ MonoBehaviour:
   connections:
   - {fileID: 5406752440679831810}
   - {fileID: 2590208260113878346}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0

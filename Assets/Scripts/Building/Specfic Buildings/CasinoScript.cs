@@ -7,12 +7,10 @@ public class CasinoScript : MonoBehaviour
     public bool timerStarted;
     public float timerDuration;
     public float timer = 0;
-
-    public float price;
-
     public JobScript winnerJob;
     public GameObject winner;
     public bool winnerSelected;
+    private GlobalStats globalStats;
 
     public float jackpot;
 
@@ -21,10 +19,7 @@ public class CasinoScript : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
-        {
-            jobNode.price = price;
-        }
+        globalStats = FindObjectOfType<GlobalStats>();
         setNewWinner = StartCoroutine(SetNewWinner());
     }
     void Update()
@@ -40,10 +35,9 @@ public class CasinoScript : MonoBehaviour
         {
             if(winner != winnerJob.employee)
             {
-                FindObjectOfType<GlobalStats>().SpendMoney(-jackpot);
-                Debug.Log("spent money");
+                globalStats.SpendMoney(-jackpot);
                 winnerSelected = false;
-                winnerJob.price = price;
+                winnerJob.price = GetComponent<SetPrices>().jobPrice;
                 winnerJob = null;
                 setNewWinner = StartCoroutine(SetNewWinner());
             }

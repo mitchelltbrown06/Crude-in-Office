@@ -5,6 +5,11 @@ using UnityEngine;
 public class AStarManager : MonoBehaviour
 {
     public static AStarManager instance;
+    private LogicScript logic;
+    void Start()
+    {
+        logic = GameObject.FindObjectOfType<LogicScript>();
+    }
 
     private void Awake()
     {
@@ -14,7 +19,7 @@ public class AStarManager : MonoBehaviour
     {
         List<Node> openSet = new List<Node>();
 
-        foreach(Node n in FindObjectsOfType<Node>())
+        foreach(Node n in logic.nodesInScene)
         {
             n.gScore = float.MaxValue;
         }
@@ -76,43 +81,5 @@ public class AStarManager : MonoBehaviour
             
         }
         return null;
-    }
- 
-    public Node FindNearestNode(Vector2 position)
-    {
-        Node foundNode = null;
-        float minDistance = float.MaxValue;
-
-        foreach(Node node in NodesInScene())
-        {
-            float currentDistance = Vector2.Distance(position, node.transform.position);
-            if (currentDistance < minDistance)
-            {
-                minDistance = currentDistance;
-                foundNode = node;
-            }
-        }
-        return foundNode;
-    }
-
-    public Node FindFurtherstNode(Vector2 Position)
-    {
-        Node foundNode = null;
-        float maxDistance = 0;
-
-        foreach(Node node in NodesInScene())
-        {
-            float currentDistance = Vector2.Distance(transform.position, node.transform.position);
-            if (currentDistance > maxDistance)
-            {
-                maxDistance = currentDistance;
-                foundNode = node;
-            }
-        }
-        return foundNode;
-    }
-    private Node[] NodesInScene()
-    {
-        return FindObjectsOfType<Node>();
     }
 }

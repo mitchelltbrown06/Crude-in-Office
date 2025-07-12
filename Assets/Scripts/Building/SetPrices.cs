@@ -9,9 +9,13 @@ public class SetPrices : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
+        foreach (GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
         {
             jobNode.GetComponent<JobScript>().price = jobPrice;
+        }
+        if (GetComponentInChildren<QueueScript>())
+        {
+            GetComponentInChildren<QueueScript>().price = jobPrice;
         }
     }
 }

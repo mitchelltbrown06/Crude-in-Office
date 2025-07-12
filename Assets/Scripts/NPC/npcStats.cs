@@ -25,7 +25,7 @@ public class npcStats : MonoBehaviour
     {
         logic = GameObject.FindObjectOfType<LogicScript>();
         globalStats = GameObject.FindObjectOfType<GlobalStats>();
-        adult = logic.WeightedCoinToss(6.666f);
+        adult = logic.WeightedCoinToss(.666f);
     }
     void Update()
     {

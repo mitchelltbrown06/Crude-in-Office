@@ -255,7 +255,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1719167107335925562}
   - {fileID: 1620529428218974328}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -365,7 +364,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 339488308617983606}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -394,11 +392,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &2278951708076731353
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +492,7 @@ GameObject:
   - component: {fileID: 9187299836190376093}
   - component: {fileID: 151120899261927309}
   - component: {fileID: 4548454442537144673}
+  - component: {fileID: 1486302358780205052}
   m_Layer: 0
   m_Name: Node5
   m_TagString: InBuilding
@@ -584,7 +582,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 8341682443351596023}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -613,11 +610,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &1486302358780205052
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828725827220542239}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2870570963092842773
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +707,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1620529428218974328}
   - {fileID: 3255954893421217905}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -808,7 +848,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1620529428218974328}
   - {fileID: 7833750077379618858}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -997,6 +1036,7 @@ GameObject:
   - component: {fileID: 3078758757733964217}
   - component: {fileID: 8531949860503380078}
   - component: {fileID: 4752865459690032802}
+  - component: {fileID: 47848428505955066}
   m_Layer: 0
   m_Name: Node6
   m_TagString: InBuilding
@@ -1086,7 +1126,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 5313910608718665303}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1115,11 +1154,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &47848428505955066
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123600597070266664}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4210207518131201120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1474,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 8166045191073742249}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1420,11 +1502,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &6311153811962573866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,6 +1518,7 @@ GameObject:
   - component: {fileID: 1342667238097195471}
   - component: {fileID: 4917064127940319755}
   - component: {fileID: 1620529428218974328}
+  - component: {fileID: 2463490274661156527}
   m_Layer: 0
   m_Name: Door
   m_TagString: InBuilding
@@ -1471,10 +1553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d175eb29e6d55438cabafe0395f81a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcs: []
   grid: {fileID: 0}
   openJob: {fileID: 0}
   rejectionList: []
+  pathConnections: []
 --- !u!212 &4917064127940319755
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1549,7 +1631,6 @@ MonoBehaviour:
   - {fileID: 5313910608718665303}
   - {fileID: 7273525189347533702}
   - {fileID: 2958654085183596936}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1558,6 +1639,51 @@ MonoBehaviour:
   onEnemy: 0
   onBuilding: 1
   onEntranceOrExit: 0
+--- !u!61 &2463490274661156527
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311153811962573866}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6448833824165030661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,7 +1816,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1620529428218974328}
   - {fileID: 7815312278209816111}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1747,7 +1872,6 @@ MonoBehaviour:
   connections:
   - {fileID: 2650560408143572650}
   - {fileID: 1620529428218974328}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1804,7 +1928,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1620529428218974328}
   - {fileID: 8297624242560498155}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -1909,6 +2032,7 @@ GameObject:
   - component: {fileID: 7452165277201358203}
   - component: {fileID: 7815312278209816111}
   - component: {fileID: 3125517724335500381}
+  - component: {fileID: 133420031037898515}
   m_Layer: 0
   m_Name: Node8
   m_TagString: InBuilding
@@ -1998,7 +2122,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 2958654085183596936}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2027,11 +2150,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &133420031037898515
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7164448309908797560}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &7257742429059223200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,6 +2211,7 @@ GameObject:
   - component: {fileID: 4256535908651595543}
   - component: {fileID: 7833750077379618858}
   - component: {fileID: 1466823025774004630}
+  - component: {fileID: 5317942716983854344}
   m_Layer: 0
   m_Name: Node7
   m_TagString: InBuilding
@@ -2133,7 +2301,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 7273525189347533702}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2162,11 +2329,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &5317942716983854344
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257742429059223200}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &7431621845961353054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2215,7 +2426,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1620529428218974328}
   - {fileID: 8531949860503380078}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2272,7 +2482,6 @@ MonoBehaviour:
   connections:
   - {fileID: 1620529428218974328}
   - {fileID: 151120899261927309}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2382,7 +2591,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 8877971507784114479}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2411,11 +2619,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &8014823283768476951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,7 +2718,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -737880409
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: f8923e79b22e54c60ba4a9dcdb6c26de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2538,6 +2745,7 @@ MonoBehaviour:
   door: {fileID: 6311153811962573866}
   jobNodes: []
   waitingRooms: []
+  logic: {fileID: 0}
   adultsOnly: 0
   hungryOnly: 0
   bathroomOnly: 1
@@ -2680,7 +2888,6 @@ MonoBehaviour:
   cameFrom: {fileID: 0}
   connections:
   - {fileID: 7244074424006998222}
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -2709,11 +2916,10 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
 --- !u!1 &8401888465490778671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2960,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8401888465490778671}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -2811,7 +3017,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083b68c2bc4e144f1a5d19cfc7c1b68a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QueueOpen: 0
+  queueOpen: 0
+  maxCustomers: 4
+  nodePrefab: {fileID: 361989636522234013, guid: 22cf133df20e6430cb047f930a0b2adc, type: 3}
+  logic: {fileID: 0}
+  grid: {fileID: 0}
+  employee: {fileID: 0}
+  building: {fileID: 0}
+  nodeConnections:
+  - {fileID: 8877971507784114479}
+  - {fileID: 7244074424006998222}
+  - {fileID: 339488308617983606}
+  - {fileID: 8166045191073742249}
+  - {fileID: 8341682443351596023}
+  - {fileID: 5313910608718665303}
+  - {fileID: 7273525189347533702}
+  - {fileID: 2958654085183596936}
+  price: 0
+  door: {fileID: 0}
+  moveRate: 5
 --- !u!1 &8716050174195593311
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,179 +2,148 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class LogicScript : MonoBehaviour
 {
     public List<GameObject> placedPaths;
     public List<GameObject> laserTagPlayers;
+    public GridScript grid;
 
     public float hungryCutoff;
     public float starvation;
     public float bathroomCutoff;
     public float gottaGoCuttoff;
-    
+    public int entityLayerMask = (1 << 7);
+    public int gridLayerMask = (1 << 6);
+    public int pathlayerMask = (1 << 8);
+    public List<Node> nodesInScene;
+    public List<GameObject> npcs;
+    void Start()
+    {
+        grid = GameObject.FindObjectOfType<GridScript>();
+    }
     public Node FindNearestNode(Vector2 position)
     {
         Node foundNode = null;
-        float minDistance = float.MaxValue;
-
-        foreach(Node node in NodesInScene())
+        float searchDistance = grid.tileSize / 2;
+        while (foundNode == null)
         {
-            float currentDistance = Vector2.Distance(position, node.transform.position);
-            if (currentDistance < minDistance)
+            RaycastHit2D[] collisions = Physics2D.BoxCastAll(position, new Vector2(searchDistance, searchDistance), 0f, Vector2.up, 0f);
+            float minDistance = float.MaxValue;
+
+            foreach (RaycastHit2D collision in collisions)
             {
-                minDistance = currentDistance;
-                foundNode = node;
+                if (collision.collider.GetComponent<Node>())
+                {
+                    float currentDistance = Vector2.Distance(position, collision.transform.position);
+                    if (currentDistance < minDistance)
+                    {
+                        minDistance = currentDistance;
+                        foundNode = collision.collider.GetComponent<Node>();
+                    }
+                }
             }
+            searchDistance = searchDistance * 2;
         }
         return foundNode;
     }
     public GameObject FindClosestTile(Vector3 position)
     {
-        float nearestDistance = float.MaxValue;
-        GameObject[] Tiles = GameObject.FindGameObjectsWithTag("Grid");
         GameObject closeTile = null;
-
-        if (Tiles.Length > 0)
+        float searchDistance = grid.tileSize / 2;
+        while (closeTile == null)
         {
-            for(int i = 0; i < Tiles.Length; i++)
+            RaycastHit2D[] collisions = Physics2D.BoxCastAll(position, new Vector2(searchDistance, searchDistance), 0f, Vector2.up, 0f, gridLayerMask);
+            float nearestDistance = float.MaxValue;
+            foreach (RaycastHit2D collision in collisions)
             {
-                float distance = Vector3.Distance(position, Tiles[i].transform.position);
-
-                if(distance < nearestDistance)
+                float distance = Vector3.Distance(position, collision.transform.position);
+                if (distance < nearestDistance)
                 {
-                    closeTile = Tiles[i];
+                    closeTile = collision.collider.gameObject;
                     nearestDistance = distance;
                 }
             }
-            if(closeTile != null)
-            {
-                return closeTile;
-            }
+            searchDistance = searchDistance * 2;
         }
-        return null;
+        return closeTile;
     }
     public GameObject FindClosestPath(Vector3 position)
     {
-        float nearestDistance = float.MaxValue;
-        GameObject[] paths = GameObject.FindGameObjectsWithTag("Path");
-        GameObject path = null;
-
-        if (paths.Length > 0)
+        float searchDistance = grid.tileSize / 2;
+        GameObject closestPath = null;
+        while (closestPath == null)
         {
-            for(int i = 0; i < paths.Length; i++)
+            RaycastHit2D[] collisions = Physics2D.BoxCastAll(position, new Vector2(searchDistance, searchDistance), 0f, Vector2.up, 0f, pathlayerMask);
+            float nearestDistance = float.MaxValue;
+            foreach (RaycastHit2D collision in collisions)
             {
-                float distance = Vector3.Distance(position, paths[i].transform.position);
-
-                if(distance < nearestDistance)
+                float distance = Vector3.Distance(position, collision.transform.position);
+                if (distance < nearestDistance)
                 {
-                    path = paths[i];
+                    closestPath = collision.collider.gameObject;
                     nearestDistance = distance;
                 }
             }
-            return path;
+            searchDistance = searchDistance * 2;
         }
-        return null;
+        return closestPath;
     }
     public Node FindClosestConnectedNode(Vector3 position)
     {
         Node closestNode = null;
-        float minDistance = float.MaxValue;
-
-        foreach(Node node in NodesInScene())
+        float searchDistance = grid.tileSize / 2;
+        while (closestNode == null)
         {
-            if(node.connections.Count > 0)
+            RaycastHit2D[] collisions = Physics2D.BoxCastAll(position, new Vector2(searchDistance, searchDistance), 0f, Vector2.up, 0f);
+            float minDistance = float.MaxValue;
+
+            foreach (RaycastHit2D collision in collisions)
             {
-                float currentDistance = Vector2.Distance(position, node.transform.position);
-                if (currentDistance < minDistance)
+                if (collision.collider.GetComponent<Node>() && collision.collider.GetComponent<Node>().connections.Count > 0)
                 {
-                    minDistance = currentDistance;
-                    closestNode = node;
+                    float currentDistance = Vector2.Distance(position, collision.transform.position);
+                    if (currentDistance < minDistance)
+                    {
+                        minDistance = currentDistance;
+                        closestNode = collision.collider.GetComponent<Node>();
+                    }
                 }
             }
-            
+            searchDistance = searchDistance * 2;
         }
         return closestNode;
-    }
-    public GameObject FindClosestBuilding(Vector3 position)
-    {
-        float closestBuildingDistance = float.MaxValue;
-        GameObject closestBuilding = null;
-        GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
-
-        if (buildings.Length > 0)
-        {
-            for(int i = 0; i < buildings.Length; i++)
-            {
-                float currentDistance = Vector3.Distance(this.transform.position, buildings[i].transform.position);
-
-                if(currentDistance < closestBuildingDistance)
-                {
-                    closestBuilding = buildings[i];
-                    closestBuildingDistance = currentDistance;
-                }
-            }
-            return closestBuilding;
-        }
-        return null;
-    }
-    public Node[] NodesInScene()
-    {
-        return FindObjectsOfType<Node>();
     }
     public List<GameObject> FindPathsInRange(Vector3 position, float minDistance)
     {
         List<GameObject> pathsInRange = new List<GameObject>();
-
-        if (GameObject.FindGameObjectsWithTag("Path").Length > 0)
+        RaycastHit2D[] collisions = Physics2D.BoxCastAll(position, new Vector2(minDistance / 2, minDistance / 2), 0f, Vector2.up, 0f, pathlayerMask);
+        foreach (RaycastHit2D collision in collisions)
         {
-            foreach(GameObject path in GameObject.FindGameObjectsWithTag("Path"))
-            {
-                if(Vector2.Distance(path.transform.position, position) < minDistance)
-                {
-                    pathsInRange.Add(path);
-                }
-            }
-            return pathsInRange;
+            pathsInRange.Add(collision.collider.gameObject);
         }
-        return null;
+        return pathsInRange;
     }
     public List<Node> FindTilesInRange(Vector3 position, float minDistance)
     {
         List<Node> tilesInRange = new List<Node>();
-
-        if (NodesInScene().Length > 0)
+        RaycastHit2D[] collisions = Physics2D.BoxCastAll(position, new Vector2(minDistance / 2, minDistance / 2), 0f, Vector2.up, 0f);
+        foreach (RaycastHit2D collision in collisions)
         {
-            foreach(Node node in NodesInScene())
+            if (collision.collider.GetComponent<Node>())
             {
-                if(Vector2.Distance(node.transform.position, position) < minDistance)
-                {
-                    tilesInRange.Add(node);
-                }
-            }
-            return tilesInRange;
-        }
-        return null;
-    }
-    public GameObject FindClosestCustomer(Vector2 position)
-    {
-        GameObject foundCustomer = null;
-        float minDistance = float.MaxValue;
-
-        foreach(GameObject customer in GameObject.FindGameObjectsWithTag("Entity"))
-        {
-            float currentDistance = Vector2.Distance(position, customer.transform.position);
-            if (currentDistance < minDistance)
-            {
-                minDistance = currentDistance;
-                foundCustomer = customer;
+                tilesInRange.Add(collision.collider.GetComponent<Node>());   
             }
         }
-        return foundCustomer;
+        return tilesInRange;
     }
     public bool WeightedCoinToss(float weight)
     {
-        float randomValue = Random.Range(0f,10f);
+        //you set a weight for this function between 0 and 1. Then, you generate a random float between 0 and 1. 
+        // If the randomly generated value is less than the weight value, return true. Otherwise, return false
+        //Essentially, your weight represents the percent chance that you will return true.
+        float randomValue = Random.Range(0f,1f);
         if(randomValue < weight)
         {
             return true;

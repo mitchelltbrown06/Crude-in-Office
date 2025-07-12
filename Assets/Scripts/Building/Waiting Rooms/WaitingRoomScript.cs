@@ -11,8 +11,6 @@ public class WaitingRoomScript : MonoBehaviour
     public ControlWaitingRooms controller;
     public bool customerWaiting;
 
-    private float previousSpeed;
-
     void Start()
     {
         logic = GameObject.FindObjectOfType<LogicScript>();
@@ -21,36 +19,36 @@ public class WaitingRoomScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(jobNode != null && jobNode.employee != null && controller != null)
+        if (employee == null || (employee != null && employee != jobNode.employee))
         {
-            employee = jobNode.employee;
-
-            //if a customer is within range and the waiting rooms are open, stop the customer that is within range;
-            if(Vector2.Distance(employee.transform.position, transform.position) < .1f 
-            && employee.GetComponent<npcJob>().jobToDo == true)
+            if (jobNode != null && jobNode.employee != null && controller != null)
+            {
+                employee = jobNode.employee;
+                employee.GetComponent<npcJob>().waitingRoomNode = GetComponent<Node>();
+            }
+        }
+        else if (employee.GetComponent<npcStateManager>().currentState != employee.GetComponent<npcStateManager>().WaitingState)
+        {
+            if (controller.waitingRoomsOpen == false
+            && Vector2.Distance(employee.transform.position, transform.position) < .1f
+            && employee.GetComponent<npcJob>().jobToDo == true
+            && jobNode.timerStarted == false
+            && employee.GetComponent<npcStateManager>().currentState == employee.GetComponent<npcStateManager>().GoingToJobState)
             {
                 customerWaiting = true;
+                controller.CheckOccupancy();
+                employee.GetComponent<npcStateManager>().SwitchState(employee.GetComponent<npcStateManager>().WaitingState);
             }
             else
             {
                 customerWaiting = false;
             }
-            if(controller.waitingRoomsOpen == false 
-            && Vector2.Distance(employee.transform.position, transform.position) < .1f 
-            && employee.GetComponent<npcJob>().jobToDo == true
-            && jobNode.jobTimer == 0)
-            {
-                if(employee.GetComponent<npcStats>().speed != 0)
-                {
-                    previousSpeed = employee.GetComponent<npcStats>().speed;
-                }
-                employee.GetComponent<npcStats>().speed = 0;
-            }
-            else if(controller.waitingRoomsOpen == true  
-            && employee.GetComponent<npcJob>().jobToDo == true)
-            {
-                employee.GetComponent<npcStats>().speed = previousSpeed;
-            }
+        }
+        else if (controller.waitingRoomsOpen == true
+        && employee.GetComponent<npcJob>().jobToDo == true
+        && employee.GetComponent<npcStateManager>().currentState == employee.GetComponent<npcStateManager>().WaitingState)
+        {
+            employee.GetComponent<npcStateManager>().SwitchState(employee.GetComponent<npcStateManager>().GoingToJobState);
         }
     }
 }

@@ -90,17 +90,21 @@ public class ButtonManager : MonoBehaviour
     }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(equiped == "Bulldozer")
-            {
-                equiped = "null";
-            }
-            else
-            {
-                equiped = "Bulldozer";
-            }
+            equiped = "null";
         }
+        if (Input.GetKeyDown(KeyCode.B))
+            {
+                if (equiped == "Bulldozer")
+                {
+                    equiped = "null";
+                }
+                else
+                {
+                    equiped = "Bulldozer";
+                }
+            }
         if(equiped == "Bulldozer")
         {
             canvas.GetComponent<Image>().enabled = true;
@@ -113,7 +117,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Purchase(Button instance)
     {
-        Disable(instance);
+        //Disable(instance);
     }
 
     public void Equip(string equippable)
@@ -192,7 +196,7 @@ public class ButtonManager : MonoBehaviour
     }
     void ArcadeMachineOnClick()
     {
-        Equip("ArcadeMachine");
+        Equip("Arcade");
     }
     void RollerRinkOnClick()
     {
@@ -241,7 +245,7 @@ public class ButtonManager : MonoBehaviour
                 spawnPosition = slot6Position;
             }
     }
-    void Disable(Button instance)
+    public void Disable(Button instance)
     {
         instance.GetComponent<ButtonDisable>().Disable();
     }

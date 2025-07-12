@@ -18,6 +18,10 @@ public class DemolishScript : MonoBehaviour
         {
             node.onBuilding = false;
         }
+        foreach (Node node in GetComponentsInChildren<Node>())
+        {
+            logic.nodesInScene.Remove(node);
+        }
         Destroy(gameObject);
     }
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class npcJob : MonoBehaviour
 {
-    private npcController myController;
     private npcStats myStats;
+    public Node jobNode;
+    public Node queueNode;
+    public Node waitingRoomNode;
 
     public bool jobToDo = false;
 
     void Start()
     {
         myStats = GetComponent<npcStats>();
-        myController = GetComponent<npcController>();
     }
     
     public void JobComplete(float price)

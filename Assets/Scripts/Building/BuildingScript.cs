@@ -9,29 +9,30 @@ public class BuildingScript : MonoBehaviour
     public List<GameObject> jobNodes;
     public List<GameObject> waitingRooms;
 
+    public LogicScript logic;
+
     public bool adultsOnly;
     public bool hungryOnly;
     public bool bathroomOnly;
 
     void Start()
     {
+        logic = GameObject.FindObjectOfType<LogicScript>();
         FindJobNodes();
         FindWaitingRooms();
-        SetRestrictions();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         UpdateOpenJob();
         SetDoor();
+        foreach (Node node in GetComponentsInChildren<Node>())
+        {
+            node.gameObject.AddComponent<BoxCollider2D>();
+        }
     }
 
-    void UpdateOpenJob()
+    public void UpdateOpenJob()
     {
-        foreach(GameObject jobNode in jobNodes)
+        foreach (GameObject jobNode in jobNodes)
         {
-            if(jobNode.GetComponent<JobScript>().occupied == false)
+            if (jobNode.GetComponent<JobScript>().occupied == false)
             {
                 door.GetComponent<DoorScript>().openJob = jobNode.GetComponent<Node>();
                 return;
@@ -41,38 +42,55 @@ public class BuildingScript : MonoBehaviour
     }
     void FindJobNodes()
     {
-        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        foreach (JobScript jobNode in GetComponentsInChildren<JobScript>())
         {
             jobNodes.Add(jobNode.gameObject);
         }
     }
     void FindWaitingRooms()
     {
-        foreach(WaitingRoomScript waitingRoom in GetComponentsInChildren<WaitingRoomScript>())
+        foreach (WaitingRoomScript waitingRoom in GetComponentsInChildren<WaitingRoomScript>())
         {
             waitingRooms.Add(waitingRoom.gameObject);
         }
     }
     void SetDoor()
     {
-        foreach(GameObject jobNode in jobNodes)
+        foreach (GameObject jobNode in jobNodes)
         {
             jobNode.GetComponent<JobScript>().door = door.GetComponent<DoorScript>();
         }
     }
-    void SetRestrictions()
+    public bool CandidateCheck(GameObject candidate)
     {
-        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        if (adultsOnly == true)
         {
-            jobNode.adultsOnly = adultsOnly;
+            if (candidate.GetComponent<npcStats>().adult == false)
+            {
+                return false;
+            }
         }
-        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        if(hungryOnly == true)
         {
-            jobNode.hungryOnly = hungryOnly;
+            if(candidate.GetComponent<npcStats>().hunger < logic.hungryCutoff)
+            {
+                return false;
+            }
         }
-        foreach(JobScript jobNode in GetComponentsInChildren<JobScript>())
+        else
         {
-            jobNode.bathroomOnly = bathroomOnly;
+            if(candidate.GetComponent<npcStats>().hunger > logic.starvation)
+            {
+                return false;
+            }
         }
+        if(bathroomOnly == true)
+        {
+            if(candidate.GetComponent<npcStats>().bathroom < logic.bathroomCutoff)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

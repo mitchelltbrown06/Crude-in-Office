@@ -4,37 +4,40 @@ using UnityEngine;
 
 public class LaserTagScript : MonoBehaviour
 {
-
     public LogicScript logic;
-
+    public bool animationsStarted;
+    public List<JobScript> jobNodes;
     void Start()
     {
         logic = GameObject.FindObjectOfType<LogicScript>();
+        foreach (GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
+        {
+            jobNodes.Add(jobNode.GetComponent<JobScript>());
+        }
     }
 
     void Update()
     {
-        foreach(GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
+        if (GetComponent<ControlWaitingRooms>().waitingRoomsOpen == true
+        && animationsStarted == false)
         {
-            if(jobNode.GetComponent<JobScript>().employee != null
-            && Vector2.Distance(jobNode.transform.position, jobNode.GetComponent<JobScript>().employee.transform.position) < .1f
-            && jobNode.GetComponent<JobScript>().jobTimer == 0)
+            foreach (JobScript jobNode in jobNodes)
             {
                 jobNode.GetComponent<Animator>().SetTrigger("StartAnimation");
+                jobNode.employee.GetComponent<npcStats>().laserTag = true;
+                logic.laserTagPlayers.Add(jobNode.employee);
             }
-            if(jobNode.GetComponent<JobScript>().occupied == false)
+            animationsStarted = true;
+        }
+        else if (GetComponent<ControlWaitingRooms>().waitingRoomsOpen == false
+        && animationsStarted == true)
+        {
+            foreach (JobScript jobNode in jobNodes)
             {
                 jobNode.transform.position = transform.position + transform.right * .5f + transform.up * .1f;
                 jobNode.GetComponent<Animator>().SetTrigger("StopAnimation");
             }
-        }
-        if(GetComponent<ControlWaitingRooms>().waitingRoomsOpen == true)
-        {
-            foreach(GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
-            {
-                jobNode.GetComponent<JobScript>().employee.GetComponent<npcStats>().laserTag = true;
-                logic.laserTagPlayers.Add(jobNode.GetComponent<JobScript>().employee);
-            }
+            animationsStarted = false;
         }
     }
 }

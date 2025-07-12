@@ -9,39 +9,14 @@ public class ExitScript : MonoBehaviour
     void Start()
     {
         logic = GameObject.FindObjectOfType<LogicScript>();
-        FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
-    }
-
-    public GameObject FindClosestTile(Vector3 position)
-    {
-        float nearestDistance = float.MaxValue;
-        GameObject[] Tiles = GameObject.FindGameObjectsWithTag("Grid");
-        GameObject closeTile = null;
-
-        if (Tiles.Length > 0)
-        {
-            for(int i = 0; i < Tiles.Length; i++)
-            {
-                float distance = Vector3.Distance(position, Tiles[i].transform.position);
-
-                if(distance < nearestDistance)
-                {
-                    closeTile = Tiles[i];
-                    nearestDistance = distance;
-                }
-            }
-            if(closeTile != null)
-            {
-                return closeTile;
-            }
-        }
-        return null;
+        logic.FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
+        FindObjectOfType<EntranceScript>().exit = gameObject;
     }
     //This will make the exit path go to the last placed path every time thsi function is triggered (which is whenever a path is placed)
     public void GoToPath(Vector3 position)
     {
-        FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = false;
+        logic.FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = false;
         transform.position = position;
-        FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
+        logic.FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
     }
 }

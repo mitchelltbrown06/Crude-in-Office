@@ -21,7 +21,7 @@ public class MouseSpawningScript : MonoBehaviour
     //Previews
     public GameObject bulldozerPreview;
     public GameObject bulldozerPreviewInstance;
-    
+
     public GameObject entrancePreview;
     public GameObject entrancePreviewInstance;
 
@@ -52,11 +52,6 @@ public class MouseSpawningScript : MonoBehaviour
     public GridScript grid;
 
     //Vector3 spawnLocation;
-    public GameObject closestTile;
-    public GameObject closestPath;
-    public Vector3 closestTileCrossection;
-
-    private Vector3 mousePosition;
     public LayerMask buildingLayer;
 
     // Start is called before the first frame update
@@ -68,57 +63,45 @@ public class MouseSpawningScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePosition = Input.mousePosition;
-        closestTile = FindClosestTile(Camera.main.ScreenToWorldPoint(mousePosition));
-        
-        closestTileCrossection = new Vector3(FindClosestTile(new Vector3(Camera.main.ScreenToWorldPoint(mousePosition).x 
-                                                                - grid.tileSize / 2, Camera.main.ScreenToWorldPoint(mousePosition).y
-                                                                - grid.tileSize / 2, 0)).transform.position.x + grid.tileSize / 2,
-                                                                FindClosestTile(new Vector3(Camera.main.ScreenToWorldPoint(mousePosition).x 
-                                                                    - grid.tileSize / 2, Camera.main.ScreenToWorldPoint(mousePosition).y 
-                                                                    - grid.tileSize / 2, 0)).transform.position.y + grid.tileSize / 2, 0);
-
-        closestPath = FindClosestPath(Camera.main.ScreenToWorldPoint(mousePosition));
-
         SpawnPreviews();
 
         //When the mouse is clicked down
-        if(Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(closestTile.transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && !Physics2D.OverlapBox(logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, new Vector2(.1f, .1f), 0, buildingLayer))
         {
-            if(buttonManager.equiped == "Bulldozer")
+            if (buttonManager.equiped == "Bulldozer")
             {
                 Bulldoze();
             }
-            if(buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance" && closestTile.GetComponent<Node>().onPath == false)
+            if (buttonManager.entrancePlaced == false && buttonManager.equiped == "Entrance" && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath == false)
             {
                 PlaceEntrance();
             }
-            if(buttonManager.equiped == "Path" && Vector2.Distance(closestTile.transform.position, logic.placedPaths[^1].transform.position) < grid.tileSize * 1.1 && closestTile.GetComponent<Node>().onPath == false)
+            if (buttonManager.equiped == "Path" && Vector2.Distance(logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, logic.placedPaths[^1].transform.position) < grid.tileSize * 1.1 && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath == false)
             {
                 PlacePath();
             }
             //one tile buildings
-            if(buttonManager.equiped == "ArcadeMachine")
+            if (buttonManager.equiped == "Arcade")
             {
                 Place1TileBuilding(arcadeMachine, arcadePreviewInstance, buttonManager.arcadeMachineInstance);
             }
-            if(buttonManager.equiped == "RollerRink")
+            if (buttonManager.equiped == "RollerRink")
             {
                 Place4TileBuilding(rollerRink, rollerRinkPreviewInstance, buttonManager.rollerRinkInstance);
             }
-            if(buttonManager.equiped == "LaserTag")
+            if (buttonManager.equiped == "LaserTag")
             {
                 Place3TileBuilding(laserTag, laserTagPreviewInstance, buttonManager.laserTagInstance);
             }
-            if(buttonManager.equiped == "Casino")
+            if (buttonManager.equiped == "Casino")
             {
                 Place2TileBuilding(casino, casinoPreviewInstance, buttonManager.casinoInstance);
             }
-            if(buttonManager.equiped == "Restaurant")
+            if (buttonManager.equiped == "Restaurant")
             {
                 Place4TileBuilding(restaurant, restaurantPreviewInstance, buttonManager.restaurantInstance);
             }
-            if(buttonManager.equiped == "Bathroom")
+            if (buttonManager.equiped == "Bathroom")
             {
                 Place1TileBuilding(bathroom, bathroomPreviewInstance, buttonManager.bathroomInstance);
             }
@@ -126,200 +109,204 @@ public class MouseSpawningScript : MonoBehaviour
     }
     void SpawnPreviews()
     {
-        SpawnBulldozerPreview();
-        SpawnEntrancePreview();
-        SpawnPathPreview();
-        SpawnArcadePreview();
-        SpawnRollerRinkPreview();
-        SpawnLaserTagPreview();
-        SpawnCasinoPreview();
-        SpawnRestaurantPreview();
-        SpawnBathroomPreview();
-    }
-    void SpawnBulldozerPreview()
-    {
-        if(buttonManager.equiped == "Bulldozer")
+        if (buttonManager.equiped == "Bulldozer")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(bulldozerPreviewInstance == null)
-            {
-                bulldozerPreviewInstance = Instantiate(bulldozerPreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display1TilePreview(bulldozerPreviewInstance, bulldozerPreviewInstance.transform.position);
-            }
+            SpawnBulldozerPreview();
         }
-        else if(bulldozerPreviewInstance != null)
+        else
         {
             Destroy(bulldozerPreviewInstance);
         }
-    }
-    void SpawnEntrancePreview()
-    {
-        if(buttonManager.equiped == "Entrance")
+        if (buttonManager.equiped == "Entrance")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(entrancePreviewInstance == null)
-            {
-                entrancePreviewInstance = Instantiate(entrancePreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display1TilePreview(entrancePreviewInstance, entrancePreviewInstance.transform.position);
-            }
+            SpawnEntrancePreview();
         }
-        else if(entrancePreviewInstance != null)
+        else
         {
             Destroy(entrancePreviewInstance);
         }
-    }
-    void SpawnPathPreview()
-    {
-        if(buttonManager.equiped == "Path")
+        if (buttonManager.equiped == "Path")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(pathPreviewInstance == null)
-            {
-                pathPreviewInstance = Instantiate(pathPreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                DisplayPathPreview(pathPreviewInstance);
-            }
+            SpawnPathPreview();
         }
-        else if(pathPreviewInstance != null)
+        else
         {
             Destroy(pathPreviewInstance);
         }
-    }
-    void SpawnArcadePreview()
-    {
-        if(buttonManager.equiped == "ArcadeMachine")
+        if (buttonManager.equiped == "Arcade")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(arcadePreviewInstance == null)
-            {
-                arcadePreviewInstance = Instantiate(arcadePreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display1TilePreview(arcadePreviewInstance, arcadePreviewInstance.transform.GetChild(0).transform.position);
-            }
+            SpawnArcadePreview();
         }
-        else if(arcadePreviewInstance != null)
+        else
         {
             Destroy(arcadePreviewInstance);
         }
-    }
-    void SpawnRollerRinkPreview()
-    {
-        if(buttonManager.equiped == "RollerRink")
+        if (buttonManager.equiped == "RollerRink")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(rollerRinkPreviewInstance == null)
-            {
-                rollerRinkPreviewInstance = Instantiate(rollerRinkPreview, closestTileCrossection, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display4TilePreview(rollerRinkPreviewInstance, rollerRinkPreviewInstance.transform.GetChild(0).transform.position);
-            }
+            SpawnRollerRinkPreview();
         }
-        else if(rollerRinkPreviewInstance != null)
+        else
         {
             Destroy(rollerRinkPreviewInstance);
         }
-    }
-    void SpawnLaserTagPreview()
-    {
-        if(buttonManager.equiped == "LaserTag")
+        if (buttonManager.equiped == "LaserTag")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(laserTagPreviewInstance == null)
-            {
-                laserTagPreviewInstance = Instantiate(laserTagPreview, closestTileCrossection, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display3TilePreview(laserTagPreviewInstance, laserTagPreviewInstance.transform.GetChild(0).transform.position);
-            }
+            SpawnLaserTagPreview();
         }
-        else if(laserTagPreviewInstance != null)
+        else
         {
             Destroy(laserTagPreviewInstance);
         }
-    }
-    void SpawnCasinoPreview()
-    {
-        if(buttonManager.equiped == "Casino")
+        if (buttonManager.equiped == "Casino")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(casinoPreviewInstance == null)
-            {
-                casinoPreviewInstance = Instantiate(casinoPreview, closestTileCrossection, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display2TilePreview(casinoPreviewInstance, casinoPreviewInstance.transform.GetChild(0).transform.position);
-            }
+            SpawnCasinoPreview();
         }
-        else if(casinoPreviewInstance != null)
+        else
         {
             Destroy(casinoPreviewInstance);
         }
-    }
-    void SpawnRestaurantPreview()
-    {
-        if(buttonManager.equiped == "Restaurant")
+        if (buttonManager.equiped == "Restaurant")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(restaurantPreviewInstance == null)
-            {
-                restaurantPreviewInstance = Instantiate(restaurantPreview, closestTileCrossection, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display4TilePreview(restaurantPreviewInstance, restaurantPreviewInstance.transform.GetChild(0).transform.position);
-            }
+            SpawnRestaurantPreview();
         }
-        else if(restaurantPreviewInstance != null)
+        else
         {
             Destroy(restaurantPreviewInstance);
         }
-    }
-    void SpawnBathroomPreview()
-    {
-        if(buttonManager.equiped == "Bathroom")
+        if (buttonManager.equiped == "Bathroom")
         {
-            //if there's no preview currently spawned, spawn one in
-            if(bathroomPreviewInstance == null)
-            {
-                bathroomPreviewInstance = Instantiate(bathroomPreview, closestTile.transform.position, Quaternion.identity);
-            }
-            //everything you do if there is a preview
-            else
-            {
-                Display1TilePreview(bathroomPreviewInstance, bathroomPreviewInstance.transform.GetChild(0).transform.position);
-            }
+            SpawnBathroomPreview();
         }
-        else if(bathroomPreviewInstance != null)
+        else
         {
             Destroy(bathroomPreviewInstance);
         }
     }
+    void SpawnBulldozerPreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (bulldozerPreviewInstance == null)
+        {
+            bulldozerPreviewInstance = Instantiate(bulldozerPreview, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display1TilePreview(bulldozerPreviewInstance, bulldozerPreviewInstance.transform.position);
+        }
+    }
+    void SpawnEntrancePreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (entrancePreviewInstance == null)
+        {
+            entrancePreviewInstance = Instantiate(entrancePreview, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display1TilePreview(entrancePreviewInstance, entrancePreviewInstance.transform.position);
+        }
+    }
+    void SpawnPathPreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (pathPreviewInstance == null)
+        {
+            pathPreviewInstance = Instantiate(pathPreview, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            DisplayPathPreview(pathPreviewInstance);
+        }
+    }
+    void SpawnArcadePreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (arcadePreviewInstance == null)
+        {
+            arcadePreviewInstance = Instantiate(arcadePreview, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display1TilePreview(arcadePreviewInstance, arcadePreviewInstance.transform.GetChild(0).transform.position);
+        }
+    }
+    void SpawnRollerRinkPreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (rollerRinkPreviewInstance == null)
+        {
+            rollerRinkPreviewInstance = Instantiate(rollerRinkPreview, FindClosestCrossection(), Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display4TilePreview(rollerRinkPreviewInstance, rollerRinkPreviewInstance.transform.GetChild(0).transform.position);
+        }
+    }
+    void SpawnLaserTagPreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (laserTagPreviewInstance == null)
+        {
+            laserTagPreviewInstance = Instantiate(laserTagPreview, FindClosestCrossection(), Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display3TilePreview(laserTagPreviewInstance, laserTagPreviewInstance.transform.GetChild(0).transform.position);
+        }
+    }
+    void SpawnCasinoPreview()
+{
+        //if there's no preview currently spawned, spawn one in
+        if (casinoPreviewInstance == null)
+        {
+            casinoPreviewInstance = Instantiate(casinoPreview, FindClosestCrossection(), Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display2TilePreview(casinoPreviewInstance, casinoPreviewInstance.transform.GetChild(0).transform.position);
+        }
+    }
+    void SpawnRestaurantPreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (restaurantPreviewInstance == null)
+        {
+            restaurantPreviewInstance = Instantiate(restaurantPreview, FindClosestCrossection(), Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display4TilePreview(restaurantPreviewInstance, restaurantPreviewInstance.transform.GetChild(0).transform.position);
+        }
+    }
+    void SpawnBathroomPreview()
+    {
+        //if there's no preview currently spawned, spawn one in
+        if (bathroomPreviewInstance == null)
+        {
+            bathroomPreviewInstance = Instantiate(bathroomPreview, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position, Quaternion.identity);
+        }
+        //everything you do if there is a preview
+        else
+        {
+            Display1TilePreview(bathroomPreviewInstance, bathroomPreviewInstance.transform.GetChild(0).transform.position);
+        }
+    }
     void PlaceEntrance()
     {
-        Instantiate(entrance, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity);
-        logic.placedPaths.Add(Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity));
+        Instantiate(entrance, new Vector3(logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position.x, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position.y, 0), Quaternion.identity);
+        logic.placedPaths.Add(Instantiate(path, new Vector3(logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position.x, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position.y, 0), Quaternion.identity));
+        logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath = true;
+
+        //For testing
+        buttonManager.Disable(buttonManager.entranceInstance);
         buttonManager.Purchase(buttonManager.entranceInstance);
         buttonManager.entrancePlaced = true;
         buttonManager.CheckSpawnPosition();
@@ -340,14 +327,15 @@ public class MouseSpawningScript : MonoBehaviour
     }
     void PlacePath()
     {
-        if(buttonManager.paths >= 0
-        && closestTile.GetComponent<Node>().onBuilding == false
-        && closestTile.GetComponent<Node>().onPath == false)
-        {   
+        if (buttonManager.paths >= 0
+        && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onBuilding == false
+        && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath == false)
+        {
             buttonManager.paths -= 1;
-            logic.placedPaths.Add(Instantiate(path, new Vector3(closestTile.transform.position.x, closestTile.transform.position.y, 0), Quaternion.identity));
+            logic.placedPaths.Add(Instantiate(path, new Vector3(logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position.x, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position.y, 0), Quaternion.identity));
+            logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath = true;
         }
-        if(buttonManager.paths <= 0 && buttonManager.pathInstance != null)
+        if (buttonManager.paths <= 0 && buttonManager.pathInstance != null)
         {
             buttonManager.Purchase(buttonManager.pathInstance);
             buttonManager.equiped = "null";
@@ -355,14 +343,14 @@ public class MouseSpawningScript : MonoBehaviour
     }
     void Place1TileBuilding(GameObject prefab, GameObject preview, Button button)
     {
-        if(buttonManager.entrancePlaced == true 
-        && closestTile.GetComponent<Node>().onPath == false
-        && FindClosestTile(FindClosestPath(preview.transform.GetChild(0).transform.position).transform.position).GetComponent<Node>().onEntranceOrExit == false
-        && closestTile.GetComponent<Node>().onBuilding == false
-        && Vector2.Distance(FindClosestPath(preview.transform.GetChild(0).transform.position).transform.position, preview.transform.GetChild(0).transform.position) < grid.tileSize * 0.6
+        if (buttonManager.entrancePlaced == true
+        && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath == false
+        && logic.FindClosestTile(logic.FindClosestPath(preview.transform.GetChild(0).transform.position).transform.position).GetComponent<Node>().onEntranceOrExit == false
+        && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onBuilding == false
+        && Vector2.Distance(logic.FindClosestPath(preview.transform.GetChild(0).transform.position).transform.position, preview.transform.GetChild(0).transform.position) < grid.tileSize * 0.6
         )
         {
-            foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+            foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
             {
                 node.onBuilding = true;
             }
@@ -378,25 +366,25 @@ public class MouseSpawningScript : MonoBehaviour
     }
     void Place2TileBuilding(GameObject prefab, GameObject preview, Button button)
     {
-        foreach(GameObject path in logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f))
+        foreach (GameObject path in logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f))
         {
-            if(logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true
-            || Vector2.Distance(path.transform.position, closestTileCrossection) < grid.tileSize * .9f)
+            if (logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true
+            || Vector2.Distance(path.transform.position, FindClosestCrossection()) < grid.tileSize * .9f)
             {
                 return;
             }
         }
-        foreach(Node node in logic.FindTilesInRange((preview.transform.Find("Door").transform.position + closestTileCrossection) / 2f, grid.tileSize * .51f))
+        foreach (Node node in logic.FindTilesInRange((preview.transform.Find("Door").transform.position + FindClosestCrossection()) / 2f, grid.tileSize * .51f))
         {
-            if(node.onBuilding == true
+            if (node.onBuilding == true
             || node.onPath == true)
             {
                 return;
             }
         }
-        if(logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f).Count == 2)
+        if (logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f).Count == 2)
         {
-            foreach(Node node in logic.FindTilesInRange((preview.transform.Find("Door").transform.position + closestTileCrossection) / 2f, grid.tileSize * .51f))
+            foreach (Node node in logic.FindTilesInRange((preview.transform.Find("Door").transform.position + FindClosestCrossection()) / 2f, grid.tileSize * .51f))
             {
                 node.onBuilding = true;
             }
@@ -412,21 +400,21 @@ public class MouseSpawningScript : MonoBehaviour
     }
     void Place3TileBuilding(GameObject prefab, GameObject preview, Button button)
     {
-        if(logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f).Count == 1
+        if (logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f).Count == 1
         && preview.transform.InverseTransformPoint(logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f)[0].transform.position) == new Vector3(-.5f, -.5f, 0)
         && logic.FindClosestTile(logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f)[0].transform.position).GetComponent<Node>().onEntranceOrExit == false
         )
         {
-            foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+            foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
             {
-                if(node.onBuilding == true)
+                if (node.onBuilding == true)
                 {
                     return;
                 }
             }
-            foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+            foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
             {
-                if(node.onPath == false)
+                if (node.onPath == false)
                 {
                     node.onBuilding = true;
                 }
@@ -446,26 +434,26 @@ public class MouseSpawningScript : MonoBehaviour
     }
     void Place4TileBuilding(GameObject prefab, GameObject preview, Button button)
     {
-        foreach(GameObject path in logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f))
+        foreach (GameObject path in logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f))
         {
 
-            if(logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true
-            || Vector2.Distance(path.transform.position, closestTileCrossection) < grid.tileSize * .9f)
+            if (logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true
+            || Vector2.Distance(path.transform.position, FindClosestCrossection()) < grid.tileSize * .9f)
             {
                 return;
             }
         }
-        foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+        foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
         {
-            if(node.onBuilding == true
+            if (node.onBuilding == true
             || node.onPath == true)
             {
                 return;
             }
         }
-        if(logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f).Count == 2)
+        if (logic.FindPathsInRange(preview.transform.Find("Door").transform.position, grid.tileSize * .9f).Count == 2)
         {
-            foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+            foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
             {
                 node.onBuilding = true;
             }
@@ -483,31 +471,31 @@ public class MouseSpawningScript : MonoBehaviour
     void Display1TilePreview(GameObject preview, Vector3 pathConnectionPoint)
     {
         //update the preview position to be at the cursor tile
-        preview.transform.position = closestTile.transform.position;
+        preview.transform.position = logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position;
 
-        if(preview.CompareTag("BuildingPreview"))
+        if (preview.CompareTag("BuildingPreview"))
         {
             //if you press r, the preview should rotate
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 preview.transform.Rotate(0, 0, -90);
             }
 
             //if the preview is on a tile that is spawnable, it's color values should be normal. If not, turn it red
-            if(closestTile.GetComponent<Node>().onPath == false
-            && FindClosestTile(FindClosestPath(pathConnectionPoint).transform.position).GetComponent<Node>().onEntranceOrExit == false
-            && closestTile.GetComponent<Node>().onBuilding == false
-            && Vector2.Distance(FindClosestPath(pathConnectionPoint).transform.position, pathConnectionPoint) < grid.tileSize * 0.6
+            if (logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onPath == false
+            && logic.FindClosestTile(logic.FindClosestPath(pathConnectionPoint).transform.position).GetComponent<Node>().onEntranceOrExit == false
+            && logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).GetComponent<Node>().onBuilding == false
+            && Vector2.Distance(logic.FindClosestPath(pathConnectionPoint).transform.position, pathConnectionPoint) < grid.tileSize * 0.6
             )
             {
                 //this finds all the sprite renderers for each child object
-                foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                 {
                     sr.color = new Color(1f, 1f, 1f, 0.7f);
                 }
                 return;
             }
-            foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+            foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
             {
                 sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
             }
@@ -516,22 +504,22 @@ public class MouseSpawningScript : MonoBehaviour
     void Display2TilePreview(GameObject preview, Vector3 pathConnectionPoint)
     {
         //update the preview position to be at the cursor tile
-        preview.transform.position = closestTileCrossection;
+        preview.transform.position = FindClosestCrossection();
 
-        if(preview.CompareTag("BuildingPreview"))
+        if (preview.CompareTag("BuildingPreview"))
         {
             //if you press r, the preview should rotate
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 preview.transform.Rotate(0, 0, -90);
             }
 
-            foreach(GameObject path in logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f))
+            foreach (GameObject path in logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f))
             {
-                if(logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true 
-                || Vector2.Distance(path.transform.position, closestTileCrossection) < grid.tileSize * .9f)
+                if (logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true
+                || Vector2.Distance(path.transform.position, FindClosestCrossection()) < grid.tileSize * .9f)
                 {
-                    foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                    foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                     {
                         sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
                     }
@@ -539,27 +527,27 @@ public class MouseSpawningScript : MonoBehaviour
                 }
             }
             //if the surrounding tiles are on buildings, don't spawn
-            foreach(Node node in logic.FindTilesInRange((pathConnectionPoint + closestTileCrossection) / 2f, grid.tileSize * .51f))
+            foreach (Node node in logic.FindTilesInRange((pathConnectionPoint + FindClosestCrossection()) / 2f, grid.tileSize * .51f))
             {
-                if(node.onBuilding == true)
+                if (node.onBuilding == true)
                 {
-                    foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                    foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                     {
                         sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
                     }
                     return;
                 }
             }
-            if(logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f).Count == 2)
+            if (logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f).Count == 2)
             {
                 //this finds all the sprite renderers for each child object
-                foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                 {
                     sr.color = new Color(1f, 1f, 1f, .7f);
                 }
                 return;
             }
-            foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+            foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
             {
                 sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
             }
@@ -568,38 +556,38 @@ public class MouseSpawningScript : MonoBehaviour
     void Display3TilePreview(GameObject preview, Vector3 pathConnectionPoint)
     {
         //update the preview position to be at the cursor tile
-        preview.transform.position = closestTileCrossection;
+        preview.transform.position = FindClosestCrossection();
 
-        if(preview.CompareTag("BuildingPreview"))
+        if (preview.CompareTag("BuildingPreview"))
         {
             //if you press r, the preview should rotate
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 preview.transform.Rotate(0, 0, -90);
             }
-            if(logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f).Count == 1
+            if (logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f).Count == 1
             && preview.transform.InverseTransformPoint(logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f)[0].transform.position) == new Vector3(-.5f, -.5f, 0)
             && logic.FindClosestTile(logic.FindPathsInRange(preview.transform.position, grid.tileSize * .9f)[0].transform.position).GetComponent<Node>().onEntranceOrExit == false
             )
             {
-                foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+                foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
                 {
-                    if(node.onBuilding == true)
+                    if (node.onBuilding == true)
                     {
-                        foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                        foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                         {
                             sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
                         }
                         return;
                     }
                 }
-                foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                 {
                     sr.color = new Color(1f, 1f, 1f, .7f);
                 }
                 return;
             }
-            foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+            foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
             {
                 sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
             }
@@ -608,37 +596,37 @@ public class MouseSpawningScript : MonoBehaviour
     void Display4TilePreview(GameObject preview, Vector3 pathConnectionPoint)
     {
         //update the preview position to be at the cursor tile
-        preview.transform.position = closestTileCrossection;
+        preview.transform.position = FindClosestCrossection();
 
-        if(preview.CompareTag("BuildingPreview"))
+        if (preview.CompareTag("BuildingPreview"))
         {
             //if you press r, the preview should rotate
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 preview.transform.Rotate(0, 0, -90);
             }
 
-            foreach(GameObject path in logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f))
+            foreach (GameObject path in logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f))
             {
 
-                if(logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true 
-                || Vector2.Distance(path.transform.position, closestTileCrossection) < grid.tileSize * .9f)
+                if (logic.FindClosestTile(path.transform.position).GetComponent<Node>().onEntranceOrExit == true
+                || Vector2.Distance(path.transform.position, FindClosestCrossection()) < grid.tileSize * .9f)
                 {
-                    foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                    foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                     {
                         sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
                     }
                     return;
                 }
             }
-            if(logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f).Count == 2)
+            if (logic.FindPathsInRange(pathConnectionPoint, grid.tileSize * .9f).Count == 2)
             {
                 //if the surrounding tiles are on buildings, don't spawn
-                foreach(Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
+                foreach (Node node in logic.FindTilesInRange(preview.transform.position, grid.tileSize))
                 {
-                    if(node.onBuilding == true)
+                    if (node.onBuilding == true)
                     {
-                        foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                        foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                         {
                             sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
                         }
@@ -646,13 +634,13 @@ public class MouseSpawningScript : MonoBehaviour
                     }
                 }
                 //this finds all the sprite renderers for each child object
-                foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+                foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
                 {
                     sr.color = new Color(1f, 1f, 1f, .7f);
                 }
                 return;
             }
-            foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+            foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
             {
                 sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
             }
@@ -662,70 +650,23 @@ public class MouseSpawningScript : MonoBehaviour
     void DisplayPathPreview(GameObject preview)
     {
         //update the preview position to be at the cursor tile
-        preview.transform.position = closestTile.transform.position;
+        preview.transform.position = logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position;
 
-        if(Vector2.Distance(logic.placedPaths[^1].transform.position, preview.transform.position) < grid.tileSize * 1.1f
+        if (Vector2.Distance(logic.placedPaths[^1].transform.position, preview.transform.position) < grid.tileSize * 1.1f
         && logic.FindClosestTile(preview.transform.position).GetComponent<Node>().onBuilding == false
         && logic.FindClosestTile(preview.transform.position).GetComponent<Node>().onPath == false
         )
         {
-            foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+            foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
             {
                 sr.color = new Color(1f, 1f, 1f, 0.7f);
             }
             return;
         }
-        foreach(SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>()) 
+        foreach (SpriteRenderer sr in preview.GetComponentsInChildren<SpriteRenderer>())
         {
             sr.color = new Color(1f, 0.5f, 0.5f, 0.7f);
         }
-    }
-    public GameObject FindClosestTile(Vector3 position)
-    {
-        float nearestDistance = float.MaxValue;
-        GameObject[] Tiles = GameObject.FindGameObjectsWithTag("Grid");
-        GameObject closeTile = null;
-
-        if (Tiles.Length > 0)
-        {
-            for(int i = 0; i < Tiles.Length; i++)
-            {
-                float distance = Vector3.Distance(position, Tiles[i].transform.position);
-
-                if(distance < nearestDistance)
-                {
-                    closeTile = Tiles[i];
-                    nearestDistance = distance;
-                }
-            }
-            if(closeTile != null)
-            {
-                return closeTile;
-            }
-        }
-        return null;
-    }
-    public GameObject FindClosestPath(Vector3 position)
-    {
-        float nearestDistance = float.MaxValue;
-        GameObject[] paths = GameObject.FindGameObjectsWithTag("Path");
-        GameObject path = null;
-
-        if (paths.Length > 0)
-        {
-            for(int i = 0; i < paths.Length; i++)
-            {
-                float distance = Vector3.Distance(position, paths[i].transform.position);
-
-                if(distance < nearestDistance)
-                {
-                    path = paths[i];
-                    nearestDistance = distance;
-                }
-            }
-            return path;
-        }
-        return null;
     }
     void Bulldoze()
     {
@@ -733,44 +674,65 @@ public class MouseSpawningScript : MonoBehaviour
         GameObject[] buildings = GameObject.FindGameObjectsWithTag("Building");
 
         //go through each building and, if the closest tile to the building is the same as the cursor tile, destroy the building
-        foreach(GameObject building in buildings)
+        foreach (GameObject building in buildings)
         {
-            if(Vector2.Distance(FindClosestTile(building.transform.position).transform.position, closestTile.transform.position) < .1f)
+            if (Vector2.Distance(logic.FindClosestTile(building.transform.position).transform.position, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position) < .1f)
             {
                 building.GetComponent<DemolishScript>().Demolish();
             }
         }
 
         //Go through every path in the list of paths that have been placed and if that path is at cursor tile, delete it and all of the following paths
-        for(int i = 0; i < logic.placedPaths.Count; i++)
+        for (int i = 0; i < logic.placedPaths.Count; i++)
         {
-            if(Vector2.Distance(FindClosestTile(logic.placedPaths[i].transform.position).transform.position, closestTile.transform.position) < .1f && i > 1)
+            if (Vector2.Distance(logic.FindClosestTile(logic.placedPaths[i].transform.position).transform.position, logic.FindClosestTile(Camera.main.ScreenToWorldPoint(Input.mousePosition)).transform.position) < .1f && i > 1)
             {
-                for(int j = logic.placedPaths.Count - 1; j > -1; j--)
+                for (int j = logic.placedPaths.Count - 1; j > -1; j--)
                 {
-                    if(j > i)
+                    if (j > i)
                     {
                         //clear the connections between nodes
-                        FindClosestTile(logic.placedPaths[j].transform.position).GetComponent<Node>().connections.Clear();
+                        logic.FindClosestTile(logic.placedPaths[j].transform.position).GetComponent<Node>().connections.Clear();
                         logic.placedPaths[j].GetComponent<DemolishScript>().Demolish();
+
+                        //set onpath and onentranceorexit to false for the tile at this path
+                        logic.FindClosestTile(logic.placedPaths[j].transform.position).GetComponent<Node>().onPath = false;
+                        logic.FindClosestTile(logic.placedPaths[j].transform.position).GetComponent<Node>().onEntranceOrExit = false;
 
                         //remove this path from the list of paths
                         logic.placedPaths.RemoveAt(j);
                     }
                 }
-                FindClosestTile(logic.placedPaths[i].transform.position).GetComponent<Node>().connections.Clear();
+                logic.FindClosestTile(logic.placedPaths[i].transform.position).GetComponent<Node>().connections.Clear();
                 logic.placedPaths[i].GetComponent<DemolishScript>().Demolish();
 
-                exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
-                exit.transform.position = logic.placedPaths[i-1].transform.position;
+                //set onpath and onentranceorexit to false for the tile at this path
+                logic.FindClosestTile(logic.placedPaths[i].transform.position).GetComponent<Node>().onPath = false;
+                logic.FindClosestTile(logic.placedPaths[i].transform.position).GetComponent<Node>().onEntranceOrExit = false;
+
+                if (exit == null)
+                {
+                    exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
+                }
+                exit.transform.position = logic.placedPaths[i - 1].transform.position;
+                logic.FindClosestTile(exit.transform.position).GetComponent<Node>().onEntranceOrExit = true;
                 
+                foreach (GameObject npc in logic.npcs)
+                {
+                    if (npc.GetComponent<npcStateManager>().currentState == npc.GetComponent<npcStateManager>().ExitingState
+                    && !npc.GetComponent<npcStateManager>().ExitingState.path.Contains(logic.FindNearestNode(exit.transform.position)))
+                    {
+                        npc.GetComponent<npcStateManager>().ExitingState.updateNeeded = true;
+                    }
+                }
+
                 logic.placedPaths.RemoveAt(i);
 
                 //check if any buildings were cut off
-                foreach(GameObject building in buildings)
+                foreach (GameObject building in buildings)
                 {
-                    if(building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count -1].connections.Count == 0
-                    || Vector2.Distance(building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count -1].transform.position, exit.transform.position) < .1f)
+                    if (building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count - 1].connections.Count == 0
+                    || Vector2.Distance(building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count - 1].transform.position, exit.transform.position) < .1f)
                     {
                         building.GetComponent<DemolishScript>().Demolish();
                     }
@@ -780,15 +742,15 @@ public class MouseSpawningScript : MonoBehaviour
                 //if one of their connections doesn't have a connection, remove it as a connection.
                 List<Node> nodesWithConnections = new List<Node>();
 
-                foreach(Node node in logic.NodesInScene())
+                foreach (Node node in logic.nodesInScene)
                 {
                     nodesWithConnections.Add(node);
                 }
-                foreach(Node node in nodesWithConnections)
+                foreach (Node node in nodesWithConnections)
                 {
-                    foreach(Node connectedNode in node.connections)
+                    foreach (Node connectedNode in node.connections)
                     {
-                        if(connectedNode.connections.Count == 0)
+                        if (connectedNode.connections.Count == 0)
                         {
                             node.connections.Remove(connectedNode);
                             break;
@@ -797,5 +759,14 @@ public class MouseSpawningScript : MonoBehaviour
                 }
             }
         }
+    }
+    private Vector3 FindClosestCrossection()
+    {
+        return new Vector3(logic.FindClosestTile(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x
+                                                                - grid.tileSize / 2, Camera.main.ScreenToWorldPoint(Input.mousePosition).y
+                                                                - grid.tileSize / 2, 0)).transform.position.x + grid.tileSize / 2,
+                                                                logic.FindClosestTile(new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x
+                                                                    - grid.tileSize / 2, Camera.main.ScreenToWorldPoint(Input.mousePosition).y
+                                                                    - grid.tileSize / 2, 0)).transform.position.y + grid.tileSize / 2, 0);
     }
 }

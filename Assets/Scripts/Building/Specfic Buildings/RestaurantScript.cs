@@ -1,20 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Jobs.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RestaurantScript : MonoBehaviour
 {
     public List<GameObject> fedCustomers;
+    private ControlWaitingRooms[] controllers;
+    public List<ControlWaitingRooms> tablesToFeed;
     // Update is called once per frame
+    void Start()
+    {
+        controllers = GetComponentsInChildren<ControlWaitingRooms>();
+        foreach (ControlWaitingRooms controller in controllers)
+        {
+            tablesToFeed.Add(controller);
+        }
+    }
     void Update()
     {
-        foreach(GameObject jobNode in GetComponent<BuildingScript>().jobNodes)
+        foreach (ControlWaitingRooms controller in controllers)
         {
-            if(jobNode.GetComponent<JobScript>().employee != null 
-            && !fedCustomers.Contains(jobNode.GetComponent<JobScript>().employee)
-            && jobNode.transform.parent.GetComponent<WaitingRoomScript>().controller.waitingRoomsOpen == true)
+            if (controller.waitingRoomsOpen == true && tablesToFeed.Contains(controller))
             {
-                Feed(jobNode.GetComponent<JobScript>().employee);
+                JobScript[] jobNodes = GetComponentsInChildren<JobScript>();
+                foreach (JobScript jobNode in jobNodes)
+                {
+                    if (jobNode.GetComponent<JobScript>().employee != null
+                    && !fedCustomers.Contains(jobNode.GetComponent<JobScript>().employee))
+                    {
+                        Feed(jobNode.GetComponent<JobScript>().employee);
+                    }
+                }
+                tablesToFeed.Remove(controller);
+            }
+            else if (controller.waitingRoomsOpen = false && !tablesToFeed.Contains(controller))
+            {
+                tablesToFeed.Add(controller);
             }
         }
     }

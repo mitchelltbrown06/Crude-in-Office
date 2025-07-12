@@ -99,6 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exit: {fileID: 0}
   npc: {fileID: 2747605592038468128, guid: b869d6f538eb04160936900c116ddb34, type: 3}
-  exitFound: 0
   spawnCooldown: 1
   Timer: 0

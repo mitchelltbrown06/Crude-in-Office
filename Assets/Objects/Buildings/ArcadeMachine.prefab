@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8988439840057102933}
   - component: {fileID: 5738330675203615675}
   - component: {fileID: 8267262036008719675}
+  - component: {fileID: 3742481628232480006}
   m_Layer: 0
   m_Name: Node1
   m_TagString: InBuilding
@@ -100,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameFrom: {fileID: 0}
   connections: []
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -129,11 +129,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &3742481628232480006
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734513999135834554}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1767091686347828150
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +190,7 @@ GameObject:
   - component: {fileID: 3501746203817211971}
   - component: {fileID: 4845970033591482767}
   - component: {fileID: 7773297709877116034}
+  - component: {fileID: 2535194439956635724}
   m_Layer: 0
   m_Name: Node2
   m_TagString: InBuilding
@@ -234,7 +279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameFrom: {fileID: 0}
   connections: []
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -263,11 +307,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &2535194439956635724
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767091686347828150}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2599571360413805212
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +368,7 @@ GameObject:
   - component: {fileID: 4331961895928574075}
   - component: {fileID: 635398366192164424}
   - component: {fileID: 2143750820381206382}
+  - component: {fileID: 1437884686858052528}
   m_Layer: 0
   m_Name: Node3
   m_TagString: InBuilding
@@ -368,7 +457,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameFrom: {fileID: 0}
   connections: []
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -397,11 +485,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &1437884686858052528
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2599571360413805212}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4696148503923634026
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +546,7 @@ GameObject:
   - component: {fileID: 4030641739128762972}
   - component: {fileID: 5673225488384665459}
   - component: {fileID: 1995826835855319769}
+  - component: {fileID: 4192624012375198976}
   m_Layer: 0
   m_Name: Node4
   m_TagString: InBuilding
@@ -502,7 +635,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameFrom: {fileID: 0}
   connections: []
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -531,11 +663,55 @@ MonoBehaviour:
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
-  logic: {fileID: 0}
   grid: {fileID: 0}
-  adultsOnly: 0
-  hungryOnly: 0
-  bathroomOnly: 0
+  logic: {fileID: 0}
+  building: {fileID: 0}
+  boxCastCenter: {x: 0, y: 0, z: 0}
+--- !u!61 &4192624012375198976
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696148503923634026}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6311153811962573866
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +724,7 @@ GameObject:
   - component: {fileID: 1342667238097195471}
   - component: {fileID: 4917064127940319755}
   - component: {fileID: 1620529428218974328}
+  - component: {fileID: 6449484611570284112}
   m_Layer: 0
   m_Name: Door
   m_TagString: InBuilding
@@ -582,10 +759,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d175eb29e6d55438cabafe0395f81a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcs: []
   grid: {fileID: 0}
   openJob: {fileID: 0}
   rejectionList: []
+  pathConnections: []
 --- !u!212 &4917064127940319755
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -652,7 +829,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameFrom: {fileID: 0}
   connections: []
-  allGridTiles: []
   grid: {fileID: 0}
   logic: {fileID: 0}
   gScore: 0
@@ -661,6 +837,51 @@ MonoBehaviour:
   onEnemy: 0
   onBuilding: 1
   onEntranceOrExit: 0
+--- !u!61 &6449484611570284112
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311153811962573866}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &8014823283768476951
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +963,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -737880409
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 80a354e8e7cfd45c8af3b90b09c0931b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -769,6 +990,7 @@ MonoBehaviour:
   door: {fileID: 6311153811962573866}
   jobNodes: []
   waitingRooms: []
+  logic: {fileID: 0}
   adultsOnly: 0
   hungryOnly: 0
   bathroomOnly: 0

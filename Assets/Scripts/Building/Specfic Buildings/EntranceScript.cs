@@ -6,56 +6,31 @@ public class EntranceScript : MonoBehaviour
 {
     public GameObject exit;
     public GameObject npc;
-
-    public bool exitFound = false;
-
     public float spawnCooldown;
     public float Timer;
+    private LogicScript logic;
 
     void Start()
     {
+        logic = GameObject.FindObjectOfType<LogicScript>();
         Timer = spawnCooldown;
-        FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
+        logic.FindClosestTile(transform.position).GetComponent<Node>().onEntranceOrExit = true;
     }
     void Update()
     {
-        if(FindObjectOfType<ExitScript>() && exitFound == false)
+        if (exit != null)
         {
-            exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
-            exitFound = true;
-        }
-        Timer += Time.deltaTime;
-        if(Timer > spawnCooldown && exit != null && AStarManager.instance.GeneratePath(
-            AStarManager.instance.FindNearestNode(transform.position), 
-            AStarManager.instance.FindNearestNode(exit.transform.position)) != null)
-        {
-            Timer = 0;
-            Instantiate(npc, transform.position, Quaternion.identity);
-        }
-    }
-    public GameObject FindClosestTile(Vector3 position)
-    {
-        float nearestDistance = float.MaxValue;
-        GameObject[] Tiles = GameObject.FindGameObjectsWithTag("Grid");
-        GameObject closeTile = null;
-
-        if (Tiles.Length > 0)
-        {
-            for(int i = 0; i < Tiles.Length; i++)
+            Timer += Time.deltaTime;
+            if(Timer > spawnCooldown && exit != null)
             {
-                float distance = Vector3.Distance(position, Tiles[i].transform.position);
-
-                if(distance < nearestDistance)
+                if (AStarManager.instance.GeneratePath(
+                logic.FindNearestNode(transform.position),
+                logic.FindNearestNode(exit.transform.position)) != null)
                 {
-                    closeTile = Tiles[i];
-                    nearestDistance = distance;
+                    Timer = 0;
+                    logic.npcs.Add(Instantiate(npc, transform.position, Quaternion.identity));
                 }
             }
-            if(closeTile != null)
-            {
-                return closeTile;
-            }
         }
-        return null;
     }
 }
