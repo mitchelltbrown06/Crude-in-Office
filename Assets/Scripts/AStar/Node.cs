@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public class Node : MonoBehaviour, IHeapItem<Node>
 {
     public Node cameFrom;
     public List<Node> connections;
+    int heapIndex;
     public GridScript grid;
     public LogicScript logic;
 
@@ -43,7 +45,7 @@ public class Node : MonoBehaviour
                 {
                     Debug.DrawLine(this.transform.position, node.transform.position, Color.red);
                 }
-               
+
             }
         }
     }
@@ -51,7 +53,7 @@ public class Node : MonoBehaviour
     {
         GameObject[] paths = GameObject.FindGameObjectsWithTag("Path");
 
-        foreach(GameObject path in paths)
+        foreach (GameObject path in paths)
         {
             if (Vector2.Distance(path.transform.position, transform.position) < grid.tileSize / 2)
             {
@@ -60,5 +62,27 @@ public class Node : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int HeapIndex
+    {
+        get
+        {
+            return heapIndex;
+        }
+        set
+        {
+            heapIndex = value;
+        }
+    }
+
+    public int CompareTo(Node nodeToCompare)
+    {
+        int compare = FScore().CompareTo(nodeToCompare.FScore());
+        if (compare == 0)
+        {
+            compare = hScore.CompareTo(nodeToCompare.hScore);
+        }
+        return -compare;
     }
 }
