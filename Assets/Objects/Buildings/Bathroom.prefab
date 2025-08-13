@@ -388,7 +388,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -396,6 +395,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &2278951708076731353
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +606,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -614,6 +613,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!61 &1486302358780205052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1150,7 +1150,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -1158,6 +1157,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!61 &47848428505955066
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1498,7 +1498,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -1506,6 +1505,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &6311153811962573866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,7 +2146,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -2154,6 +2153,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!61 &133420031037898515
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2325,7 +2325,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -2333,6 +2332,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!61 &5317942716983854344
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2615,7 +2615,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -2623,6 +2622,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &8014823283768476951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,7 +2637,8 @@ GameObject:
   - component: {fileID: 3154677809793881162}
   - component: {fileID: -2383094549412519352}
   - component: {fileID: -2178719364222904885}
-  m_Layer: 0
+  - component: {fileID: 4469853290162682944}
+  m_Layer: 3
   m_Name: Bathroom
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -2787,6 +2788,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jobPrice: 0
+--- !u!61 &4469853290162682944
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8014823283768476951}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &8397567628394619920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,7 +2958,6 @@ MonoBehaviour:
   price: 5
   employee: {fileID: 0}
   jobLength: 3
-  jobTimer: 0
   timerStarted: 0
   occupied: 0
   door: {fileID: 0}
@@ -2920,6 +2965,7 @@ MonoBehaviour:
   logic: {fileID: 0}
   building: {fileID: 0}
   boxCastCenter: {x: 0, y: 0, z: 0}
+  animationStarted: 0
 --- !u!1 &8401888465490778671
 GameObject:
   m_ObjectHideFlags: 0

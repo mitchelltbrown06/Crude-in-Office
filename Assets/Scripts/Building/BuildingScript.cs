@@ -10,6 +10,7 @@ public class BuildingScript : MonoBehaviour
     public List<GameObject> waitingRooms;
 
     public LogicScript logic;
+    public GlobalStats stats;
 
     public bool adultsOnly;
     public bool hungryOnly;
@@ -17,6 +18,7 @@ public class BuildingScript : MonoBehaviour
 
     void Start()
     {
+        stats = GameObject.FindGameObjectWithTag("Logic").GetComponent<GlobalStats>();
         logic = GameObject.FindObjectOfType<LogicScript>();
         FindJobNodes();
         FindWaitingRooms();
@@ -72,21 +74,21 @@ public class BuildingScript : MonoBehaviour
         }
         if(hungryOnly == true)
         {
-            if(candidate.GetComponent<npcStats>().hunger < logic.hungryCutoff)
+            if(candidate.GetComponent<npcStats>().hunger < stats.hungryCutoff)
             {
                 return false;
             }
         }
         else
         {
-            if(candidate.GetComponent<npcStats>().hunger > logic.starvation)
+            if(candidate.GetComponent<npcStats>().hunger > stats.starvation)
             {
                 return false;
             }
         }
         if(bathroomOnly == true)
         {
-            if(candidate.GetComponent<npcStats>().bathroom < logic.bathroomCutoff)
+            if(candidate.GetComponent<npcStats>().bathroom < stats.bathroomCutoff)
             {
                 return false;
             }

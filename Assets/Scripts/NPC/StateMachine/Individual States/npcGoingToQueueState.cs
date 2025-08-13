@@ -90,7 +90,7 @@ public class npcGoingToQueueState : npcBaseState
     {
         if(nextNode != null)
         {
-            myJob.transform.position = Vector3.MoveTowards(myJob.transform.position, new Vector3(nextNode.transform.position.x + positionOffset, nextNode.transform.position.y + positionOffset, 0), myStats.speed * Time.deltaTime);
+            myJob.transform.position = Vector3.MoveTowards(myJob.transform.position, new Vector3(nextNode.transform.position.x + positionOffset, nextNode.transform.position.y + positionOffset, 0), npc.logic.GetComponent<GlobalStats>().npcSpeed * Time.deltaTime);
 
             if(nextNode.CompareTag("InBuilding") && Vector2.Distance(myJob.transform.position, nextNode.transform.position) < .1f)
             {

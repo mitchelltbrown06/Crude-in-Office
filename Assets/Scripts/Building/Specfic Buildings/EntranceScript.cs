@@ -9,6 +9,7 @@ public class EntranceScript : MonoBehaviour
     public float spawnCooldown;
     public float Timer;
     private LogicScript logic;
+    public GameObject spawnPoint;
 
     void Start()
     {
@@ -21,15 +22,10 @@ public class EntranceScript : MonoBehaviour
         if (exit != null)
         {
             Timer += Time.deltaTime;
-            if(Timer > spawnCooldown && exit != null)
+            if (Timer > spawnCooldown && exit != null)
             {
-                if (AStarManager.instance.GeneratePath(
-                logic.FindNearestNode(transform.position),
-                logic.FindNearestNode(exit.transform.position)) != null)
-                {
-                    Timer = 0;
-                    logic.npcs.Add(Instantiate(npc, transform.position, Quaternion.identity));
-                }
+                Timer = 0;
+                logic.npcs.Add(Instantiate(npc, spawnPoint.transform.position, Quaternion.identity));
             }
         }
     }

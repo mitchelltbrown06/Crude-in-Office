@@ -357,7 +357,7 @@ public class MouseSpawningScript : MonoBehaviour
             //PlaceArcade();
             Instantiate(prefab, preview.transform.position, preview.transform.rotation);
             //get ride of the arcade button
-            buttonManager.Purchase(button);
+            //buttonManager.Purchase(button);
 
             buttonManager.equiped = "null";
             //get ride of the arcade preview
@@ -731,8 +731,8 @@ public class MouseSpawningScript : MonoBehaviour
                 //check if any buildings were cut off
                 foreach (GameObject building in buildings)
                 {
-                    if (building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count - 1].connections.Count == 0
-                    || Vector2.Distance(building.transform.Find("Door").GetComponent<Node>().connections[building.transform.Find("Door").GetComponent<Node>().connections.Count - 1].transform.position, exit.transform.position) < .1f)
+                    if (building.transform.Find("Door").GetComponent<Node>().connections[^1].connections.Count == 0
+                    || Vector2.Distance(building.transform.Find("Door").GetComponent<Node>().connections[^1].transform.position, exit.transform.position) < .1f)
                     {
                         building.GetComponent<DemolishScript>().Demolish();
                     }

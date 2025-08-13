@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 7967239472474715779}
   - component: {fileID: 828424503899142625}
   - component: {fileID: 4108854596229171873}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RollerSkatingRink
   m_TagString: Building
   m_Icon: {fileID: 0}

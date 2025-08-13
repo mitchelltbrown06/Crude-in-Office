@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DemolishScript : MonoBehaviour
@@ -16,7 +17,11 @@ public class DemolishScript : MonoBehaviour
     {
         foreach(Node node in logic.FindTilesInRange(transform.position, grid.tileSize))
         {
-            node.onBuilding = false;
+            RaycastHit2D hit = Physics2D.Raycast(node.transform.position, Vector2.up, 1f, logic.buildingLayerMask);
+            if (hit && hit.collider.gameObject == gameObject)
+            {
+                node.onBuilding = false;
+            }
         }
         foreach (Node node in GetComponentsInChildren<Node>())
         {

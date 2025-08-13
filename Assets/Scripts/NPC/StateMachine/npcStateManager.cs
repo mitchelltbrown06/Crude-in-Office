@@ -18,9 +18,11 @@ public class npcStateManager : MonoBehaviour
     public GameObject exit;
     public LogicScript logic;
     public GridScript grid;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         entrance = GameObject.FindObjectOfType<EntranceScript>().gameObject;
         exit = GameObject.FindObjectOfType<ExitScript>().gameObject;
         logic = GameObject.FindObjectOfType<LogicScript>();
@@ -44,5 +46,13 @@ public class npcStateManager : MonoBehaviour
         currentState = state;
         currentState.EnterState(this);
         currentStateStr = currentState.ToString();
+        if (state == ExitingState || state == GoingToJobState || state == GoingToQueueState)
+        {
+            animator.SetBool(name: "StandingStill", false);
+        }
+        else
+        {
+            animator.SetBool(name: "StandingStill", true);
+        }
     }
 }

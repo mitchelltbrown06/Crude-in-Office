@@ -20,6 +20,7 @@ TagManager:
   - UI
   - BuildingPreview
   - InBuilding
+  - PerkParent
   layers:
   - Default
   - TransparentFX

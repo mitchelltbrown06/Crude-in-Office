@@ -16,7 +16,10 @@ public class QueueNode : MonoBehaviour
         move = StartCoroutine(MoveNode());
         localScale = transform.parent.localScale;
         position = transform.parent.transform.position;
-        moveRate = transform.parent.GetComponent<QueueScript>().moveRate;
+        moveRate = GetComponentInParent<QueueScript>().moveRate;
+        transform.localPosition = new Vector3(Random.Range(transform.parent.localScale.x / 2, -transform.parent.localScale.x / 2),
+                                        Random.Range(transform.parent.localScale.y / 2, -transform.parent.localScale.y / 2),
+                                        0);
     }
     void Update()
     {
@@ -37,9 +40,8 @@ public class QueueNode : MonoBehaviour
     IEnumerator MoveNode()
     {
         yield return new WaitForSeconds(moveRate);
-        transform.position = new Vector3(Random.Range(localScale.x / 2, -localScale.x / 2) + position.x, Random.Range(localScale.y / 2, -localScale.y / 2)
-                                                                                                + position.y, 0);
-        moveRate = transform.parent.GetComponent<QueueScript>().moveRate * Random.Range(.3f, 1.5f);
+        transform.localPosition = new Vector3(Random.Range(localScale.x / 2, -localScale.x / 2), Random.Range(localScale.y / 2, -localScale.y / 2), 0);
+        moveRate = GetComponentInParent<QueueScript>().moveRate * Random.Range(.3f, 1.5f);
         move = StartCoroutine(MoveNode());
     }
 }

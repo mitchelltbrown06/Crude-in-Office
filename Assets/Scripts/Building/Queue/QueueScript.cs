@@ -79,18 +79,17 @@ public class QueueScript : MonoBehaviour
                         customers.Enqueue(employee);
                         employee.GetComponent<npcJob>().jobToDo = true;
                         //create a node and assign that node to the employee's "queue node" slot.
-                        Node queueNode = Instantiate(nodePrefab, new Vector3(Random.Range(transform.localScale.x / 2, -transform.localScale.x / 2) + transform.position.x, Random.Range(transform.localScale.y / 2, -transform.localScale.y / 2)
-                                                                                                + transform.position.y, 0), transform.rotation, transform).GetComponent<Node>();
-                        queueNode.GetComponent<QueueNode>().employee = employee;
-                        employee.GetComponent<npcJob>().queueNode = queueNode;
+                        GameObject queueNode = Instantiate(nodePrefab, transform.position, transform.rotation, transform);
+                        queueNode.GetComponentInChildren<QueueNode>().employee = employee;
+                        employee.GetComponent<npcJob>().queueNode = queueNode.GetComponentInChildren<Node>();
                         employee.GetComponent<npcStateManager>().SwitchState(employee.GetComponent<npcStateManager>().GoingToQueueState);
                         foreach (Node node in nodeConnections)
                         {
                             //add each node that leads to a job node to the list of connections on the new queue node
-                            queueNode.connections.Add(node);
+                            queueNode.GetComponentInChildren<Node>().connections.Add(node);
                         }
                         //add the queue node to the list of connections for the door
-                        door.GetComponent<Node>().connections.Add(queueNode);
+                        door.GetComponent<Node>().connections.Add(queueNode.GetComponentInChildren<Node>());
                         return;
                     }
                 }

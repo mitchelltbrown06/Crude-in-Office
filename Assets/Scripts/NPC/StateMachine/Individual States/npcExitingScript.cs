@@ -1,11 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class npcExitingScript : npcBaseState
 {
     public GridScript grid;
     public LogicScript logic;
+    public GlobalStats stats;
 
     public List<Node> path;
     public Node currentNode;
@@ -35,11 +36,22 @@ public class npcExitingScript : npcBaseState
         exit = npc.exit;
         logic = npc.logic;
         grid = npc.grid;
+        stats = npc.logic.GetComponent<GlobalStats>();
 
         //if you're not on a path (i.e. the path closest to you isn't at the same position as the tile closest to you) then set current node to the nearest connected node
-        if (logic.FindClosestPath(npc.transform.position) == null || Vector2.Distance(logic.FindClosestPath(npc.transform.position).transform.position, logic.FindClosestTile(npc.transform.position).transform.position) > .1f)
+        if (logic.FindClosestTile(npc.transform.position).GetComponent<Node>().onBuilding == true)
         {
-            currentNode = logic.FindClosestConnectedNode(npc.transform.position);
+            float minDistance = float.MaxValue;
+            Node nearestNode = null;
+            foreach (Node node in myJob.jobNode.transform.root.GetComponentsInChildren<Node>())
+            {
+                if (Vector2.Distance(npc.transform.position, node.transform.position) < minDistance)
+                {
+                    nearestNode = node;
+                    minDistance = Vector2.Distance(npc.transform.position, node.transform.position);
+                }
+            }
+            currentNode = nearestNode;
         }
         //otherwise, you are on a path, so you should set your current node the nearest path
         else
@@ -80,7 +92,16 @@ public class npcExitingScript : npcBaseState
     }
     public void CreatePath(Node destination)
     {
-        path = AStarManager.instance.GeneratePath(currentNode, destination);
+        if (logic.generatedPaths.TryGetValue((currentNode, destination), out List<Node> cachedPath))
+        {
+            path = new List<Node>(cachedPath);
+        }
+        else
+        {
+            path = AStarManager.instance.GeneratePath(currentNode, destination);
+            List<Node> pathToCache = new List<Node>(path);
+            logic.generatedPaths[(currentNode, destination)] = pathToCache;
+        }
         nextNode = path[0];
         if (nextNode.CompareTag("InBuilding") && positionOffset != 0)
         {
@@ -95,7 +116,7 @@ public class npcExitingScript : npcBaseState
     {
         if (nextNode != null)
         {
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, new Vector3(nextNode.transform.position.x + positionOffset, nextNode.transform.position.y + positionOffset, 0), myStats.speed * Time.deltaTime);
+            npc.transform.position = Vector3.MoveTowards(npc.transform.position, new Vector3(nextNode.transform.position.x + positionOffset, nextNode.transform.position.y + positionOffset, 0), stats.npcSpeed * Time.deltaTime);
 
             if (nextNode.CompareTag("InBuilding") && Vector2.Distance(npc.transform.position, nextNode.transform.position) < .01f)
             {
@@ -129,7 +150,7 @@ public class npcExitingScript : npcBaseState
         }
         else if (nextNode != null && !nextNode.CompareTag("InBuilding") && positionOffset == 0)
         {
-            positionOffset = Random.Range(-.2f, .2f);
+            positionOffset = UnityEngine.Random.Range(-.2f, .2f);
         }
     }
     void CheckIncompletePath(npcStateManager npc)

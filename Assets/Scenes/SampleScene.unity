@@ -409,8 +409,8 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
-  m_Depth: -1
+  orthographic size: 4
+  m_Depth: -0.3
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -436,7 +436,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Follow: {fileID: 864538419}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3
+    OrthographicSize: 4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1008,6 +1008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equiped: 
   canvas: {fileID: 1166641}
+  perk: {fileID: 1771252337}
   buttonsSpawned: []
   slotZFilled: 0
   slotZPosition: {x: 0, y: 0, z: 0}
@@ -1044,6 +1045,8 @@ MonoBehaviour:
   restaurantInstance: {fileID: 0}
   bathroomPrefab: {fileID: 7855744068180812019, guid: 04b84c558c5e04ad1bb2003f3ea986ed, type: 3}
   bathroomInstance: {fileID: 0}
+  salesTaxPrefab: {fileID: 7855744068180812019, guid: fcd21bec7e38b4cce833f9764f3e90ba, type: 3}
+  salesTaxInstance: {fileID: 0}
   entrancePlaced: 0
   exitPlaced: 0
   paths: 100
@@ -1094,6 +1097,8 @@ MonoBehaviour:
   threshold: 0
   startingThreshold: 10
   thresholdMultiplier: 2
+  buttons: {fileID: 1760549751}
+  logic: {fileID: 1990053727}
 --- !u!4 &1771252338
 Transform:
   m_ObjectHideFlags: 0
@@ -1165,6 +1170,7 @@ GameObject:
   - component: {fileID: 1990053727}
   - component: {fileID: 1990053729}
   - component: {fileID: 1990053730}
+  - component: {fileID: 1990053731}
   m_Layer: 0
   m_Name: LogicManager
   m_TagString: Logic
@@ -1186,11 +1192,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placedPaths: []
   laserTagPlayers: []
+  grid: {fileID: 0}
   hungryCutoff: 0
   starvation: 14
   bathroomCutoff: 7
   gottaGoCuttoff: 24
   entityLayerMask: 128
+  gridLayerMask: 64
+  pathlayerMask: 256
+  buildingLayerMask: 8
+  nodesInScene: []
+  npcs: []
 --- !u!4 &1990053728
 Transform:
   m_ObjectHideFlags: 0
@@ -1248,9 +1260,6 @@ MonoBehaviour:
   buttonManager: {fileID: 1760549751}
   logic: {fileID: 0}
   grid: {fileID: 133848949}
-  closestTile: {fileID: 0}
-  closestPath: {fileID: 0}
-  closestTileCrossection: {x: 0, y: 0, z: 0}
   buildingLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -1268,18 +1277,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   laserTagCost: 0
+  salesTax: 0
+--- !u!114 &1990053731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990053726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d750106c6bce84c0399ef082810ae473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0
+  startingThreshold: 0
+  thresholdMultiplier: 0
+  buttons: {fileID: 0}
+  logic: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
+  - {fileID: 864538419}
+  - {fileID: 777552956}
   - {fileID: 1166642}
   - {fileID: 1461301713}
   - {fileID: 1990053728}
+  - {fileID: 1771252338}
   - {fileID: 133848950}
   - {fileID: 1944286085}
   - {fileID: 1443810165}
-  - {fileID: 864538419}
-  - {fileID: 777552956}
   - {fileID: 389011791}
-  - {fileID: 1771252338}

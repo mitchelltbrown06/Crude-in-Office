@@ -9,19 +9,17 @@ public class LogicScript : MonoBehaviour
     public List<GameObject> placedPaths;
     public List<GameObject> laserTagPlayers;
     public GridScript grid;
-
-    public float hungryCutoff;
-    public float starvation;
-    public float bathroomCutoff;
-    public float gottaGoCuttoff;
     public int entityLayerMask = (1 << 7);
     public int gridLayerMask = (1 << 6);
     public int pathlayerMask = (1 << 8);
+    public int buildingLayerMask = (1 << 3);
     public List<Node> nodesInScene;
     public List<GameObject> npcs;
+    public Dictionary<(Node start, Node end), List<Node>> generatedPaths;
     void Start()
     {
         grid = GameObject.FindObjectOfType<GridScript>();
+        generatedPaths = new Dictionary<(Node start, Node end), List<Node>>();
     }
     public Node FindNearestNode(Vector2 position)
     {

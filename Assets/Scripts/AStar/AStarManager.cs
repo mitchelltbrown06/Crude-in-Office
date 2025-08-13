@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class AStarManager : MonoBehaviour
@@ -17,7 +18,7 @@ public class AStarManager : MonoBehaviour
     }
     public List<Node> GeneratePath(Node start, Node end)
     {
-        List<Node> openSet = new List<Node>();
+        Heap<Node> openSet = new Heap<Node>(logic.nodesInScene.Count);
 
         foreach(Node n in logic.nodesInScene)
         {
@@ -30,18 +31,7 @@ public class AStarManager : MonoBehaviour
 
         while(openSet.Count > 0)
         {
-            int lowestF = default;
-
-            for(int i = 1; i < openSet.Count; i++)
-            {
-                if (openSet[i].FScore() < openSet[lowestF].FScore())
-                {
-                    lowestF = i;
-                }
-            }
-
-            Node currentNode = openSet[lowestF];
-            openSet.Remove(currentNode);
+            Node currentNode = openSet.RemoveFirst();
             
             if(currentNode == end)
             {
@@ -56,6 +46,7 @@ public class AStarManager : MonoBehaviour
                 }
 
                 path.Reverse();
+
                 return path;
             }
 

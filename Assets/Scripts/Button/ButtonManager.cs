@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +10,8 @@ public class ButtonManager : MonoBehaviour
     public string equiped;
 
     public Canvas canvas;
+    public PerkEvent perk;
+    public GameObject perkParent;
 
     //button list
     public List<Button> buttonsSpawned;
@@ -84,9 +88,10 @@ public class ButtonManager : MonoBehaviour
         slotZPosition = new Vector3(784, 55, 0);
 
         spawnPosition = slot1Position;
-        
+
         SpawnEntrance();
         equiped = "null";
+        perk = GameObject.FindObjectOfType<PerkEvent>();
     }
     void Update()
     {
@@ -117,7 +122,7 @@ public class ButtonManager : MonoBehaviour
 
     public void Purchase(Button instance)
     {
-        //Disable(instance);
+        Disable(instance);
     }
 
     public void Equip(string equippable)
@@ -180,6 +185,11 @@ public class ButtonManager : MonoBehaviour
         Enable(bathroomInstance);
         bathroomInstance.onClick.AddListener(BathroomOnClick);
     }
+    public Button Spawn(Button prefab, Vector3 position)
+    {
+        Debug.Log("Spawning");
+        return Instantiate(prefab, position, Quaternion.identity, perkParent.transform);
+    }
 
     //OnClicks
     void EntranceOnClick()
@@ -221,29 +231,29 @@ public class ButtonManager : MonoBehaviour
     public void CheckSpawnPosition()
     {
         if (!slot1Filled)
-            {
-                spawnPosition = slot1Position;
-            }
-            else if(!slot2Filled)
-            {
-                spawnPosition = slot2Position;
-            }
-            else if(!slot3Filled)
-            {
-                spawnPosition = slot3Position;
-            }
-            else if(!slot4Filled)
-            {
-                spawnPosition = slot4Position;
-            }
-            else if(!slot5Filled)
-            {
-                spawnPosition = slot5Position;
-            }
-            else if(!slot6Filled)
-            {
-                spawnPosition = slot6Position;
-            }
+        {
+            spawnPosition = slot1Position;
+        }
+        else if (!slot2Filled)
+        {
+            spawnPosition = slot2Position;
+        }
+        else if (!slot3Filled)
+        {
+            spawnPosition = slot3Position;
+        }
+        else if (!slot4Filled)
+        {
+            spawnPosition = slot4Position;
+        }
+        else if (!slot5Filled)
+        {
+            spawnPosition = slot5Position;
+        }
+        else if (!slot6Filled)
+        {
+            spawnPosition = slot6Position;
+        }
     }
     public void Disable(Button instance)
     {
